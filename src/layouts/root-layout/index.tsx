@@ -1,22 +1,16 @@
-import { useEffect, useState } from 'react'
-import { RootMain } from './root-main'
-import { LoadingCandles } from '@/components/loadings'
+import { RootHeader } from './root-header'
 
 export default function RootLayout() {
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    // Simulasi proses loading
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 4000) // Contoh: 2 detik
-
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
-    <div className="scrollbar h-screen overflow-auto bg-gradient-to-br from-purple-50 via-blue-50 to-orange-50 text-center text-[2.4rem]">
-      {loading ? <LoadingCandles /> : <RootMain />}
+    <div className="flex h-screen flex-col bg-white text-[2rem] phones:text-[2.4rem]">
+      <div className="bg-primary-500 p-24 text-primary-100">
+        <RootHeader />
+      </div>
+      <div className="bg-blue-300">Naviasi</div>
+      <div className="scrollbar h-full flex-1 overflow-y-auto bg-red-300">
+        <div className="bg-green-300 text-[15rem]">Konten</div>
+        <div className="bg-yellow-300">Footer</div>
+      </div>
     </div>
   )
 }

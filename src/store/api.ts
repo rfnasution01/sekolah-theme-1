@@ -1,5 +1,5 @@
+import { BeritaTerbaruType } from '@/libs/types/beranda-type'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import Cookies from 'js-cookie'
 
 export type Meta = {
   page?: number
@@ -15,15 +15,17 @@ export type Res<T, M = undefined> = {
   related: T
   meta: Meta
   mapped?: M
+  berita_terbaru?: BeritaTerbaruType[]
 }
 
 const baseURL = import.meta.env.VITE_BASE_URL
+const baseToken = import.meta.env.VITE_BASE_TOKEN
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: baseURL,
     prepareHeaders: (headers) => {
-      const token = Cookies.get('token')
+      const token = baseToken
       if (token) {
         headers.set('authorization', `Bearer ${token}`)
       }
@@ -31,7 +33,7 @@ export const api = createApi({
       return headers
     },
   }),
-  tagTypes: ['ujian', 'hasil', 'soal', 'biodata', 'ranking'],
+  tagTypes: [],
   // * it's okay to disable eslint here, because the warning is unnecessary. Each endpoint will be injected from an api slice.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   endpoints: (_builder) => ({}),

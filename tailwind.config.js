@@ -81,18 +81,19 @@ export default {
 
       // ? ----- COLOR SYSTEM
       colors: {
-        background: '#f0f0f0',
+        background: '#fff',
         primary: {
           DEFAULT: '#28A6F4',
           background: '#0891E6',
+          footer: '#050B32',
           50: '#D9EDF7',
           100: '#d2e0f7',
           200: '#AFE6FF',
           300: '#7491D2',
-          400: '#A6DDFF',
+          400: '#4963A4',
           500: '#1B2F69',
           600: '#13235A',
-          700: '#1C5EB7',
+          700: '#0D1A4B',
           800: '#08113C',
           900: '#0A2E7A',
         },
@@ -115,6 +116,7 @@ export default {
         },
         success: {
           DEFAULT: '#5cb85c',
+          100: '#C4F5CF',
           700: '#3B9A13',
           tint: { 1: '#568500', 2: '#D6F9D5' },
           shade: { 1: '#2B4200' },
