@@ -3,7 +3,7 @@ import { SearchHeader } from './search'
 import { BeritaTerbaruType, MenuType } from '@/libs/types/beranda-type'
 import { useGetMenuTopQuery } from '@/store/slices/berandaAPI'
 import { SingleSkeleton } from '@/components/skeleton'
-import { NavigasiHeader } from './navigasi'
+import { NavigasiHeader } from './mapping-navigasi'
 import { BeritaTerbaru } from './berita-terbaru'
 
 export function RootHeader() {

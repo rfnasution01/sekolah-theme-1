@@ -3,9 +3,12 @@ import { MenuType } from '@/libs/types/beranda-type'
 import { Link } from 'react-router-dom'
 
 export function NavigasiHeader({ menu }: { menu: MenuType[] }) {
+  const sortedData = [...menu].sort((a, b) => {
+    return parseInt(a.urutan) - parseInt(b.urutan)
+  })
   return (
     <div className="flex items-center gap-32">
-      {menu?.slice(0, 3).map((item, idx) => (
+      {sortedData?.slice(0, 3).map((item, idx) => (
         <Link
           to={
             item?.nama_menu === 'Home'

@@ -4,9 +4,11 @@ import { ReactNode } from 'react'
 const Tooltips = ({
   triggerComponent,
   tooltipContent,
+  position,
 }: {
   triggerComponent: ReactNode
   tooltipContent: ReactNode
+  position?: 'bottom' | 'top' | 'left' | 'right'
 }) => {
   return (
     <Tooltip.Provider>
@@ -16,8 +18,9 @@ const Tooltips = ({
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content
-            className="z-20 w-[15vw] rounded-xl border border-slate-300 bg-white px-32 py-24 text-center text-black shadow-xl"
+            className="z-20 w-[15vw] rounded-xl bg-primary-800 p-8 text-black shadow-xl"
             sideOffset={5}
+            side={position}
           >
             {tooltipContent}
             <Tooltip.Arrow />

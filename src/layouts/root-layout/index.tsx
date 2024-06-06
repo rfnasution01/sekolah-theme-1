@@ -1,4 +1,5 @@
 import { RootHeader } from './root-header'
+import { RootNavigasi } from './root-navigasi'
 
 export default function RootLayout() {
   return (
@@ -6,7 +7,7 @@ export default function RootLayout() {
       <div className="bg-primary-500 p-24 text-primary-100">
         <RootHeader />
       </div>
-      <div className="bg-blue-300">Naviasi</div>
+      <RootNavigasi />
       <div className="scrollbar h-full flex-1 overflow-y-auto bg-red-300">
         <div className="bg-green-300 text-[15rem]">Konten</div>
         <div className="bg-yellow-300">Footer</div>
