@@ -50,7 +50,7 @@ export default function HalamanPage() {
   }, [halamanDetailData?.data, id])
 
   return (
-    <div className="my-32 flex flex-col gap-32">
+    <div className="mb-80 mt-32 flex flex-col gap-32">
       <Breadcrumb page={page} />
       {loadingHalamanDetail ? (
         <Loading />

@@ -3,7 +3,10 @@ import Loading from '@/components/Loading'
 import { ProgramDetail, ProgramList } from '@/features/program-detail'
 import { ProgramDetailType } from '@/libs/types/beranda-type'
 import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
-import { useGetProgramDetailQuery } from '@/store/slices/berandaAPI'
+import {
+  useGetProgramDetailQuery,
+  useGetProgramQuery,
+} from '@/store/slices/berandaAPI'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -35,13 +38,13 @@ export default function ProgramDetailsPage() {
   const [programDetail, setProgramDetail] = useState<ProgramDetailType>()
   const {
     data: programDetailData,
-    isLoading,
-    isFetching,
+    isLoading: programDetailIsLoading,
+    isFetching: programDetailIsFetching,
   } = useGetProgramDetailQuery({
     id: id,
   })
 
-  const loadingProgramDetail = isLoading || isFetching
+  const loadingProgramDetail = programDetailIsLoading || programDetailIsFetching
 
   useEffect(() => {
     if (programDetailData?.data) {
@@ -49,14 +52,29 @@ export default function ProgramDetailsPage() {
     }
   }, [programDetailData?.data, id])
 
+  // --- Halaman Page ---
+  const [program, setProgram] = useState<ProgramDetailType[]>()
+  const {
+    data: programData,
+    isLoading: programIsLoading,
+    isFetching: programIsFethcing,
+  } = useGetProgramQuery()
+
+  const loadingProgram = programIsLoading || programIsFethcing
+
+  useEffect(() => {
+    if (programData?.data) {
+      setProgram(programData?.data)
+    }
+  }, [programData?.data])
+
   return (
-    <div className="my-32 flex flex-col gap-32">
-      <p className="text-[5rem]">{page}</p>
+    <div className="mb-80 mt-32 flex flex-col gap-32">
       <Breadcrumb page={page} />
-      {loadingProgramDetail ? (
+      {loadingProgramDetail || loadingProgram ? (
         <Loading />
       ) : page === '' ? (
-        <ProgramList />
+        <ProgramList data={program} />
       ) : (
         <ProgramDetail data={programDetail} />
       )}

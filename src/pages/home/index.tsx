@@ -38,7 +38,7 @@ export default function HomePage() {
   }, [data?.data])
 
   return (
-    <div className="my-32 flex flex-col gap-32">
+    <div className="mb-80 mt-32 flex flex-col gap-32">
       {/* --- Banner --- */}
       {loadingSlider ? <Loading /> : <Slider1 listImage={slider} isShadow />}
       <HomeCard loading={loadingBeranda} beranda={beranda} />
