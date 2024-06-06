@@ -94,7 +94,7 @@ const buttonVariants = cva(
           'active:bg-transparant',
         ],
         solid: ['focus:ring'],
-        outline: ['border-2', 'bg-white'],
+        outline: ['border-2', 'bg-background'],
       },
       variant: {
         nothing: [],
@@ -118,7 +118,7 @@ const buttonVariants = cva(
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         visible: 'border-none',
         outlined:
-          'bg-white border border-borderSuburbed hover:border-borderHovered hover:bg-backgroundHovered focus-visible:shadow-primary-shade-1',
+          'bg-background border border-borderSuburbed hover:border-borderHovered hover:bg-backgroundHovered focus-visible:shadow-primary-shade-1',
         'danger-solid': [
           'bg-button-danger-background',
           'border-button-danger-border',

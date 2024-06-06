@@ -23,7 +23,7 @@ const CheckRadioButton: React.FC<CheckRadioButtonProps> = ({
   return (
     <label className="text-radio-label grid-cols-radio-button text-sm box-border grid gap-2">
       <input
-        className="text-radio-unchecked border-radio-unchecked rounded-half translate-y-0.5 checked:border-5 checked:border-radio-checked checked:text-radio-checked m-0 box-border h-4 w-4 appearance-none border-2 bg-white"
+        className="text-radio-unchecked border-radio-unchecked rounded-half translate-y-0.5 checked:border-5 checked:border-radio-checked checked:text-radio-checked m-0 box-border h-4 w-4 appearance-none border-2 bg-background"
         type="radio"
         disabled={disabled}
         checked={isChecked}

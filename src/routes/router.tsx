@@ -1,5 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { ComingSoonPage, HalamanPage, HomePage, RootLayout } from './loadables'
+import {
+  ComingSoonPage,
+  HalamanPage,
+  HomePage,
+  RootLayout,
+  TentangKamiPage,
+} from './loadables'
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: 'halaman',
         element: <HalamanPage />,
+      },
+      {
+        path: 'tentang-kami',
+        element: <TentangKamiPage />,
       },
     ],
   },

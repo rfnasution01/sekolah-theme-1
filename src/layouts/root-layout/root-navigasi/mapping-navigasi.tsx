@@ -111,7 +111,7 @@ export function MappingNavigasi({
                             dispatch(
                               setStateHalaman({
                                 id: list?.id_konten,
-                                page: item?.nama_menu,
+                                page: list?.nama_menu,
                               }),
                             )
                           }}

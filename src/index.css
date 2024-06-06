@@ -84,8 +84,8 @@
     @apply bg-background font-sf-pro text-16 font-normal leading text-black antialiased;
   }
 
-  body:has(#User__Admisi) {
-    @apply bg-white;
+  body:has(#halaman) {
+    @apply bg-background;
   }
 
   body > main {
@@ -118,5 +118,5 @@
 }
 
 #RootLayout section:not(#RootLayout) > section {
-  @apply flex -translate-y-2 flex-col gap-48 rounded-2xl border-[1.5px] border-border border-t-transparent bg-white p-32;
+  @apply flex -translate-y-2 flex-col gap-48 rounded-2xl border-[1.5px] border-border border-t-transparent bg-background p-32;
 }

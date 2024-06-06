@@ -38,7 +38,7 @@ export function FormLabelInput({
           <FormLabel>{label}</FormLabel>
           <Input
             {...field}
-            className="bg-white"
+            className="bg-background"
             type={type}
             placeholder={placeholder}
             value={field.value}

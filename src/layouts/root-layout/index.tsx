@@ -77,7 +77,7 @@ export default function RootLayout() {
   const loadingIdentitas = isLoadingIdentitas || isFetchingIdentitas
 
   return (
-    <div className="flex h-screen flex-col bg-white text-[2rem] phones:text-[2.4rem]">
+    <div className="flex h-screen flex-col bg-background text-[2rem] phones:text-[2.4rem]">
       <div className="bg-primary-500 p-24 text-primary-100">
         <RootHeader
           setIsShow={setIsShow}

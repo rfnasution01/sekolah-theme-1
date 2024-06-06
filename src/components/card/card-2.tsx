@@ -18,7 +18,7 @@ export function Card2({ data }: { data: BerandaType }) {
         {data?.berita?.length > 0 ? (
           data?.berita?.map((item, idx) => (
             <div className="col-span-1 phones:col-span-5" key={idx}>
-              <div className="flex flex-col gap-12 border bg-white px-12 pb-24 pt-12 shadow hover:cursor-pointer hover:shadow-lg">
+              <div className="flex flex-col gap-12 border bg-background px-12 pb-24 pt-12 shadow hover:cursor-pointer hover:shadow-lg">
                 <img
                   src={item?.photo?.gambar}
                   alt={item?.photo?.keterangan}

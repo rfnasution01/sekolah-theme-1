@@ -37,7 +37,7 @@ export function Breadcrumb({ page }: { page: string }) {
             'text-nowrap hover:cursor-not-allowed hover:text-primary-400',
           )}
         >
-          {page}
+          {convertSlugToText(page)}
         </p>
       </div>
     </div>

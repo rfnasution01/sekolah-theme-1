@@ -69,7 +69,7 @@ export function Table<T, P>({
 
                   {/* ----- Detail Header ----- */}
                   {collapseComponent && (
-                    <th className="sticky right-0 top-0 bg-white p-16 text-left">
+                    <th className="sticky right-0 top-0 bg-background p-16 text-left">
                       <span className="shadow-[-2.4rem_0_0.4rem_rgb(255,255,255)]">
                         Detail
                       </span>
@@ -104,7 +104,7 @@ export function Table<T, P>({
 
                       {/* ----- Collapse Trigger ----- */}
                       {collapseComponent && (
-                        <td className="sticky right-0 bg-white p-16">
+                        <td className="sticky right-0 bg-background p-16">
                           <div className="shadow-[-2.4rem_0_0.4rem_rgb(255,255,255)]">
                             <button
                               className="rounded-full p-4 transition-all ease-in hover:bg-neutral-100"
