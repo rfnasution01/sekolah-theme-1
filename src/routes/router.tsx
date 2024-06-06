@@ -3,6 +3,7 @@ import {
   ComingSoonPage,
   HalamanPage,
   HomePage,
+  ProgramDetailPage,
   RootLayout,
   TentangKamiPage,
 } from './loadables'
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: 'tentang-kami',
         element: <TentangKamiPage />,
+      },
+      {
+        path: 'program-details',
+        element: <ProgramDetailPage />,
       },
     ],
   },

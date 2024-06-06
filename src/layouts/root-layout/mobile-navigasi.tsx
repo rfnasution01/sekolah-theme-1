@@ -1,6 +1,5 @@
 import Loading from '@/components/Loading'
 import { enumRoute } from '@/libs/enum/enum-route'
-import { usePathname } from '@/libs/hooks/usePathname'
 import { MenuType } from '@/libs/types/beranda-type'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import clsx from 'clsx'
@@ -22,15 +21,6 @@ export function MobileNavigasi({
   loadingUtama: boolean
   setIsShow: Dispatch<SetStateAction<boolean>>
 }) {
-  const { firstPathname } = usePathname()
-
-  const isActivePage = (item: string) => {
-    if (item?.toLocaleLowerCase() === firstPathname) {
-      return true
-    }
-    return false
-  }
-
   const dispatch = useDispatch()
 
   const handleBeritaClick = (id) => {
@@ -52,41 +42,40 @@ export function MobileNavigasi({
                   to={
                     item?.nama_menu === 'Home'
                       ? '/'
-                      : item?.jenis_menu === enumRoute.ROUTE
-                        ? item?.slug
-                        : item?.jenis_menu === enumRoute.HALAMAN
-                          ? `/halaman?page=${item?.slug}`
-                          : item?.jenis_menu === enumRoute.PROGRAM
-                            ? `/program-details?page=${item?.slug}`
-                            : item?.jenis_menu === enumRoute.BERITA
-                              ? `/berita`
-                              : item?.jenis_menu === enumRoute.AGENDA
-                                ? `/agenda`
-                                : item?.jenis_menu === enumRoute.PENGUMUMAN
-                                  ? `/pengumuman`
-                                  : item?.jenis_menu === enumRoute.PRESTASI
-                                    ? `/prestasi`
-                                    : item?.jenis_menu === enumRoute.URL
-                                      ? item?.id_konten
-                                      : item?.slug
+                      : item?.slug === 'merdeka-belajar-kampus-merdeka-mbkm'
+                        ? '/program-details'
+                        : item?.jenis_menu === enumRoute.ROUTE
+                          ? item?.slug
+                          : item?.jenis_menu === enumRoute.HALAMAN
+                            ? `/halaman?page=${item?.slug}`
+                            : item?.jenis_menu === enumRoute.PROGRAM
+                              ? `/program-details?page=${item?.slug}`
+                              : item?.jenis_menu === enumRoute.BERITA
+                                ? `/berita`
+                                : item?.jenis_menu === enumRoute.AGENDA
+                                  ? `/agenda`
+                                  : item?.jenis_menu === enumRoute.PENGUMUMAN
+                                    ? `/pengumuman`
+                                    : item?.jenis_menu === enumRoute.PRESTASI
+                                      ? `/prestasi`
+                                      : item?.jenis_menu === enumRoute.URL
+                                        ? item?.id_konten
+                                        : item?.slug
                   }
                   target={
                     item?.jenis_menu === enumRoute.URL ? '_blank' : '_self'
                   }
                   className={clsx(
                     'px-16 py-24 text-[2rem] uppercase hover:cursor-pointer phones:text-[2.4rem]',
-                    {
-                      'bg-primary-400': isActivePage(item?.slug),
-                    },
                   )}
                 >
-                  <ul className="space-x-8">
+                  <ul className="">
                     {item?.children?.length > 0 ? (
-                      <div className="flex flex-col gap-16">
+                      <div className="flex flex-col gap-24">
                         <p>{item?.nama_menu}</p>
                         {item?.children?.map((list, id) => (
                           <li
-                            className="pb-16 pl-32"
+                            className="pl-32"
                             key={id}
                             onClick={() => {
                               handleBeritaClick(list?.id_konten)
@@ -169,9 +158,6 @@ export function MobileNavigasi({
                 target={item?.jenis_menu === enumRoute.URL ? '_blank' : '_self'}
                 className={clsx(
                   'py-24 text-[2rem] uppercase hover:cursor-pointer phones:text-[2.4rem]',
-                  {
-                    'bg-primary-400': isActivePage(item?.slug),
-                  },
                 )}
                 key={idx}
               >
