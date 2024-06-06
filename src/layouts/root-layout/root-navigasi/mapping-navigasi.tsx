@@ -4,31 +4,19 @@ import { enumRoute } from '@/libs/enum/enum-route'
 import { usePathname } from '@/libs/hooks/usePathname'
 import { MenuType } from '@/libs/types/beranda-type'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
-import { useGetMenuUtamaQuery } from '@/store/slices/berandaAPI'
 import clsx from 'clsx'
 import { ChevronDown } from 'lucide-react'
-import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export function MappingNavigasi() {
+export function MappingNavigasi({
+  loading,
+  menuUtama,
+}: {
+  loading: boolean
+  menuUtama: MenuType[]
+}) {
   const { firstPathname } = usePathname()
-
-  // --- Menu Top ---
-  const [menuUtama, setMenuUtama] = useState<MenuType[]>([])
-  const {
-    data: menuUtamaData,
-    isLoading: isLoadingMenuUtama,
-    isFetching: isFetchingMenuUtama,
-  } = useGetMenuUtamaQuery()
-
-  const loading = isLoadingMenuUtama || isFetchingMenuUtama
-
-  useEffect(() => {
-    if (menuUtamaData?.data) {
-      setMenuUtama(menuUtamaData?.data)
-    }
-  }, [menuUtamaData?.data])
 
   const isActivePage = (item: string) => {
     if (
