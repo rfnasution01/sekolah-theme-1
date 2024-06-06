@@ -17,3 +17,4 @@ export const TentangKamiPage = loadable(() => import('@/pages/tentang-kami'))
 export const ProgramDetailPage = loadable(
   () => import('@/pages/program-details'),
 )
+export const BeritaPage = loadable(() => import('@/pages/berita'))

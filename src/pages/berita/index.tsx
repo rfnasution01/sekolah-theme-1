@@ -1,16 +1,17 @@
 import { Breadcrumb } from '@/components/Breadcrumb'
 import Loading from '@/components/Loading'
-import { ProgramDetail, ProgramList } from '@/features/program-detail'
-import { ProgramDetailType } from '@/libs/types/beranda-type'
+import { BeritaDetail } from '@/features/berita'
+import { ProgramList } from '@/features/program-detail'
+import { BeritaDetailType, ProgramDetailType } from '@/libs/types/beranda-type'
 import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
 import {
-  useGetProgramDetailQuery,
+  useGetBeritaDetailQuery,
   useGetProgramQuery,
 } from '@/store/slices/berandaAPI'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-export default function ProgramDetailsPage() {
+export default function BeritaPage() {
   const stateId = useSelector(getHalamanSlice)?.id
   const statePage = useSelector(getHalamanSlice)?.page
 
@@ -34,25 +35,25 @@ export default function ProgramDetailsPage() {
   const [id, setId] = useState<string>(idParams ?? stateId ?? '')
   const [page, setPage] = useState<string>(pageParams ?? statePage ?? '')
 
-  // --- Program Detail Page ---
-  const [programDetail, setProgramDetail] = useState<ProgramDetailType>()
+  // --- Berita Detail Page ---
+  const [beritaDetail, setBeritaDetail] = useState<BeritaDetailType>()
   const {
-    data: programDetailData,
-    isLoading: programDetailIsLoading,
-    isFetching: programDetailIsFetching,
-  } = useGetProgramDetailQuery({
+    data: beritaDetailData,
+    isLoading: beritaDetailIsLoading,
+    isFetching: beritaDetailIsFetching,
+  } = useGetBeritaDetailQuery({
     id: id,
   })
 
-  const loadingProgramDetail = programDetailIsLoading || programDetailIsFetching
+  const loadingBeritaDetail = beritaDetailIsLoading || beritaDetailIsFetching
 
   useEffect(() => {
-    if (programDetailData?.data) {
-      setProgramDetail(programDetailData?.data)
+    if (beritaDetailData?.data) {
+      setBeritaDetail(beritaDetailData?.data)
     }
-  }, [programDetailData?.data, id])
+  }, [beritaDetailData?.data, id])
 
-  // --- Program Page ---
+  // --- Halaman Page ---
   const [program, setProgram] = useState<ProgramDetailType[]>()
   const {
     data: programData,
@@ -71,12 +72,12 @@ export default function ProgramDetailsPage() {
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
       <Breadcrumb page={page} />
-      {loadingProgramDetail || loadingProgram ? (
+      {loadingBeritaDetail || loadingProgram ? (
         <Loading />
       ) : page === '' ? (
         <ProgramList data={program} />
       ) : (
-        <ProgramDetail data={programDetail} />
+        <BeritaDetail data={beritaDetail} id={id} />
       )}
     </div>
   )

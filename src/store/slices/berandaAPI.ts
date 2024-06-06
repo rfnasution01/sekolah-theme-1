@@ -6,6 +6,7 @@ import {
   MenuType,
   Params,
   ProgramDetailType,
+  RelatedType,
   SliderType,
 } from '@/libs/types/beranda-type'
 import { Res, api } from '../api'
@@ -77,7 +78,16 @@ export const BerandaEndpoints = api.injectEndpoints({
         },
       }),
     }),
-    getBeritaDetail: builder.query<Res<BeritaDetailType[]>, { id: string }>({
+    getBeritaDetail: builder.query<Res<BeritaDetailType>, { id: string }>({
+      query: ({ id }) => ({
+        url: `website/berita/detail`,
+        method: 'GET',
+        params: {
+          id: id,
+        },
+      }),
+    }),
+    getBeritaDetailRelated: builder.query<Res<RelatedType[]>, { id: string }>({
       query: ({ id }) => ({
         url: `website/berita/detail`,
         method: 'GET',
@@ -100,4 +110,5 @@ export const {
   useGetProgramDetailQuery,
   useGetBeritaQuery,
   useGetBeritaDetailQuery,
+  useGetBeritaDetailRelatedQuery,
 } = BerandaEndpoints

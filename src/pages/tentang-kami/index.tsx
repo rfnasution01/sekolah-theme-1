@@ -108,7 +108,7 @@ export default function TentangKamiPage() {
               />
             )}
             <div className="scrollbar h-full flex-1 overflow-y-auto">
-              <HalamanDetail data={halamanDetail} isTentangKami />
+              <HalamanDetail data={halamanDetail} isDetail />
             </div>
           </div>
         </div>

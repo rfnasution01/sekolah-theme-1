@@ -34,7 +34,7 @@ export function Breadcrumb({ page }: { page: string }) {
         ))}
         <p
           className={clsx(
-            'text-nowrap hover:cursor-not-allowed hover:text-primary-400',
+            'line-clamp-1 text-nowrap hover:cursor-not-allowed hover:text-primary-400',
           )}
         >
           {convertSlugToText(page)}

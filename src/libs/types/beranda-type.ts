@@ -106,6 +106,29 @@ export type BeritaDetailType = {
   kategori: string
   seo_kategori: string
   isi: string
+  hits: number
+  jumlah_photo: number
   tanggal: string
   photo: PhotoType[]
+  tag: TagType[]
+  penulis: string
+}
+
+export type TagType = {
+  id: string
+  nama: string
+  seo: string
+}
+
+export type RelatedType = {
+  id: string
+  seo: string
+  judul: string
+  tanggal: string
+  deskripsi_singkat: string
+  isi: string
+  hits: string
+  kategori: string
+  seo_kategori: string
+  kelompok: string
 }

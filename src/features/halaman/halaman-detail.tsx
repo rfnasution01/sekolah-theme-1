@@ -4,13 +4,13 @@ import clsx from 'clsx'
 
 export function HalamanDetail({
   data,
-  isTentangKami,
+  isDetail,
 }: {
   data: HalamanDetailType
-  isTentangKami?: boolean
+  isDetail?: boolean
 }) {
   return (
-    <div className={clsx('', { 'px-[30rem] phones:p-32': !isTentangKami })}>
+    <div className={clsx('', { 'px-[30rem] phones:p-32': !isDetail })}>
       <div
         className={
           'flex flex-col gap-32 border bg-background p-64 shadow-lg phones:p-32'
