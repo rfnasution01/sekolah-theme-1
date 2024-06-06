@@ -107,7 +107,7 @@ export function MappingNavigasi({
                         <div
                           key={no}
                           onClick={() => {
-                            handleBeritaClick(list?.id)
+                            handleBeritaClick(list?.id_konten)
                             dispatch(
                               setStateHalaman({
                                 id: list?.id_konten,

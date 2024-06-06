@@ -89,7 +89,7 @@ export function MobileNavigasi({
                             className="pb-16 pl-32"
                             key={id}
                             onClick={() => {
-                              handleBeritaClick(list?.id)
+                              handleBeritaClick(list?.id_konten)
                               dispatch(
                                 setStateHalaman({
                                   id: list?.id_konten,
