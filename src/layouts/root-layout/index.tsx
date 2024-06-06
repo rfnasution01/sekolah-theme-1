@@ -2,8 +2,13 @@ import { useEffect, useState } from 'react'
 import { RootHeader } from './root-header'
 import { RootNavigasi } from './root-navigasi'
 import { MobileNavigasi } from './mobile-navigasi'
-import { BeritaTerbaruType, MenuType } from '@/libs/types/beranda-type'
 import {
+  BeritaTerbaruType,
+  IdentitasType,
+  MenuType,
+} from '@/libs/types/beranda-type'
+import {
+  useGetIdentitasQuery,
   useGetMenuTopQuery,
   useGetMenuUtamaQuery,
 } from '@/store/slices/berandaAPI'
@@ -55,6 +60,22 @@ export default function RootLayout() {
     return parseInt(a.urutan) - parseInt(b.urutan)
   })
 
+  // --- Identitas ---
+  const [identitas, setIdentitas] = useState<IdentitasType>()
+  const {
+    data: identitasData,
+    isLoading: isLoadingIdentitas,
+    isFetching: isFetchingIdentitas,
+  } = useGetIdentitasQuery()
+
+  useEffect(() => {
+    if (identitasData?.data) {
+      setIdentitas(identitasData?.data)
+    }
+  }, [identitasData?.data])
+
+  const loadingIdentitas = isLoadingIdentitas || isFetchingIdentitas
+
   return (
     <div className="flex h-screen flex-col bg-white text-[2rem] phones:text-[2.4rem]">
       <div className="bg-primary-500 p-24 text-primary-100">
@@ -67,7 +88,12 @@ export default function RootLayout() {
         />
       </div>
       <div className="phones:hidden">
-        <RootNavigasi menuUtama={sortedDataUtama} loading={loadingMenuUtama} />
+        <RootNavigasi
+          menuUtama={sortedDataUtama}
+          loading={loadingMenuUtama}
+          loadingIdentitas={loadingIdentitas}
+          identitas={identitas}
+        />
       </div>
       {isShow ? (
         <div className="flex-1">
@@ -82,7 +108,7 @@ export default function RootLayout() {
       ) : (
         <div className="scrollbar h-full overflow-y-auto">
           <Outlet />
-          <RootFooter />
+          <RootFooter identitas={identitas} loading={loadingIdentitas} />
         </div>
       )}
     </div>
