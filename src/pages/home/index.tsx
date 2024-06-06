@@ -1,8 +1,11 @@
 import Loading from '@/components/Loading'
 import { Slider1 } from '@/components/slider/slider-1'
-import { HomeBanner } from '@/features/home'
-import { SliderType } from '@/libs/types/beranda-type'
-import { useGetSliderQuery } from '@/store/slices/berandaAPI'
+import { HomeCard } from '@/features/home'
+import { BerandaType, SliderType } from '@/libs/types/beranda-type'
+import {
+  useGetBerandaQuery,
+  useGetSliderQuery,
+} from '@/store/slices/berandaAPI'
 import { useEffect, useState } from 'react'
 
 export default function HomePage() {
@@ -14,7 +17,7 @@ export default function HomePage() {
     isLoading: isLoadingData,
   } = useGetSliderQuery()
 
-  const loading = isFetchingData || isLoadingData
+  const loadingSlider = isFetchingData || isLoadingData
 
   useEffect(() => {
     if (sliderData?.data) {
@@ -22,11 +25,23 @@ export default function HomePage() {
     }
   }, [sliderData?.data])
 
+  //   --- Beranda ---
+  const [beranda, setBeranda] = useState<BerandaType[]>([])
+  const { data, isFetching, isLoading } = useGetBerandaQuery()
+
+  const loadingBeranda = isFetching || isLoading
+
+  useEffect(() => {
+    if (data?.data) {
+      setBeranda(data?.data)
+    }
+  }, [data?.data])
+
   return (
-    <div className="flex h-full w-full flex-col gap-32  bg-red-300">
+    <div className="my-32 flex flex-col gap-32">
       {/* --- Banner --- */}
-      {loading ? <Loading /> : <Slider1 listImage={slider} isShadow />}
-      <HomeBanner />
+      {loadingSlider ? <Loading /> : <Slider1 listImage={slider} isShadow />}
+      <HomeCard loading={loadingBeranda} beranda={beranda} />
     </div>
   )
 }
