@@ -1,19 +1,29 @@
 import { CalendarDays, Eye } from 'lucide-react'
 import { IconLabel } from '../IconLabel'
 import dayjs from 'dayjs'
+import { PhotoType } from '@/libs/types/beranda-type'
 
 export function Card3({
   judul,
   hits,
   tanggal,
+  gambar,
 }: {
   judul: string
   hits: string
   tanggal: string
+  gambar: PhotoType
 }) {
   return (
     <div className="flex transform gap-24 border-b border-[#00000033] py-12 transition-transform hover:translate-x-12 hover:cursor-pointer phones:flex-col">
-      <div className="flex h-[9rem] w-1/4 bg-red-300 phones:h-[15rem] phones:w-full"></div>
+      <div className="flex h-[9rem] w-1/4 phones:h-[15rem] phones:w-full">
+        <img
+          src={gambar?.gambar}
+          alt={gambar?.keterangan}
+          className="h-full w-full object-cover"
+          loading="lazy"
+        />
+      </div>
       <div className="flex w-3/4 flex-col justify-between phones:w-full phones:gap-12">
         <div className="flex items-start gap-32">
           <p className="line-clamp-2 w-2/3 uppercase phones:w-full">{judul}</p>

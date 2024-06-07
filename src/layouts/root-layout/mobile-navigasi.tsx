@@ -43,7 +43,7 @@ export function MobileNavigasi({
                     item?.nama_menu === 'Home'
                       ? '/'
                       : item?.slug === 'merdeka-belajar-kampus-merdeka-mbkm'
-                        ? '/program-details'
+                        ? '#'
                         : item?.jenis_menu === enumRoute.ROUTE
                           ? item?.slug
                           : item?.jenis_menu === enumRoute.HALAMAN

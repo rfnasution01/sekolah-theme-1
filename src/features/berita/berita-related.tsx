@@ -31,8 +31,8 @@ export function BeritaRelated({ id }: { id: string }) {
 
   return (
     <div className="flex w-3/5 flex-col gap-12 phones:w-full">
-      <div className="border-danger-700 flex border-b-4 pb-8">
-        <p className="border-danger-700 border-l-4 px-12 py-8 font-nunito text-[3rem] uppercase">
+      <div className="flex border-b-4 border-danger-700 pb-8">
+        <p className="border-l-4 border-danger-700 px-12 py-8 font-nunito text-[3rem] uppercase">
           berita lainnya
         </p>
       </div>
@@ -53,6 +53,7 @@ export function BeritaRelated({ id }: { id: string }) {
                 judul={item?.judul}
                 hits={item?.hits}
                 tanggal={item?.tanggal}
+                gambar={item?.photo}
               />
             </Link>
           ))}

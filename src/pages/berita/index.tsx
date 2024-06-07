@@ -1,12 +1,12 @@
 import { Breadcrumb } from '@/components/Breadcrumb'
 import Loading from '@/components/Loading'
-import { BeritaDetail } from '@/features/berita'
-import { ProgramList } from '@/features/program-detail'
-import { BeritaDetailType, ProgramDetailType } from '@/libs/types/beranda-type'
+import { BeritaDetail, BeritaList } from '@/features/berita'
+import { BeritaDetailType, BeritaType } from '@/libs/types/beranda-type'
+import { Meta } from '@/store/api'
 import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
 import {
   useGetBeritaDetailQuery,
-  useGetProgramQuery,
+  useGetBeritaQuery,
 } from '@/store/slices/berandaAPI'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -53,29 +53,46 @@ export default function BeritaPage() {
     }
   }, [beritaDetailData?.data, id])
 
-  // --- Halaman Page ---
-  const [program, setProgram] = useState<ProgramDetailType[]>()
+  // --- berita Page ---
+  const [berita, setBerita] = useState<BeritaType[]>()
+  const [pageNumber, setPageNumber] = useState<number>(1)
+  const [pageSize, setPageSize] = useState<number>(12)
+  const [search, setSearch] = useState<string>('')
+  const [meta, setMeta] = useState<Meta>()
   const {
-    data: programData,
-    isLoading: programIsLoading,
-    isFetching: programIsFethcing,
-  } = useGetProgramQuery()
+    data: beritaData,
+    isLoading: beritaIsLoading,
+    isFetching: beritaIsFethcing,
+  } = useGetBeritaQuery({
+    page_number: pageNumber,
+    page_size: pageSize,
+    search: search,
+  })
 
-  const loadingProgram = programIsLoading || programIsFethcing
+  const loadingBerita = beritaIsLoading || beritaIsFethcing
 
   useEffect(() => {
-    if (programData?.data) {
-      setProgram(programData?.data)
+    if (beritaData) {
+      setBerita(beritaData?.data)
+      setMeta(beritaData?.meta)
     }
-  }, [programData?.data])
+  }, [beritaData])
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
       <Breadcrumb page={page} />
-      {loadingBeritaDetail || loadingProgram ? (
+      {loadingBeritaDetail ? (
         <Loading />
       ) : page === '' ? (
-        <ProgramList data={program} />
+        <BeritaList
+          data={berita}
+          setPageNumber={setPageNumber}
+          setPageSize={setPageSize}
+          setSearch={setSearch}
+          loading={loadingBerita}
+          pageNumber={pageNumber}
+          lastPage={meta?.last_page}
+        />
       ) : (
         <BeritaDetail data={beritaDetail} id={id} />
       )}

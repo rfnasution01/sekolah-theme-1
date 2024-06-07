@@ -47,6 +47,7 @@ export type BerandaType = {
   kategori: string
   seo: string
   keterangan: string
+  kelompok: string
   urutan: string
   berita: BeritaType[]
 }
@@ -60,6 +61,9 @@ export type BeritaType = {
   kelompok: string
   tanggal: string
   photo: PhotoType
+  isi: string
+  hits: string
+  penulis: string
 }
 
 export type PhotoType = {
@@ -131,4 +135,5 @@ export type RelatedType = {
   kategori: string
   seo_kategori: string
   kelompok: string
+  photo: PhotoType
 }

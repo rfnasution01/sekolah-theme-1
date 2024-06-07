@@ -2,6 +2,7 @@ import { BerandaType } from '@/libs/types/beranda-type'
 import { Link } from 'react-router-dom'
 import { Slider2 } from '../slider/slider-2'
 import clsx from 'clsx'
+import { convertToSlug } from '@/libs/helpers/format-text'
 
 export function Card1({ data, angka }: { data: BerandaType; angka: number }) {
   return (
@@ -18,7 +19,7 @@ export function Card1({ data, angka }: { data: BerandaType; angka: number }) {
         </div>
         <div>
           <Link
-            to={``}
+            to={`/${convertToSlug(data?.kelompok)}`}
             className="rounded-lg bg-primary-700 px-32 py-12 text-primary-100 hover:bg-primary-900"
           >
             Lihat Berita Lainnya

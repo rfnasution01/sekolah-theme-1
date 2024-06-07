@@ -1,6 +1,7 @@
 import {
   BerandaType,
   BeritaDetailType,
+  BeritaType,
   HalamanDetailType,
   IdentitasType,
   MenuType,
@@ -67,7 +68,7 @@ export const BerandaEndpoints = api.injectEndpoints({
         },
       }),
     }),
-    getBerita: builder.query<Res<BeritaDetailType[]>, Params>({
+    getBerita: builder.query<Res<BeritaType[]>, Params>({
       query: ({ page_size, page_number, search }) => ({
         url: `website/berita`,
         method: 'GET',

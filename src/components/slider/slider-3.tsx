@@ -105,15 +105,21 @@ export function Slider3({
               </span>
             </div>
 
-            <div className="flex flex-shrink flex-col gap-16 p-32">
-              <div className="flex">
-                <Link
-                  to={`/berita?kategori=${seo_kategori}`}
-                  className="flex items-center gap-12 rounded-2xl bg-primary-500 p-16 text-[2rem] font-bold tracking-0.25 text-primary-100"
-                >
-                  <Folder size={16} />
-                  <p>{kategori}</p>
-                </Link>
+            {/* --- Kategori --- */}
+
+            <div
+              className={`absolute top-0 flex ${isShadow ? 'w-[80%]' : 'w-full'} flex-grow items-center justify-between px-4`}
+            >
+              <div className="flex flex-shrink flex-col gap-16 p-32">
+                <div className="flex hover:cursor-pointer">
+                  <Link
+                    to={`/berita?kategori=${seo_kategori}`}
+                    className="flex items-center gap-12 rounded-2xl bg-primary-500 p-16 text-[2rem] font-bold tracking-0.25 text-primary-100 hover:bg-primary-700"
+                  >
+                    <Folder size={16} />
+                    <p>{kategori}</p>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

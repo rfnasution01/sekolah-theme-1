@@ -1,11 +1,53 @@
-import { ProgramDetailType } from '@/libs/types/beranda-type'
 import './berita-detail.css'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
+import { Dispatch, SetStateAction } from 'react'
+import { BeritaType } from '@/libs/types/beranda-type'
+import './berita-detail.css'
+import { IconLabel } from '@/components/IconLabel'
+import { Search, Timer, User } from 'lucide-react'
+import TimeSinceUploaded from '@/libs/helpers/format-time'
+import { debounce } from 'lodash'
+import Loading from '@/components/Loading'
+import { FormListDataPerPage } from '@/components/form/formListDataPerPage'
+import { Pagination } from '@/components/Pagination'
 
-export function BeritaList({ data }: { data: ProgramDetailType[] }) {
+export function BeritaList({
+  data,
+  setPageNumber,
+  setPageSize,
+  setSearch,
+  loading,
+  pageNumber,
+  lastPage,
+}: {
+  data: BeritaType[]
+  setPageNumber: Dispatch<SetStateAction<number>>
+  setPageSize: Dispatch<SetStateAction<number>>
+  setSearch: Dispatch<SetStateAction<string>>
+  loading: boolean
+  pageNumber: number
+  lastPage: number
+}) {
   const dispatch = useDispatch()
+
+  const handleSearch = debounce((searchValue: string) => {
+    setPageNumber(1)
+    setSearch(searchValue)
+  }, 300)
+
+  const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    handleSearch(value)
+  }
+
+  const handleClick = () => {
+    const inputElement = document.querySelector(
+      'input[type="text"]',
+    ) as HTMLInputElement
+    handleSearch(inputElement.value)
+  }
 
   return (
     <div className="px-[30rem] phones:p-32">
@@ -14,37 +56,88 @@ export function BeritaList({ data }: { data: ProgramDetailType[] }) {
           'flex flex-col gap-32 border bg-background p-64 shadow-lg phones:p-32'
         }
       >
-        <p className="font-roboto text-[5rem]">Program</p>
-        <div className="grid grid-cols-4 gap-32">
-          {data?.map((item, idx) => (
-            <div
-              className="col-span-1 phones:col-span-2"
-              key={idx}
-              onClick={() => {
-                dispatch(setStateHalaman({ id: item?.id, page: item?.seo }))
+        <div className="flex items-center justify-between gap-32">
+          <p className="font-roboto text-[5rem]">Berita</p>
+          <div className="flex w-1/2 justify-end">
+            <input
+              type="text"
+              className="h-1/2 w-4/6 rounded-lg border border-gray-300 p-16 text-[2rem] focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 phones:w-full"
+              placeholder="Search"
+              onChange={(e) => onSearch(e)}
+            />
+            <button
+              className="bg-primary px-12 text-white"
+              type="button"
+              style={{
+                borderTopRightRadius: '1rem',
+                borderBottomRightRadius: '1rem',
               }}
+              onClick={() => handleClick()}
             >
-              <Link
-                to={`/program-details?page=${item?.seo}`}
-                className="flex flex-col gap-24 rounded-2xl bg-white px-24 pb-32 pt-24 shadow hover:cursor-pointer hover:shadow-lg"
+              <Search size={20} />
+            </button>
+          </div>
+        </div>
+
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="grid grid-cols-12 gap-32">
+            {data?.map((item, idx) => (
+              <div
+                className="col-span-4 phones:col-span-12"
+                key={idx}
+                onClick={() => {
+                  dispatch(setStateHalaman({ id: item?.id, page: item?.seo }))
+                }}
               >
-                <div className="h-[25vh] w-full">
-                  <img
-                    src={item?.photo}
-                    alt={item?.judul}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="flex flex-col gap-4">
-                  <p className="font-roboto text-[2.4rem] phones:text-[2.8rem]">
-                    {item?.judul ?? '-'}
-                  </p>
-                  <p className="line-clamp-3">{item?.isi_singkat ?? '-'}</p>
-                </div>
-              </Link>
-            </div>
-          ))}
+                <Link
+                  to={`/berita?page=${item?.seo}`}
+                  className="flex h-full flex-col gap-24 rounded-2xl bg-white px-24 pb-32 pt-24 shadow hover:cursor-pointer hover:shadow-lg"
+                >
+                  <div className="h-[25vh] w-full">
+                    <img
+                      src={item?.photo?.gambar}
+                      alt={item?.photo?.keterangan}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <p className="line-clamp-2 font-roboto text-[2.4rem] phones:text-[2.8rem]">
+                      {item?.judul ?? '-'}
+                    </p>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: item?.isi }}
+                      className="article-content line-clamp-3"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between gap-32 text-[1.6rem] phones:text-[2rem]">
+                    <IconLabel
+                      icon={<User size={12} />}
+                      label={item?.penulis}
+                    />
+                    <IconLabel
+                      icon={<Timer size={12} />}
+                      label={<TimeSinceUploaded uploadTime={item?.tanggal} />}
+                    />
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* --- Footer --- */}
+        <div className="flex items-center justify-end">
+          <FormListDataPerPage setDataPerPage={setPageSize} />
+          {data?.length > 0 && (
+            <Pagination
+              setPage={setPageNumber}
+              pageNow={pageNumber ?? 0}
+              lastPage={lastPage ?? 0}
+            />
+          )}
         </div>
       </div>
     </div>

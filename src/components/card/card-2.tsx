@@ -1,6 +1,8 @@
 import { BerandaType } from '@/libs/types/beranda-type'
 import clsx from 'clsx'
 import { NoData } from '../NoData'
+import { Link } from 'react-router-dom'
+import { convertToSlug } from '@/libs/helpers/format-text'
 
 export function Card2({ data }: { data: BerandaType }) {
   return (
@@ -36,6 +38,14 @@ export function Card2({ data }: { data: BerandaType }) {
             <NoData />
           </div>
         )}
+      </div>
+      <div className="flex items-center justify-center">
+        <Link
+          to={`/${convertToSlug(data?.kelompok)}`}
+          className="rounded-lg bg-primary-700 px-32 py-12 text-primary-100 hover:bg-primary-900"
+        >
+          Lihat Berita Lainnya
+        </Link>
       </div>
     </div>
   )
