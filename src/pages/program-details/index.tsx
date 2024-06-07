@@ -1,9 +1,12 @@
 import { Breadcrumb } from '@/components/Breadcrumb'
 import Loading from '@/components/Loading'
-import { ProgramDetail } from '@/features/program-detail'
+import { ProgramDetail, ProgramDetailTab } from '@/features/program-detail'
 import { ProgramDetailType } from '@/libs/types/beranda-type'
 import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
-import { useGetProgramDetailQuery } from '@/store/slices/berandaAPI'
+import {
+  useGetProgramDetailQuery,
+  useGetProgramQuery,
+} from '@/store/slices/berandaAPI'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -38,13 +41,45 @@ export default function ProgramDetailsPage() {
     }
   }, [programDetailData?.data, id])
 
+  // --- Program Page ---
+  const [program, setProgram] = useState<ProgramDetailType[]>()
+  const {
+    data: programData,
+    isLoading: programIsLoading,
+    isFetching: programIsFethcing,
+  } = useGetProgramQuery()
+
+  const loadingProgram = programIsLoading || programIsFethcing
+
+  useEffect(() => {
+    if (programData?.data) {
+      setProgram(programData?.data)
+    }
+  }, [programData?.data])
+
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
       <Breadcrumb />
       {loadingProgramDetail ? (
         <Loading />
       ) : (
-        <ProgramDetail data={programDetail} />
+        <div className="scrollbar h-[75vh] w-full overflow-y-auto px-[30rem] phones:p-32">
+          <div className="flex h-full border bg-background shadow-lg phones:flex-none phones:flex-col">
+            {loadingProgram ? (
+              <Loading />
+            ) : (
+              <ProgramDetailTab
+                menu={program}
+                firstPathname="Program"
+                setTab={setId}
+                tab={id}
+              />
+            )}
+            <div className="scrollbar h-full flex-1 overflow-y-auto phones:flex-none">
+              <ProgramDetail data={programDetail} isDetail />
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )
