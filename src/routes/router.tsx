@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import {
   ComingSoonPage,
   DetailLayout,
+  FaqPage,
   HalamanPage,
   HomePage,
   KategoriLayout,
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: 'profil',
         element: <ProfilPage />,
+      },
+      {
+        path: 'faq',
+        element: <FaqPage />,
       },
       {
         path: 'program-details/page/:id',
