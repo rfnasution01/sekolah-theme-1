@@ -4,7 +4,13 @@ import { NoData } from '../NoData'
 import { Link } from 'react-router-dom'
 import { convertToSlug } from '@/libs/helpers/format-text'
 
-export function Card2({ data }: { data: BerandaType }) {
+export function Card2({
+  data,
+  kelompok,
+}: {
+  data: BerandaType
+  kelompok: string
+}) {
   return (
     <div
       className={clsx(
@@ -44,7 +50,7 @@ export function Card2({ data }: { data: BerandaType }) {
           to={`/${convertToSlug(data?.kelompok)}`}
           className="rounded-lg bg-primary-700 px-32 py-12 text-primary-100 hover:bg-primary-900"
         >
-          Lihat Berita Lainnya
+          Lihat {kelompok} Lainnya
         </Link>
       </div>
     </div>

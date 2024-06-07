@@ -5,6 +5,7 @@ import loadable from '@loadable/component'
 // ------------------
 
 export const RootLayout = loadable(() => import('@/layouts/root-layout'))
+export const RouteLayout = loadable(() => import('@/layouts/route'))
 export const DetailLayout = loadable(() => import('@/layouts/children/detail'))
 export const KategoriLayout = loadable(
   () => import('@/layouts/children/kategori'),
@@ -21,6 +22,3 @@ export const TentangKamiPage = loadable(() => import('@/pages/tentang-kami'))
 export const ProgramDetailPage = loadable(
   () => import('@/pages/program-details'),
 )
-export const BeritaPage = loadable(() => import('@/pages/berita'))
-export const PengumumanPage = loadable(() => import('@/pages/pengumuman'))
-export const AgendaPage = loadable(() => import('@/pages/agenda'))

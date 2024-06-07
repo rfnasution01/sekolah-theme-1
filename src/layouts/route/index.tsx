@@ -1,4 +1,5 @@
 import { Breadcrumb } from '@/components/Breadcrumb'
+import { NoData } from '@/components/NoData'
 import { List } from '@/features/list'
 import { usePathname } from '@/libs/hooks/usePathname'
 import { ListType } from '@/libs/types/list-type'
@@ -8,7 +9,7 @@ import { useGetListQuery } from '@/store/slices/listAPI'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-export default function PengumumanPage() {
+export default function RouteLayout() {
   const { firstPathname } = usePathname()
   const statePage = useSelector(getHalamanSlice)?.page
 
@@ -52,15 +53,19 @@ export default function PengumumanPage() {
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
       <Breadcrumb page={page} />
-      <List
-        data={list}
-        setPageNumber={setPageNumber}
-        setPageSize={setPageSize}
-        setSearch={setSearch}
-        loading={loadingList}
-        pageNumber={pageNumber}
-        lastPage={meta?.last_page}
-      />
+      {list?.length > 0 ? (
+        <List
+          data={list}
+          setPageNumber={setPageNumber}
+          setPageSize={setPageSize}
+          setSearch={setSearch}
+          loading={loadingList}
+          pageNumber={pageNumber}
+          lastPage={meta?.last_page}
+        />
+      ) : (
+        <NoData />
+      )}
     </div>
   )
 }

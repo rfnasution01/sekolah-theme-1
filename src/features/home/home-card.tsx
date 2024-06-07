@@ -19,7 +19,11 @@ export function HomeCard({
           {beranda?.length > 0 ? (
             beranda?.map((item, idx) => (
               <div key={idx} className="flex flex-col gap-32">
-                <HomeShowCard angka={idx} data={item} />
+                <HomeShowCard
+                  angka={idx}
+                  data={item}
+                  kelompok={item?.kelompok}
+                />
               </div>
             ))
           ) : (

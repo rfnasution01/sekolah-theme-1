@@ -1,17 +1,17 @@
 import { createBrowserRouter } from 'react-router-dom'
 import {
-  AgendaPage,
-  BeritaPage,
   ComingSoonPage,
   DetailLayout,
   HalamanPage,
   HomePage,
   KategoriLayout,
-  PengumumanPage,
   ProgramDetailPage,
   RootLayout,
+  RouteLayout,
   TentangKamiPage,
 } from './loadables'
+
+const categories = ['berita', 'pengumuman', 'agenda', 'prestasi']
 
 export const router = createBrowserRouter([
   {
@@ -35,28 +35,11 @@ export const router = createBrowserRouter([
         path: 'program-details',
         element: <ProgramDetailPage />,
       },
-      {
-        path: 'berita',
-        element: <BeritaPage />,
-      },
-      {
-        path: 'berita/:kategori',
-        element: <KategoriLayout />,
-      },
-      { path: 'berita/page/:id', element: <DetailLayout /> },
-      {
-        path: 'pengumuman',
-        element: <PengumumanPage />,
-      },
-      {
-        path: 'pengumuman/:kategori',
-        element: <KategoriLayout />,
-      },
-      { path: 'pengumuman/page/:id', element: <DetailLayout /> },
-      {
-        path: 'agenda',
-        element: <AgendaPage />,
-      },
+      ...categories.flatMap((category) => [
+        { path: category, element: <RouteLayout /> },
+        { path: `${category}/:kategori`, element: <KategoriLayout /> },
+        { path: `${category}/page/:id`, element: <DetailLayout /> },
+      ]),
     ],
   },
 

@@ -132,7 +132,7 @@ export default function Kategori() {
                 }}
               >
                 <Link
-                  to={`/berita?page=${item?.seo}`}
+                  to={`/${firstPathname}/page/${item?.seo}`}
                   className="flex h-full flex-col gap-24 rounded-2xl bg-white px-24 pb-32 pt-24 shadow hover:cursor-pointer hover:shadow-lg"
                 >
                   <div className="h-[25vh] w-full">

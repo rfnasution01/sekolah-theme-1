@@ -56,6 +56,7 @@ export function DetailRelated({ id }: { id: string }) {
                 hits={item?.hits}
                 tanggal={item?.tanggal}
                 gambar={item?.photo}
+                kelompok={item?.kelompok}
               />
             </Link>
           ))}

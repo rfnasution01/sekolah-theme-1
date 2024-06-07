@@ -54,6 +54,7 @@ export function AgendaRelated({ id }: { id: string }) {
                 hits={item?.hits}
                 tanggal={item?.tanggal}
                 gambar={item?.photo}
+                kelompok={item?.kelompok}
               />
             </Link>
           ))}
