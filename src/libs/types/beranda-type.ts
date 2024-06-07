@@ -101,6 +101,7 @@ export type Params = {
   page_size?: number
   page_number?: number
   search?: string
+  seo_kategori?: string
 }
 
 export type BeritaDetailType = {
@@ -136,4 +137,17 @@ export type RelatedType = {
   seo_kategori: string
   kelompok: string
   photo: PhotoType
+}
+
+export type KategoriType = {
+  id: string
+  seo: string
+  judul: string
+  isi: string
+  hits: string
+  kategori: string
+  seo_kategori: string
+  tanggal: string
+  photo: PhotoType
+  penulis: string
 }

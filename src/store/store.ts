@@ -3,12 +3,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import { api } from './api'
 import stateSearch from './reducer/stateSearch.ts'
 import stateHalaman from './reducer/stateIdHalaman.tsx'
+import stateKategori from './reducer/stateIdKategori.tsx'
 
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     stateSearch: stateSearch,
     stateHalaman: stateHalaman,
+    stateKategori: stateKategori,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import { Dispatch, SetStateAction } from 'react'
-import { BeritaType } from '@/libs/types/beranda-type'
+import { KategoriType } from '@/libs/types/beranda-type'
 import './berita-detail.css'
 import { IconLabel } from '@/components/IconLabel'
 import { Search, Timer, User } from 'lucide-react'
@@ -12,8 +12,9 @@ import { debounce } from 'lodash'
 import Loading from '@/components/Loading'
 import { FormListDataPerPage } from '@/components/form/formListDataPerPage'
 import { Pagination } from '@/components/Pagination'
+import { convertSlugToText } from '@/libs/helpers/format-text'
 
-export function BeritaList({
+export function BeritaKategori({
   data,
   setPageNumber,
   setPageSize,
@@ -21,14 +22,16 @@ export function BeritaList({
   loading,
   pageNumber,
   lastPage,
+  id,
 }: {
-  data: BeritaType[]
+  data: KategoriType[]
   setPageNumber: Dispatch<SetStateAction<number>>
   setPageSize: Dispatch<SetStateAction<number>>
   setSearch: Dispatch<SetStateAction<string>>
   loading: boolean
   pageNumber: number
   lastPage: number
+  id: string
 }) {
   const dispatch = useDispatch()
 
@@ -61,7 +64,7 @@ export function BeritaList({
         }
       >
         <div className="flex items-center justify-between gap-32">
-          <p className="font-roboto text-[5rem]">Berita</p>
+          <p className="font-roboto text-[5rem]">{convertSlugToText(id)}</p>
           <div className="flex w-1/2 justify-end">
             <input
               type="text"

@@ -4,6 +4,7 @@ import {
   BeritaType,
   HalamanDetailType,
   IdentitasType,
+  KategoriType,
   MenuType,
   Params,
   ProgramDetailType,
@@ -97,6 +98,18 @@ export const BerandaEndpoints = api.injectEndpoints({
         },
       }),
     }),
+    getBeritaKategori: builder.query<Res<KategoriType[]>, Params>({
+      query: ({ page_number, page_size, search, seo_kategori }) => ({
+        url: `website/berita/kategori`,
+        method: 'GET',
+        params: {
+          page_number: page_number,
+          page_size: page_size,
+          search: search,
+          seo_kategori: seo_kategori,
+        },
+      }),
+    }),
   }),
 })
 
@@ -112,4 +125,5 @@ export const {
   useGetBeritaQuery,
   useGetBeritaDetailQuery,
   useGetBeritaDetailRelatedQuery,
+  useGetBeritaKategoriQuery,
 } = BerandaEndpoints

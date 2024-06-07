@@ -1,11 +1,17 @@
 import { Breadcrumb } from '@/components/Breadcrumb'
 import Loading from '@/components/Loading'
-import { BeritaDetail, BeritaList } from '@/features/berita'
-import { BeritaDetailType, BeritaType } from '@/libs/types/beranda-type'
+import { BeritaDetail, BeritaKategori, BeritaList } from '@/features/berita'
+import {
+  BeritaDetailType,
+  BeritaType,
+  KategoriType,
+} from '@/libs/types/beranda-type'
 import { Meta } from '@/store/api'
 import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
+import { getKategoriSlice } from '@/store/reducer/stateIdKategori'
 import {
   useGetBeritaDetailQuery,
+  useGetBeritaKategoriQuery,
   useGetBeritaQuery,
 } from '@/store/slices/berandaAPI'
 import { useEffect, useState } from 'react'
@@ -14,6 +20,7 @@ import { useSelector } from 'react-redux'
 export default function BeritaPage() {
   const stateId = useSelector(getHalamanSlice)?.id
   const statePage = useSelector(getHalamanSlice)?.page
+  const stateKategori = useSelector(getKategoriSlice)?.id
 
   useEffect(() => {
     if (stateId) {
@@ -27,13 +34,23 @@ export default function BeritaPage() {
     }
   }, [statePage])
 
+  useEffect(() => {
+    if (stateKategori) {
+      setKategori(stateKategori)
+    }
+  }, [stateKategori])
+
   const searchParams = new URLSearchParams(location.search)
   const pageParams = searchParams.get('page')
+  const kategoriParams = searchParams.get('kategori')
 
   const idParams = localStorage.getItem('beritaID')
 
   const [id, setId] = useState<string>(idParams ?? stateId ?? '')
   const [page, setPage] = useState<string>(pageParams ?? statePage ?? '')
+  const [kategori, setKategori] = useState<string>(
+    kategoriParams ?? stateKategori ?? '',
+  )
 
   // --- Berita Detail Page ---
   const [beritaDetail, setBeritaDetail] = useState<BeritaDetailType>()
@@ -78,8 +95,39 @@ export default function BeritaPage() {
     }
   }, [beritaData])
 
+  // --- berita Page ---
+  const [beritaKategori, setBeritaKategori] = useState<KategoriType[]>()
+  const [pageNumberKategori, setPageNumberKategori] = useState<number>(1)
+  const [pageSizeKategori, setPageSizeKategori] = useState<number>(12)
+  const [searchKategori, setSearchKategori] = useState<string>('')
+  const [metaKategori, setMetaKategori] = useState<Meta>()
+  const {
+    data: beritaKategoriData,
+    isLoading: beritaKategoriIsLoading,
+    isFetching: beritaKategoriIsFethcing,
+  } = useGetBeritaKategoriQuery(
+    {
+      page_number: pageNumberKategori,
+      page_size: pageSizeKategori,
+      search: searchKategori,
+      seo_kategori: kategori,
+    },
+    { skip: !kategori },
+  )
+
+  const loadingBeritaKategori =
+    beritaKategoriIsLoading || beritaKategoriIsFethcing
+
+  useEffect(() => {
+    if (beritaKategoriData) {
+      setBeritaKategori(beritaKategoriData?.data)
+      setMetaKategori(beritaKategoriData?.meta)
+    }
+  }, [beritaKategoriData])
+
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
+      <p>id: {id}</p>
       <Breadcrumb page={page} />
       {loadingBeritaDetail ? (
         <Loading />
@@ -92,6 +140,17 @@ export default function BeritaPage() {
           loading={loadingBerita}
           pageNumber={pageNumber}
           lastPage={meta?.last_page}
+        />
+      ) : kategori !== '' ? (
+        <BeritaKategori
+          data={beritaKategori}
+          setPageNumber={setPageNumberKategori}
+          setPageSize={setPageSizeKategori}
+          setSearch={setSearchKategori}
+          loading={loadingBeritaKategori}
+          pageNumber={pageNumberKategori}
+          lastPage={metaKategori?.last_page}
+          id={kategori}
         />
       ) : (
         <BeritaDetail data={beritaDetail} id={id} />
