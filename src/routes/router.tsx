@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import {
+  AgendaPage,
   BeritaPage,
   ComingSoonPage,
   HalamanPage,
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: 'pengumuman',
         element: <PengumumanPage />,
+      },
+      {
+        path: 'agenda',
+        element: <AgendaPage />,
       },
     ],
   },

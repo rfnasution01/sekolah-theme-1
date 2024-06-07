@@ -19,3 +19,4 @@ export const ProgramDetailPage = loadable(
 )
 export const BeritaPage = loadable(() => import('@/pages/berita'))
 export const PengumumanPage = loadable(() => import('@/pages/pengumuman'))
+export const AgendaPage = loadable(() => import('@/pages/agenda'))

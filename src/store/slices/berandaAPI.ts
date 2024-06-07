@@ -143,6 +143,56 @@ export const BerandaEndpoints = api.injectEndpoints({
         },
       }),
     }),
+    getPengumumanRelated: builder.query<Res<RelatedType[]>, { id: string }>({
+      query: ({ id }) => ({
+        url: `website/pengumuman/detail`,
+        method: 'GET',
+        params: {
+          id: id,
+        },
+      }),
+    }),
+    getAgenda: builder.query<Res<BeritaType[]>, Params>({
+      query: ({ page_size, page_number, search }) => ({
+        url: `website/agenda`,
+        method: 'GET',
+        params: {
+          page_number: page_number,
+          page_size: page_size,
+          search: search,
+        },
+      }),
+    }),
+    getAgendaDetail: builder.query<Res<BeritaDetailType>, { id: string }>({
+      query: ({ id }) => ({
+        url: `website/agenda/detail`,
+        method: 'GET',
+        params: {
+          id: id,
+        },
+      }),
+    }),
+    getAgendaRelated: builder.query<Res<RelatedType[]>, { id: string }>({
+      query: ({ id }) => ({
+        url: `website/agenda/detail`,
+        method: 'GET',
+        params: {
+          id: id,
+        },
+      }),
+    }),
+    getAgendaKategori: builder.query<Res<KategoriType[]>, Params>({
+      query: ({ page_number, page_size, search, seo_kategori }) => ({
+        url: `website/agenda/kategori`,
+        method: 'GET',
+        params: {
+          page_number: page_number,
+          page_size: page_size,
+          search: search,
+          seo_kategori: seo_kategori,
+        },
+      }),
+    }),
   }),
 })
 
@@ -162,4 +212,9 @@ export const {
   useGetPengumumanDetailQuery,
   useGetPengumumanKategoriQuery,
   useGetPengumumanQuery,
+  useGetPengumumanRelatedQuery,
+  useGetAgendaDetailQuery,
+  useGetAgendaKategoriQuery,
+  useGetAgendaQuery,
+  useGetAgendaRelatedQuery,
 } = BerandaEndpoints

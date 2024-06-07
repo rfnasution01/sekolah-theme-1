@@ -2,30 +2,30 @@ import Loading from '@/components/Loading'
 import { Card3 } from '@/components/card/card-3'
 import { RelatedType } from '@/libs/types/beranda-type'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
-import { useGetPengumumanRelatedQuery } from '@/store/slices/berandaAPI'
+import { useGetAgendaRelatedQuery } from '@/store/slices/berandaAPI'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export function PengumumanRelated({ id }: { id: string }) {
+export function AgendaRelated({ id }: { id: string }) {
   // --- Berita Detail Page ---
-  const [beritaDetailRelated, setBeritaDetailRelated] =
+  const [agendaDetailRelated, setAgendaDetailRelated] =
     useState<RelatedType[]>()
   const {
-    data: beritaDetailData,
-    isLoading: beritaDetailIsLoading,
-    isFetching: beritaDetailIsFetching,
-  } = useGetPengumumanRelatedQuery({
+    data: agendaDetailData,
+    isLoading: agendaDetailIsLoading,
+    isFetching: agendaDetailIsFetching,
+  } = useGetAgendaRelatedQuery({
     id: id,
   })
 
-  const loadingBeritaDetail = beritaDetailIsLoading || beritaDetailIsFetching
+  const loadingagendaDetail = agendaDetailIsLoading || agendaDetailIsFetching
 
   useEffect(() => {
-    if (beritaDetailData?.related) {
-      setBeritaDetailRelated(beritaDetailData?.related)
+    if (agendaDetailData?.related) {
+      setAgendaDetailRelated(agendaDetailData?.related)
     }
-  }, [beritaDetailData?.related, id])
+  }, [agendaDetailData?.related, id])
 
   const dispatch = useDispatch()
 
@@ -37,13 +37,13 @@ export function PengumumanRelated({ id }: { id: string }) {
         </p>
       </div>
 
-      {loadingBeritaDetail ? (
+      {loadingagendaDetail ? (
         <Loading />
       ) : (
         <div className="flex flex-col">
-          {beritaDetailRelated?.map((item, idx) => (
+          {agendaDetailRelated?.map((item, idx) => (
             <Link
-              to={`/pengumuman?page=${item?.seo}`}
+              to={`/agenda?page=${item?.seo}`}
               onClick={() => {
                 dispatch(setStateHalaman({ id: item?.id, page: item?.seo }))
               }}
