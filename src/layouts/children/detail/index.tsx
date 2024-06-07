@@ -17,7 +17,6 @@ import { DetailRelated, DetailShare, DetailTag } from '@/features/detail'
 export default function Detail() {
   const { firstPathname } = usePathname()
   const stateId = useSelector(getHalamanSlice)?.id
-  const statePage = useSelector(getHalamanSlice)?.page
 
   useEffect(() => {
     if (stateId) {
@@ -25,19 +24,9 @@ export default function Detail() {
     }
   }, [stateId])
 
-  useEffect(() => {
-    if (statePage) {
-      setPage(statePage)
-    }
-  }, [statePage])
-
-  const searchParams = new URLSearchParams(location.search)
-  const pageParams = searchParams.get('page')
-
   const idParams = localStorage.getItem('beritaID')
 
   const [id, setId] = useState<string>(idParams ?? stateId ?? '')
-  const [page, setPage] = useState<string>(pageParams ?? statePage ?? '')
 
   // --- Berita Detail Page ---
   const [detail, setDetail] = useState<DetailType>()
@@ -60,7 +49,7 @@ export default function Detail() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb page={page} />
+      <Breadcrumb />
 
       {loadingDetail ? (
         <Loading />

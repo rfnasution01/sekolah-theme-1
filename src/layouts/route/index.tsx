@@ -1,28 +1,15 @@
 import { Breadcrumb } from '@/components/Breadcrumb'
+import Loading from '@/components/Loading'
 import { NoData } from '@/components/NoData'
 import { List } from '@/features/list'
 import { usePathname } from '@/libs/hooks/usePathname'
 import { ListType } from '@/libs/types/list-type'
 import { Meta } from '@/store/api'
-import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
 import { useGetListQuery } from '@/store/slices/listAPI'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 
 export default function RouteLayout() {
   const { firstPathname } = usePathname()
-  const statePage = useSelector(getHalamanSlice)?.page
-
-  useEffect(() => {
-    if (statePage) {
-      setPage(statePage)
-    }
-  }, [statePage])
-
-  const searchParams = new URLSearchParams(location.search)
-  const pageParams = searchParams.get('page')
-
-  const [page, setPage] = useState<string>(pageParams ?? statePage ?? '')
 
   // --- List ---
   const [list, setList] = useState<ListType[]>()
@@ -52,8 +39,10 @@ export default function RouteLayout() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb page={page} />
-      {list?.length > 0 ? (
+      <Breadcrumb />
+      {loadingList ? (
+        <Loading />
+      ) : list?.length > 0 ? (
         <List
           data={list}
           setPageNumber={setPageNumber}
