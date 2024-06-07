@@ -1,10 +1,8 @@
-import './berita-detail.css'
+import './detail.css'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
-import { Dispatch, SetStateAction } from 'react'
-import { KategoriType } from '@/libs/types/beranda-type'
-import './berita-detail.css'
+import { useEffect, useState } from 'react'
 import { IconLabel } from '@/components/IconLabel'
 import { Search, Timer, User } from 'lucide-react'
 import TimeSinceUploaded from '@/libs/helpers/format-time'
@@ -13,27 +11,61 @@ import Loading from '@/components/Loading'
 import { FormListDataPerPage } from '@/components/form/formListDataPerPage'
 import { Pagination } from '@/components/Pagination'
 import { convertSlugToText } from '@/libs/helpers/format-text'
+import { usePathname } from '@/libs/hooks/usePathname'
+import { getKategoriSlice } from '@/store/reducer/stateIdKategori'
+import { ListType } from '@/libs/types/list-type'
+import { useGetKategoriQuery } from '@/store/slices/kategoriAPI'
+import { Meta } from '@/store/api'
 
-export function BeritaKategori({
-  data,
-  setPageNumber,
-  setPageSize,
-  setSearch,
-  loading,
-  pageNumber,
-  lastPage,
-  id,
-}: {
-  data: KategoriType[]
-  setPageNumber: Dispatch<SetStateAction<number>>
-  setPageSize: Dispatch<SetStateAction<number>>
-  setSearch: Dispatch<SetStateAction<string>>
-  loading: boolean
-  pageNumber: number
-  lastPage: number
-  id: string
-}) {
+export default function Kategori() {
+  const { firstPathname, secondPathname } = usePathname()
   const dispatch = useDispatch()
+  const stateId = useSelector(getKategoriSlice)?.id
+  const statePage = useSelector(getKategoriSlice)?.page
+
+  useEffect(() => {
+    if (stateId) {
+      setId(stateId)
+    }
+  }, [stateId])
+
+  useEffect(() => {
+    if (statePage) {
+      setPage(statePage)
+    }
+  }, [statePage])
+
+  const idParams = localStorage.getItem('beritaID')
+  const [id, setId] = useState<string>(idParams ?? stateId ?? '')
+  const [page, setPage] = useState<string>(secondPathname ?? statePage ?? '')
+
+  const [pageNumber, setPageNumber] = useState<number>(1)
+  const [pageSize, setPageSize] = useState<number>(12)
+  const [search, setSearch] = useState<string>('')
+  const [meta, setMeta] = useState<Meta>()
+
+  // --- Berita Kategori Page ---
+  const [kategori, setKategori] = useState<ListType[]>()
+  const {
+    data: kategoriData,
+    isLoading: kategoriIsLoading,
+    isFetching: kategoriIsFetching,
+  } = useGetKategoriQuery({
+    jenis: firstPathname,
+    page_number: pageNumber,
+    page_size: pageSize,
+    search: search,
+    seo_kategori: id,
+  })
+
+  const loadingKategori = kategoriIsLoading || kategoriIsFetching
+
+  useEffect(() => {
+    if (kategoriData) {
+      setKategori(kategoriData?.data)
+      setMeta(kategoriData?.meta)
+    }
+  }, [kategoriData, id])
 
   const handleSearch = debounce((searchValue: string) => {
     setPageNumber(1)
@@ -57,14 +89,14 @@ export function BeritaKategori({
   }
 
   return (
-    <div className="px-[30rem] phones:p-32">
+    <div className="mb-80 mt-32 flex flex-col gap-32 px-[30rem] phones:p-32">
       <div
         className={
           'flex flex-col gap-32 border bg-background p-64 shadow-lg phones:p-32'
         }
       >
         <div className="flex items-center justify-between gap-32">
-          <p className="font-roboto text-[5rem]">{convertSlugToText(id)}</p>
+          <p className="font-roboto text-[5rem]">{convertSlugToText(page)}</p>
           <div className="flex w-1/2 justify-end">
             <input
               type="text"
@@ -86,11 +118,11 @@ export function BeritaKategori({
           </div>
         </div>
 
-        {loading ? (
+        {loadingKategori ? (
           <Loading />
         ) : (
           <div className="grid grid-cols-12 gap-32">
-            {data?.map((item, idx) => (
+            {kategori?.map((item, idx) => (
               <div
                 className="col-span-4 phones:col-span-12"
                 key={idx}
@@ -139,11 +171,11 @@ export function BeritaKategori({
         {/* --- Footer --- */}
         <div className="flex items-center justify-end">
           <FormListDataPerPage setDataPerPage={setPageSize} />
-          {data?.length > 0 && (
+          {kategori?.length > 0 && (
             <Pagination
               setPage={setPageNumber}
               pageNow={pageNumber ?? 0}
-              lastPage={lastPage ?? 0}
+              lastPage={meta?.last_page ?? 0}
             />
           )}
         </div>

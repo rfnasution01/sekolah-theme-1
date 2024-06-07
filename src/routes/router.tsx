@@ -3,8 +3,10 @@ import {
   AgendaPage,
   BeritaPage,
   ComingSoonPage,
+  DetailLayout,
   HalamanPage,
   HomePage,
+  KategoriLayout,
   PengumumanPage,
   ProgramDetailPage,
   RootLayout,
@@ -20,6 +22,7 @@ export const router = createBrowserRouter([
         path: '',
         element: <HomePage />,
       },
+
       {
         path: 'halaman',
         element: <HalamanPage />,
@@ -37,9 +40,19 @@ export const router = createBrowserRouter([
         element: <BeritaPage />,
       },
       {
+        path: 'berita/:kategori',
+        element: <KategoriLayout />,
+      },
+      { path: 'berita/page/:id', element: <DetailLayout /> },
+      {
         path: 'pengumuman',
         element: <PengumumanPage />,
       },
+      {
+        path: 'pengumuman/:kategori',
+        element: <KategoriLayout />,
+      },
+      { path: 'pengumuman/page/:id', element: <DetailLayout /> },
       {
         path: 'agenda',
         element: <AgendaPage />,

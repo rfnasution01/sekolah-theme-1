@@ -1,4 +1,4 @@
-export function PengumumanShare() {
+export function DetailShare() {
   return (
     <div className="flex flex-col gap-12">
       <div className="flex">

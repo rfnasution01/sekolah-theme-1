@@ -5,6 +5,10 @@ import loadable from '@loadable/component'
 // ------------------
 
 export const RootLayout = loadable(() => import('@/layouts/root-layout'))
+export const DetailLayout = loadable(() => import('@/layouts/children/detail'))
+export const KategoriLayout = loadable(
+  () => import('@/layouts/children/kategori'),
+)
 
 // ------------------
 // ----- Pages -----

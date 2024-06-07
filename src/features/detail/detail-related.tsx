@@ -1,31 +1,33 @@
 import Loading from '@/components/Loading'
 import { Card3 } from '@/components/card/card-3'
-import { RelatedType } from '@/libs/types/beranda-type'
+import { usePathname } from '@/libs/hooks/usePathname'
+import { DetailRelatedType } from '@/libs/types/detail-type'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
-import { useGetPengumumanRelatedQuery } from '@/store/slices/berandaAPI'
+import { useGetDetailRelatedQuery } from '@/store/slices/detailAPI'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export function PengumumanRelated({ id }: { id: string }) {
+export function DetailRelated({ id }: { id: string }) {
+  const { firstPathname } = usePathname()
   // --- Berita Detail Page ---
-  const [beritaDetailRelated, setBeritaDetailRelated] =
-    useState<RelatedType[]>()
+  const [detailRelated, setDetailRelated] = useState<DetailRelatedType[]>()
   const {
-    data: beritaDetailData,
-    isLoading: beritaDetailIsLoading,
-    isFetching: beritaDetailIsFetching,
-  } = useGetPengumumanRelatedQuery({
+    data: detailData,
+    isLoading: detailIsLoading,
+    isFetching: detailIsFetching,
+  } = useGetDetailRelatedQuery({
     id: id,
+    jenis: firstPathname,
   })
 
-  const loadingBeritaDetail = beritaDetailIsLoading || beritaDetailIsFetching
+  const loadingBeritaDetail = detailIsLoading || detailIsFetching
 
   useEffect(() => {
-    if (beritaDetailData?.related) {
-      setBeritaDetailRelated(beritaDetailData?.related)
+    if (detailData?.related) {
+      setDetailRelated(detailData?.related)
     }
-  }, [beritaDetailData?.related, id])
+  }, [detailData?.related, id])
 
   const dispatch = useDispatch()
 
@@ -41,9 +43,9 @@ export function PengumumanRelated({ id }: { id: string }) {
         <Loading />
       ) : (
         <div className="flex flex-col">
-          {beritaDetailRelated?.map((item, idx) => (
+          {detailRelated?.map((item, idx) => (
             <Link
-              to={`/pengumuman?page=${item?.seo}`}
+              to={`/${firstPathname}/page/${item?.seo}`}
               onClick={() => {
                 dispatch(setStateHalaman({ id: item?.id, page: item?.seo }))
               }}

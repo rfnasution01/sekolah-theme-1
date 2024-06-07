@@ -1,6 +1,6 @@
-import { BeritaDetailType } from '@/libs/types/beranda-type'
+import { DetailType } from '@/libs/types/detail-type'
 
-export function PengumumanTag({ data }: { data: BeritaDetailType }) {
+export function DetailTag({ data }: { data: DetailType }) {
   return (
     <div className="flex flex-col gap-12">
       <div className="flex">

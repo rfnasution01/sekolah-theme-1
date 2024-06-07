@@ -37,6 +37,10 @@ export function Slider3({
 
   const dispatch = useDispatch()
 
+  const handleBeritaClick = (id) => {
+    localStorage.setItem('beritaID', id)
+  }
+
   return (
     <div className="flex flex-col gap-y-32">
       <div className={`relative col-span-6 block`}>
@@ -118,8 +122,9 @@ export function Slider3({
               <div className="flex flex-shrink flex-col gap-16 p-32">
                 <div className="flex hover:cursor-pointer">
                   <Link
-                    to={`/${kelompok}?kategori=${seo_kategori}`}
+                    to={`/${kelompok}/${seo_kategori}`}
                     onClick={() => {
+                      handleBeritaClick(seo_kategori)
                       dispatch(
                         setStateKategori({
                           id: seo_kategori,

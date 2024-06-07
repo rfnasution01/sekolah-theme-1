@@ -1,10 +1,8 @@
-import './berita-detail.css'
+import './list.css'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import { Dispatch, SetStateAction } from 'react'
-import { BeritaType } from '@/libs/types/beranda-type'
-import './berita-detail.css'
 import { IconLabel } from '@/components/IconLabel'
 import { Search, Timer, User } from 'lucide-react'
 import TimeSinceUploaded from '@/libs/helpers/format-time'
@@ -12,8 +10,21 @@ import { debounce } from 'lodash'
 import Loading from '@/components/Loading'
 import { FormListDataPerPage } from '@/components/form/formListDataPerPage'
 import { Pagination } from '@/components/Pagination'
+import { ListType } from '@/libs/types/list-type'
+import { usePathname } from '@/libs/hooks/usePathname'
+import { convertSlugToText } from '@/libs/helpers/format-text'
 
-export function BeritaList({
+interface BeritaListProps<T> {
+  data: T[]
+  setPageNumber: Dispatch<SetStateAction<number>>
+  setPageSize: Dispatch<SetStateAction<number>>
+  setSearch: Dispatch<SetStateAction<string>>
+  loading: boolean
+  pageNumber: number
+  lastPage: number
+}
+
+export function List<T extends ListType>({
   data,
   setPageNumber,
   setPageSize,
@@ -21,15 +32,8 @@ export function BeritaList({
   loading,
   pageNumber,
   lastPage,
-}: {
-  data: BeritaType[]
-  setPageNumber: Dispatch<SetStateAction<number>>
-  setPageSize: Dispatch<SetStateAction<number>>
-  setSearch: Dispatch<SetStateAction<string>>
-  loading: boolean
-  pageNumber: number
-  lastPage: number
-}) {
+}: BeritaListProps<T>) {
+  const { firstPathname } = usePathname()
   const dispatch = useDispatch()
 
   const handleSearch = debounce((searchValue: string) => {
@@ -61,7 +65,9 @@ export function BeritaList({
         }
       >
         <div className="flex items-center justify-between gap-32">
-          <p className="font-roboto text-[5rem]">Berita</p>
+          <p className="font-roboto text-[5rem]">
+            {convertSlugToText(firstPathname)}
+          </p>
           <div className="flex w-1/2 justify-end">
             <input
               type="text"
@@ -97,14 +103,14 @@ export function BeritaList({
                 }}
               >
                 <Link
-                  to={`/berita?page=${item?.seo}`}
+                  to={`/${firstPathname}/page/${item?.seo}`}
                   className="flex h-full flex-col gap-24 rounded-2xl bg-white px-24 pb-32 pt-24 shadow hover:cursor-pointer hover:shadow-lg"
                 >
                   <div className="h-[25vh] w-full">
                     <img
                       src={item?.photo?.gambar}
                       alt={item?.photo?.keterangan}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full rounded-lg object-cover"
                       loading="lazy"
                     />
                   </div>

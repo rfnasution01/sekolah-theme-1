@@ -33,7 +33,7 @@ export function BeritaTerbaru({
                 )
               }}
             >
-              <Link to={`/berita?page=${item?.seo}`} className="flex">
+              <Link to={`/berita/page/${item?.seo}`} className="flex">
                 • {item?.judul}
               </Link>
             </div>
