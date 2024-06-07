@@ -1,16 +1,16 @@
 import { BeritaDetailType } from '@/libs/types/beranda-type'
-import './berita-detail.css'
+import './pengumuman-detail.css'
 import clsx from 'clsx'
 import { CalendarDays, Eye, User } from 'lucide-react'
 import { IconLabel } from '@/components/IconLabel'
 import dayjs from 'dayjs'
 import 'dayjs/locale/id'
 import { Slider3 } from '@/components/slider/slider-3'
-import { BeritaTag } from './berita-tag'
-import { BeritaShare } from './berita-share'
-import { BeritaRelated } from './berita-related'
+import { PengumumanTag } from './pengumuman-tag'
+import { PengumumanShare } from './pengumuman-share'
+import { PengumumanRelated } from './pengumuman-related'
 
-export function BeritaDetail({
+export function PengumumanDetail({
   data,
   isDetail,
   id,
@@ -45,16 +45,16 @@ export function BeritaDetail({
             height="h-[50vh]"
             kategori={data?.kategori}
             seo_kategori={data?.seo_kategori}
-            kelompok="berita"
+            kelompok="pengumuman"
           />
         </div>
         <div
           dangerouslySetInnerHTML={{ __html: data?.isi }}
           className="article-content"
         />
-        <BeritaTag data={data} />
-        <BeritaShare />
-        <BeritaRelated id={id} />
+        <PengumumanTag data={data} />
+        <PengumumanShare />
+        <PengumumanRelated id={id} />
       </div>
     </div>
   )

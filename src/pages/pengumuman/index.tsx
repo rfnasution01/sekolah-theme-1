@@ -1,23 +1,27 @@
 import { Breadcrumb } from '@/components/Breadcrumb'
 import Loading from '@/components/Loading'
-import { BeritaDetail, BeritaKategori, BeritaList } from '@/features/berita'
+import {
+  PengumumanDetail,
+  PengumumanKategori,
+  PengumumanList,
+} from '@/features/pengumuman'
 import {
   BeritaDetailType,
-  BeritaType,
   KategoriType,
+  PengumumanType,
 } from '@/libs/types/beranda-type'
 import { Meta } from '@/store/api'
 import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
 import { getKategoriSlice } from '@/store/reducer/stateIdKategori'
 import {
-  useGetBeritaDetailQuery,
-  useGetBeritaKategoriQuery,
-  useGetBeritaQuery,
+  useGetPengumumanDetailQuery,
+  useGetPengumumanKategoriQuery,
+  useGetPengumumanQuery,
 } from '@/store/slices/berandaAPI'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-export default function BeritaPage() {
+export default function PengumumanPage() {
   const stateId = useSelector(getHalamanSlice)?.id
   const statePage = useSelector(getHalamanSlice)?.page
   const stateKategori = useSelector(getKategoriSlice)?.id
@@ -52,60 +56,61 @@ export default function BeritaPage() {
     kategoriParams ?? stateKategori ?? '',
   )
 
-  // --- Berita Detail Page ---
-  const [beritaDetail, setBeritaDetail] = useState<BeritaDetailType>()
+  // --- Pengumuman Detail Page ---
+  const [pengumumanDetail, setPengumumanDetail] = useState<BeritaDetailType>()
   const {
-    data: beritaDetailData,
-    isLoading: beritaDetailIsLoading,
-    isFetching: beritaDetailIsFetching,
-  } = useGetBeritaDetailQuery({
+    data: pengumumanDetailData,
+    isLoading: pengumumanDetailIsLoading,
+    isFetching: pengumumanDetailIsFetching,
+  } = useGetPengumumanDetailQuery({
     id: id,
   })
 
-  const loadingBeritaDetail = beritaDetailIsLoading || beritaDetailIsFetching
+  const loadingPengumumanDetail =
+    pengumumanDetailIsLoading || pengumumanDetailIsFetching
 
   useEffect(() => {
-    if (beritaDetailData?.data) {
-      setBeritaDetail(beritaDetailData?.data)
+    if (pengumumanDetailData?.data) {
+      setPengumumanDetail(pengumumanDetailData?.data)
     }
-  }, [beritaDetailData?.data, id])
+  }, [pengumumanDetailData?.data, id])
 
-  // --- berita Page ---
-  const [berita, setBerita] = useState<BeritaType[]>()
+  // --- Pengumuman Page ---
+  const [pengumuman, setPengumuman] = useState<PengumumanType[]>()
   const [pageNumber, setPageNumber] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(12)
   const [search, setSearch] = useState<string>('')
   const [meta, setMeta] = useState<Meta>()
   const {
-    data: beritaData,
-    isLoading: beritaIsLoading,
-    isFetching: beritaIsFethcing,
-  } = useGetBeritaQuery({
+    data: pengumumanData,
+    isLoading: pengumumanIsLoading,
+    isFetching: pengumumanIsFethcing,
+  } = useGetPengumumanQuery({
     page_number: pageNumber,
     page_size: pageSize,
     search: search,
   })
 
-  const loadingBerita = beritaIsLoading || beritaIsFethcing
+  const loadingPengumuman = pengumumanIsLoading || pengumumanIsFethcing
 
   useEffect(() => {
-    if (beritaData) {
-      setBerita(beritaData?.data)
-      setMeta(beritaData?.meta)
+    if (pengumumanData) {
+      setPengumuman(pengumumanData?.data)
+      setMeta(pengumumanData?.meta)
     }
-  }, [beritaData])
+  }, [pengumumanData])
 
-  // --- berita Page ---
-  const [beritaKategori, setBeritaKategori] = useState<KategoriType[]>()
+  // --- PengumumanKategori Page ---
+  const [pengumumanKategori, setPengumumanKategori] = useState<KategoriType[]>()
   const [pageNumberKategori, setPageNumberKategori] = useState<number>(1)
   const [pageSizeKategori, setPageSizeKategori] = useState<number>(12)
   const [searchKategori, setSearchKategori] = useState<string>('')
   const [metaKategori, setMetaKategori] = useState<Meta>()
   const {
-    data: beritaKategoriData,
-    isLoading: beritaKategoriIsLoading,
-    isFetching: beritaKategoriIsFethcing,
-  } = useGetBeritaKategoriQuery(
+    data: pengumumanKategoriData,
+    isLoading: pengumumanKategoriIsLoading,
+    isFetching: pengumumanKategoriIsFethcing,
+  } = useGetPengumumanKategoriQuery(
     {
       page_number: pageNumberKategori,
       page_size: pageSizeKategori,
@@ -115,44 +120,44 @@ export default function BeritaPage() {
     { skip: !kategori },
   )
 
-  const loadingBeritaKategori =
-    beritaKategoriIsLoading || beritaKategoriIsFethcing
+  const loadingPengumumanKategori =
+    pengumumanKategoriIsLoading || pengumumanKategoriIsFethcing
 
   useEffect(() => {
-    if (beritaKategoriData) {
-      setBeritaKategori(beritaKategoriData?.data)
-      setMetaKategori(beritaKategoriData?.meta)
+    if (pengumumanKategoriData) {
+      setPengumumanKategori(pengumumanKategoriData?.data)
+      setMetaKategori(pengumumanKategoriData?.meta)
     }
-  }, [beritaKategoriData])
+  }, [pengumumanKategoriData])
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
       <Breadcrumb page={page} />
-      {loadingBeritaDetail ? (
+      {loadingPengumumanDetail ? (
         <Loading />
       ) : page === '' ? (
-        <BeritaList
-          data={berita}
+        <PengumumanList
+          data={pengumuman}
           setPageNumber={setPageNumber}
           setPageSize={setPageSize}
           setSearch={setSearch}
-          loading={loadingBerita}
+          loading={loadingPengumuman}
           pageNumber={pageNumber}
           lastPage={meta?.last_page}
         />
       ) : kategori !== '' ? (
-        <BeritaKategori
-          data={beritaKategori}
+        <PengumumanKategori
+          data={pengumumanKategori}
           setPageNumber={setPageNumberKategori}
           setPageSize={setPageSizeKategori}
           setSearch={setSearchKategori}
-          loading={loadingBeritaKategori}
+          loading={loadingPengumumanKategori}
           pageNumber={pageNumberKategori}
           lastPage={metaKategori?.last_page}
           id={kategori}
         />
       ) : (
-        <BeritaDetail data={beritaDetail} id={id} />
+        <PengumumanDetail data={pengumumanDetail} id={id} />
       )}
     </div>
   )

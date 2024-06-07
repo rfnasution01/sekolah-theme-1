@@ -7,6 +7,7 @@ import {
   KategoriType,
   MenuType,
   Params,
+  PengumumanType,
   ProgramDetailType,
   RelatedType,
   SliderType,
@@ -110,6 +111,38 @@ export const BerandaEndpoints = api.injectEndpoints({
         },
       }),
     }),
+    getPengumuman: builder.query<Res<PengumumanType[]>, Params>({
+      query: ({ page_size, page_number, search }) => ({
+        url: `website/pengumuman`,
+        method: 'GET',
+        params: {
+          page_number: page_number,
+          page_size: page_size,
+          search: search,
+        },
+      }),
+    }),
+    getPengumumanDetail: builder.query<Res<BeritaDetailType>, { id: string }>({
+      query: ({ id }) => ({
+        url: `website/pengumuman/detail`,
+        method: 'GET',
+        params: {
+          id: id,
+        },
+      }),
+    }),
+    getPengumumanKategori: builder.query<Res<KategoriType[]>, Params>({
+      query: ({ page_number, page_size, search, seo_kategori }) => ({
+        url: `website/pengumuman/kategori`,
+        method: 'GET',
+        params: {
+          page_number: page_number,
+          page_size: page_size,
+          search: search,
+          seo_kategori: seo_kategori,
+        },
+      }),
+    }),
   }),
 })
 
@@ -126,4 +159,7 @@ export const {
   useGetBeritaDetailQuery,
   useGetBeritaDetailRelatedQuery,
   useGetBeritaKategoriQuery,
+  useGetPengumumanDetailQuery,
+  useGetPengumumanKategoriQuery,
+  useGetPengumumanQuery,
 } = BerandaEndpoints

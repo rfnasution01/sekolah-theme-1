@@ -12,12 +12,14 @@ export function Slider3({
   isShadow,
   kategori,
   seo_kategori,
+  kelompok,
 }: {
   listImage: PhotoType[]
   height?: string
   isShadow?: boolean
   kategori: string
   seo_kategori: string
+  kelompok: string
 }) {
   const [showIndex, setShowIndex] = useState<number>(0)
 
@@ -116,7 +118,7 @@ export function Slider3({
               <div className="flex flex-shrink flex-col gap-16 p-32">
                 <div className="flex hover:cursor-pointer">
                   <Link
-                    to={`/berita?kategori=${seo_kategori}`}
+                    to={`/${kelompok}?kategori=${seo_kategori}`}
                     onClick={() => {
                       dispatch(
                         setStateKategori({

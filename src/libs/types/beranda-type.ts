@@ -151,3 +151,16 @@ export type KategoriType = {
   photo: PhotoType
   penulis: string
 }
+
+export type PengumumanType = {
+  id: string
+  seo: string
+  judul: string
+  isi: string
+  hits: string
+  kategori: string
+  seo_kategori: string
+  tanggal: string
+  photo: PhotoType
+  penulis: string
+}

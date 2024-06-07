@@ -4,6 +4,7 @@ import {
   ComingSoonPage,
   HalamanPage,
   HomePage,
+  PengumumanPage,
   ProgramDetailPage,
   RootLayout,
   TentangKamiPage,
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: 'berita',
         element: <BeritaPage />,
+      },
+      {
+        path: 'pengumuman',
+        element: <PengumumanPage />,
       },
     ],
   },
