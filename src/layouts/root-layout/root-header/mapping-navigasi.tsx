@@ -16,9 +16,9 @@ export function NavigasiHeader({ menu }: { menu: MenuType[] }) {
               : item?.jenis_menu === enumRoute.ROUTE
                 ? item?.slug
                 : item?.jenis_menu === enumRoute.HALAMAN
-                  ? `/halaman?page=${item?.slug}`
+                  ? `/halaman/page/${item?.slug}`
                   : item?.jenis_menu === enumRoute.PROGRAM
-                    ? `/program-details?page=${item?.slug}`
+                    ? `/program-details/page/${item?.slug}`
                     : item?.jenis_menu === enumRoute.BERITA
                       ? `/berita`
                       : item?.jenis_menu === enumRoute.AGENDA
@@ -32,7 +32,7 @@ export function NavigasiHeader({ menu }: { menu: MenuType[] }) {
                               : item?.slug
           }
           target={item?.jenis_menu === enumRoute.URL ? '_blank' : '_self'}
-          className="text-success-100 text-nowrap font-light hover:cursor-pointer hover:text-success-700"
+          className="text-nowrap font-light text-success-100 hover:cursor-pointer hover:text-success-700"
           key={idx}
         >
           {item?.nama_menu}

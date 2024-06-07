@@ -1,2 +1,2 @@
 export * from './progam-detail'
-export * from './program-list'
+export * from '../../pages/program'

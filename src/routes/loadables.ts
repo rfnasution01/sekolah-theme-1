@@ -18,6 +18,7 @@ export const KategoriLayout = loadable(
 export const ComingSoonPage = loadable(() => import('@/pages/coming-soon'))
 export const HomePage = loadable(() => import('@/pages/home'))
 export const HalamanPage = loadable(() => import('@/pages/halaman'))
+export const ProgramPage = loadable(() => import('@/pages/program'))
 export const TentangKamiPage = loadable(() => import('@/pages/tentang-kami'))
 export const ProgramDetailPage = loadable(
   () => import('@/pages/program-details'),

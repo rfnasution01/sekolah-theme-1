@@ -47,9 +47,9 @@ export function MobileNavigasi({
                         : item?.jenis_menu === enumRoute.ROUTE
                           ? item?.slug
                           : item?.jenis_menu === enumRoute.HALAMAN
-                            ? `/halaman?page=${item?.slug}`
+                            ? `/halaman/page/${item?.slug}`
                             : item?.jenis_menu === enumRoute.PROGRAM
-                              ? `/program-details?page=${item?.slug}`
+                              ? `/program-details/page/${item?.slug}`
                               : item?.jenis_menu === enumRoute.BERITA
                                 ? `/berita`
                                 : item?.jenis_menu === enumRoute.AGENDA
@@ -94,20 +94,20 @@ export function MobileNavigasi({
                                   : list?.jenis_menu === enumRoute.ROUTE
                                     ? list?.slug
                                     : list?.jenis_menu === enumRoute.HALAMAN
-                                      ? `/halaman?page=${list?.slug}`
+                                      ? `/halaman/page=${list?.slug}`
                                       : list?.jenis_menu === enumRoute.PROGRAM
-                                        ? `/program-details?page=${list?.slug}`
+                                        ? `/program-details/page/${list?.slug}`
                                         : list?.jenis_menu === enumRoute.BERITA
-                                          ? `/berita?page=${list?.slug}`
+                                          ? `/berita/page/${list?.slug}`
                                           : list?.jenis_menu ===
                                               enumRoute.AGENDA
-                                            ? `/agenda?page=${list?.slug}`
+                                            ? `/agenda/page/${list?.slug}`
                                             : list?.jenis_menu ===
                                                 enumRoute.PENGUMUMAN
-                                              ? `/pengumuman?page=${list?.slug}`
+                                              ? `/pengumuman/page/${list?.slug}`
                                               : list?.jenis_menu ===
                                                   enumRoute.PRESTASI
-                                                ? `/prestasi?page=${list?.slug}`
+                                                ? `/prestasi/page/${list?.slug}`
                                                 : list?.jenis_menu ===
                                                     enumRoute.URL
                                                   ? list?.id_konten
@@ -140,9 +140,9 @@ export function MobileNavigasi({
                     : item?.jenis_menu === enumRoute.ROUTE
                       ? item?.slug
                       : item?.jenis_menu === enumRoute.HALAMAN
-                        ? `/halaman?page=${item?.slug}`
+                        ? `/halaman/page/${item?.slug}`
                         : item?.jenis_menu === enumRoute.PROGRAM
-                          ? `/program-details?page=${item?.slug}`
+                          ? `/program-details/page/${item?.slug}`
                           : item?.jenis_menu === enumRoute.BERITA
                             ? `/berita`
                             : item?.jenis_menu === enumRoute.AGENDA

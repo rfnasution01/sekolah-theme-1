@@ -18,7 +18,13 @@ export function Breadcrumb() {
           <div className="flex items-center gap-12" key={idx}>
             <Link
               to={
-                idx >= path?.length - 1 ? '#' : item === '' ? '/' : `/${item}`
+                idx >= path?.length - 1
+                  ? '#'
+                  : item === ''
+                    ? '/'
+                    : item === 'program-details'
+                      ? '/program'
+                      : `/${item}`
               }
               className={clsx('text-nowrap hover:text-primary-400', {
                 'hover:cursor-not-allowed': idx >= path?.length - 1,
@@ -28,7 +34,9 @@ export function Breadcrumb() {
                 ? 'Dashboard'
                 : item === 'hasil-ppdb'
                   ? 'Hasil PPDB'
-                  : convertSlugToText(item)}
+                  : item === 'program-details'
+                    ? 'Program'
+                    : convertSlugToText(item)}
             </Link>
             <p className="text-nowrap">
               <ChevronRight size={16} />

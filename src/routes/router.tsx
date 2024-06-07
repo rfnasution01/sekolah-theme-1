@@ -6,6 +6,7 @@ import {
   HomePage,
   KategoriLayout,
   ProgramDetailPage,
+  ProgramPage,
   RootLayout,
   RouteLayout,
   TentangKamiPage,
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
       },
 
       {
-        path: 'halaman',
+        path: 'halaman/page/:id',
         element: <HalamanPage />,
       },
       {
@@ -32,7 +33,11 @@ export const router = createBrowserRouter([
         element: <TentangKamiPage />,
       },
       {
-        path: 'program-details',
+        path: 'program',
+        element: <ProgramPage />,
+      },
+      {
+        path: 'program-details/page/:id',
         element: <ProgramDetailPage />,
       },
       ...categories.flatMap((category) => [
