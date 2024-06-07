@@ -9,10 +9,10 @@ export function FooterCopyright({
   loading: boolean
 }) {
   return (
-    <div className="bg-primary-footer w-full">
+    <div className="w-full bg-primary-footer">
       <div className="flex flex-col gap-16 px-64 py-32 phones:text-center">
         {loading ? (
-          <SingleSkeleton />
+          <SingleSkeleton height="h-[2.4rem]" width="w-2/6" />
         ) : (
           <p>
             Copyright &#169; 2024 All rights reserves by{' '}
@@ -20,7 +20,7 @@ export function FooterCopyright({
           </p>
         )}
         {loading ? (
-          <SingleSkeleton />
+          <SingleSkeleton height="h-[2rem]" width="w-1/6" />
         ) : (
           <p>
             Designer and maintained by:{' '}
