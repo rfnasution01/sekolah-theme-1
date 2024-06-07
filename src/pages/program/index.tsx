@@ -41,10 +41,10 @@ export default function Program() {
             }
           >
             <p className="font-roboto text-[5rem]">Program</p>
-            <div className="grid grid-cols-4 gap-32">
+            <div className="phones:gapx-32 mt-96 grid grid-cols-3 gap-x-48 gap-y-96 phones:gap-y-96">
               {program?.map((item, idx) => (
                 <div
-                  className="col-span-1 phones:col-span-2"
+                  className="col-span-1 phones:col-span-3"
                   key={idx}
                   onClick={() => {
                     dispatch(setStateHalaman({ id: item?.id, page: item?.seo }))
@@ -52,21 +52,23 @@ export default function Program() {
                 >
                   <Link
                     to={`/program-details/page/${item?.seo}`}
-                    className="flex flex-col gap-24 rounded-2xl bg-white px-24 pb-32 pt-24 shadow hover:cursor-pointer hover:shadow-lg"
+                    className="flex flex-col gap-24 rounded-2xl bg-primary-100 px-24 pb-32 pt-24 shadow hover:cursor-pointer hover:shadow-lg"
                   >
-                    <div className="h-[25vh] w-full">
+                    <div className="relative -top-96">
                       <img
                         src={item?.photo}
                         alt={item?.judul}
-                        className="h-full w-full object-cover"
+                        className="h-[16rem] w-[16rem]  object-cover"
                         loading="lazy"
                       />
                     </div>
-                    <div className="flex flex-col gap-4">
-                      <p className="font-roboto text-[2.4rem] phones:text-[2.8rem]">
+                    <div className="relative -top-96 flex flex-col gap-4">
+                      <p className="font-roboto text-[3rem] phones:text-[3.2rem]">
                         {item?.judul ?? '-'}
                       </p>
-                      <p className="line-clamp-3">{item?.isi_singkat ?? '-'}</p>
+                      <p className="line-clamp-3 text-[2.4rem] tracking-1.25 phones:text-[2.8rem]">
+                        {item?.isi_singkat ?? '-'}
+                      </p>
                     </div>
                   </Link>
                 </div>
