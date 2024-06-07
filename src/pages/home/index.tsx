@@ -1,6 +1,7 @@
 import Loading from '@/components/Loading'
 import { Slider1 } from '@/components/slider/slider-1'
 import { HomeCard } from '@/features/home'
+import { HomeLayanan } from '@/features/home/home-layanan'
 import { BerandaType, SliderType } from '@/libs/types/beranda-type'
 import {
   useGetBerandaQuery,
@@ -42,6 +43,7 @@ export default function HomePage() {
       {/* --- Banner --- */}
       {loadingSlider ? <Loading /> : <Slider1 listImage={slider} isShadow />}
       <HomeCard loading={loadingBeranda} beranda={beranda} />
+      <HomeLayanan />
     </div>
   )
 }

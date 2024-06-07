@@ -30,7 +30,7 @@ export function Card2({
                 <img
                   src={item?.photo?.gambar}
                   alt={item?.photo?.keterangan}
-                  className="h-[20vh] w-full"
+                  className="h-[35vh] w-full"
                   loading="lazy"
                 />
                 <div className="flex flex-col gap-4">
