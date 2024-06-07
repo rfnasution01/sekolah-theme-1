@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 export function Slider1({
   listImage,
-  height = 'h-[75vh]',
+  height = 'h-[77vh]',
   isShadow,
 }: {
   listImage: SliderType[]

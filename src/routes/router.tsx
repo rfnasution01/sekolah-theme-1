@@ -5,6 +5,7 @@ import {
   HalamanPage,
   HomePage,
   KategoriLayout,
+  ProfilPage,
   ProgramDetailPage,
   ProgramPage,
   RootLayout,
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: 'program',
         element: <ProgramPage />,
+      },
+      {
+        path: 'profil',
+        element: <ProfilPage />,
       },
       {
         path: 'program-details/page/:id',

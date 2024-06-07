@@ -23,3 +23,4 @@ export const TentangKamiPage = loadable(() => import('@/pages/tentang-kami'))
 export const ProgramDetailPage = loadable(
   () => import('@/pages/program-details'),
 )
+export const ProfilPage = loadable(() => import('@/pages/profil'))
