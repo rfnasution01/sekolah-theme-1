@@ -13,6 +13,7 @@ export function Slider3({
   kategori,
   seo_kategori,
   kelompok,
+  jumlahPhoto,
 }: {
   listImage: PhotoType[]
   height?: string
@@ -20,12 +21,19 @@ export function Slider3({
   kategori: string
   seo_kategori: string
   kelompok: string
+  jumlahPhoto: number
 }) {
   const [showIndex, setShowIndex] = useState<number>(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (showIndex === listImage?.length - 1) {
+      // Jika hanya ada satu gambar, tidak perlu dilakukan perubahan showIndex
+      if (jumlahPhoto <= 1) {
+        return
+      }
+
+      // Jika showIndex mencapai batas jumlahPhoto - 1, kembali ke gambar pertama
+      if (showIndex >= jumlahPhoto - 1) {
         setShowIndex(0)
       } else {
         setShowIndex(showIndex + 1)
@@ -33,7 +41,7 @@ export function Slider3({
     }, 3000) // Mengganti gambar setiap 3 detik
 
     return () => clearInterval(interval)
-  }, [showIndex])
+  }, [showIndex, jumlahPhoto])
 
   const dispatch = useDispatch()
 

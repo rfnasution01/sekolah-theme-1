@@ -94,6 +94,7 @@ export default function Detail() {
                 kategori={detail?.kategori}
                 seo_kategori={detail?.seo_kategori}
                 kelompok={firstPathname}
+                jumlahPhoto={detail?.jumlah_photo}
               />
             </div>
             <div
