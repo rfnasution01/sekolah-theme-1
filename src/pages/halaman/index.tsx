@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux'
 
 export default function HalamanPage() {
   const stateId = useSelector(getHalamanSlice)?.id
-  const statePage = useSelector(getHalamanSlice)?.page
 
   useEffect(() => {
     if (stateId) {
@@ -17,19 +16,9 @@ export default function HalamanPage() {
     }
   }, [stateId])
 
-  useEffect(() => {
-    if (statePage) {
-      setPage(statePage)
-    }
-  }, [statePage])
-
-  const searchParams = new URLSearchParams(location.search)
-  const pageParams = searchParams.get('page')
-
   const idParams = localStorage.getItem('beritaID')
 
   const [id, setId] = useState<string>(idParams ?? stateId ?? '')
-  const [page, setPage] = useState<string>(pageParams ?? statePage ?? '')
 
   // --- Halaman Page ---
   const [halamanDetail, setHalamanDetail] = useState<HalamanDetailType>()
@@ -51,7 +40,7 @@ export default function HalamanPage() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb page={page} />
+      <Breadcrumb />
       {loadingHalamanDetail ? (
         <Loading />
       ) : (

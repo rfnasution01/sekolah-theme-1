@@ -17,14 +17,16 @@ export function HalamanDetail({
         }
       >
         <p className="font-roboto text-[5rem]">{data?.judul}</p>
-        <div className="h-[50vh] w-full">
-          <img
-            src={data?.url_gambar}
-            alt={data?.judul}
-            className="h-full w-full"
-            loading="lazy"
-          />
-        </div>
+        {data?.url_gambar && (
+          <div className="h-[50vh] w-full">
+            <img
+              src={data?.url_gambar}
+              alt={data?.judul}
+              className="h-full w-full"
+              loading="lazy"
+            />
+          </div>
+        )}
         <div
           dangerouslySetInnerHTML={{ __html: data?.isi }}
           className="article-content"

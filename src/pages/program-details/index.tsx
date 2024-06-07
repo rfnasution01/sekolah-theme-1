@@ -70,7 +70,7 @@ export default function ProgramDetailsPage() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb page={page} />
+      <Breadcrumb />
       {loadingProgramDetail || loadingProgram ? (
         <Loading />
       ) : page === '' ? (

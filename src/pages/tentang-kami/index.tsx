@@ -15,7 +15,6 @@ import { useSelector } from 'react-redux'
 
 export default function TentangKamiPage() {
   const stateId = useSelector(getHalamanSlice)?.id
-  const statePage = useSelector(getHalamanSlice)?.page
 
   useEffect(() => {
     if (stateId) {
@@ -23,19 +22,9 @@ export default function TentangKamiPage() {
     }
   }, [stateId])
 
-  useEffect(() => {
-    if (statePage) {
-      setPage(statePage)
-    }
-  }, [statePage])
-
-  const searchParams = new URLSearchParams(location.search)
-  const pageParams = searchParams.get('page')
-
   const idParams = localStorage.getItem('beritaID')
 
   const [id, setId] = useState<string>(idParams ?? stateId ?? '')
-  const [page, setPage] = useState<string>(pageParams ?? statePage ?? '')
 
   // --- Menu Utama ---
   const [menuUtama, setMenuUtama] = useState<MenuType[]>([])
@@ -91,7 +80,7 @@ export default function TentangKamiPage() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb page={page} />
+      <Breadcrumb />
       {loadingHalamanDetail ? (
         <Loading />
       ) : (
