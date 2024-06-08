@@ -24,7 +24,7 @@ export function RootHeader({
       {loading ? (
         <SingleSkeleton height="h-[3rem]" />
       ) : (
-        <div className="flex w-full items-center gap-32">
+        <div className="flex w-full items-center gap-32 phones:flex-row-reverse">
           <div className="flex w-3/5 items-center gap-32 phones:flex-1">
             <BeritaTerbaru runningText={beritaTerbaru} />
           </div>
