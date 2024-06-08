@@ -2,7 +2,7 @@ import { FileWarning } from 'lucide-react'
 
 export function NoData() {
   return (
-    <div className="flex flex-col items-center gap-16 border-l-4 text-primary-700">
+    <div className="flex flex-col items-center gap-16 text-primary-700">
       <span>
         <FileWarning size={80} />
       </span>

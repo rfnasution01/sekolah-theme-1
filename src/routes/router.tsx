@@ -3,6 +3,7 @@ import {
   ComingSoonPage,
   DetailLayout,
   FaqPage,
+  GaleriPage,
   HalamanPage,
   HomePage,
   KategoriLayout,
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: 'profil',
         element: <ProfilPage />,
+      },
+      {
+        path: 'galeri',
+        element: <GaleriPage />,
       },
       {
         path: 'faq',
