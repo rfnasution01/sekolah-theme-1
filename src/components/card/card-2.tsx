@@ -3,6 +3,8 @@ import clsx from 'clsx'
 import { NoData } from '../NoData'
 import { Link } from 'react-router-dom'
 import { convertToSlug } from '@/libs/helpers/format-text'
+import { useDispatch } from 'react-redux'
+import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 
 export function Card2({
   data,
@@ -11,6 +13,11 @@ export function Card2({
   data: BerandaType
   kelompok: string
 }) {
+  const dispatch = useDispatch()
+
+  const handleBeritaClick = (id) => {
+    localStorage.setItem('beritaID', id)
+  }
   return (
     <div
       className={clsx(
@@ -25,7 +32,20 @@ export function Card2({
       <div className="grid grid-cols-5 gap-12">
         {data?.berita?.length > 0 ? (
           data?.berita?.map((item, idx) => (
-            <div className="col-span-1 phones:col-span-5" key={idx}>
+            <Link
+              to={`/${convertToSlug(item?.kelompok)}/page/${item?.seo}`}
+              className="col-span-1 phones:col-span-5"
+              key={idx}
+              onClick={() => {
+                handleBeritaClick(item?.id)
+                dispatch(
+                  setStateHalaman({
+                    page: item?.seo,
+                    id: item?.id,
+                  }),
+                )
+              }}
+            >
               <div className="flex flex-col gap-12 border bg-background px-12 pb-24 pt-12 shadow hover:cursor-pointer hover:shadow-lg">
                 <img
                   src={item?.photo?.gambar}
@@ -37,7 +57,7 @@ export function Card2({
                   <p className="text-center">{item?.judul}</p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))
         ) : (
           <div className="col-span-5">

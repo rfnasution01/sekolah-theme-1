@@ -36,7 +36,11 @@ export function Card1({
       </div>
       <div className="h-[40vh] w-full flex-1">
         {data?.berita?.length > 0 && (
-          <Slider2 listImage={data?.berita} height="h-[40vh]" />
+          <Slider2
+            listImage={data?.berita}
+            height="h-[40vh]"
+            kelompok={convertToSlug(kelompok)}
+          />
         )}
       </div>
     </div>

@@ -1,17 +1,22 @@
 import { BeritaType } from '@/libs/types/beranda-type'
+import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 import { Calendar, Newspaper, ThumbsUp } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 export function Slider2({
   listImage,
   height = 'h-[80vh]',
   isShadow,
+  kelompok,
 }: {
   listImage: BeritaType[]
   height?: string
   isShadow?: boolean
+  kelompok: string
 }) {
   const [showIndex, setShowIndex] = useState<number>(0)
 
@@ -27,6 +32,12 @@ export function Slider2({
     return () => clearInterval(interval)
   }, [showIndex])
 
+  const dispatch = useDispatch()
+
+  const handleBeritaClick = (id) => {
+    localStorage.setItem('beritaID', id)
+  }
+
   return (
     <div className="flex flex-col gap-y-32">
       <div className={`relative col-span-6 block`}>
@@ -41,8 +52,18 @@ export function Slider2({
           {isShadow && (
             <div className="h-full w-[10%] bg-black bg-opacity-60" />
           )}
-          <div
-            className={`"relative flex h-full ${isShadow ? 'w-[80%]' : 'w-full'} flex-col justify-end border-white`}
+          <Link
+            to={`/${kelompok}/page/${listImage?.[showIndex]?.seo}`}
+            onClick={() => {
+              handleBeritaClick(listImage?.[showIndex]?.id)
+              dispatch(
+                setStateHalaman({
+                  id: listImage?.[showIndex]?.id,
+                  page: listImage?.[showIndex]?.seo,
+                }),
+              )
+            }}
+            className={`"relative flex h-full phones:hidden ${isShadow ? 'w-[80%]' : 'w-full'} flex-col justify-end border-white`}
           >
             {/* --- Navigation -- */}
             <div
@@ -126,7 +147,7 @@ export function Slider2({
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
 
           {isShadow && (
             <div className="h-full w-[10%] bg-black bg-opacity-60" />
