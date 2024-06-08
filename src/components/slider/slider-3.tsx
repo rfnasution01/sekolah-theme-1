@@ -64,7 +64,7 @@ export function Slider3({
             <div className="h-full w-[10%] bg-black bg-opacity-60" />
           )}
           <div
-            className={`"relative flex h-full ${isShadow ? 'w-[80%]' : 'w-full'} border-white" flex-col justify-start`}
+            className={`"relative flex h-full ${isShadow ? 'w-[80%]' : 'w-full'} flex-col justify-start border-white`}
           >
             {/* --- Navigation -- */}
             <div
