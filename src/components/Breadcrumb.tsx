@@ -22,9 +22,11 @@ export function Breadcrumb() {
                   ? '#'
                   : item === ''
                     ? '/'
-                    : item === 'program-details'
-                      ? '/program'
-                      : `/${item}`
+                    : item === 'halaman'
+                      ? '#'
+                      : item === 'program-details'
+                        ? '/program'
+                        : `/${item}`
               }
               className={clsx('text-nowrap hover:text-primary-400', {
                 'hover:cursor-not-allowed': idx >= path?.length - 1,

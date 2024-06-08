@@ -1,5 +1,7 @@
 import { BeritaType } from '@/libs/types/beranda-type'
 import clsx from 'clsx'
+import dayjs from 'dayjs'
+import { Calendar, Newspaper, ThumbsUp } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 export function Slider2({
@@ -97,6 +99,32 @@ export function Slider2({
                   loading="lazy"
                 />
               </span>
+            </div>
+
+            <div className="flex flex-shrink flex-col gap-16 p-32">
+              <p className="line-clamp-1 rounded-lg bg-primary-100 bg-opacity-70 p-16 text-[2rem] font-bold tracking-0.25 text-black">
+                {listImage?.[showIndex]?.judul}
+              </p>
+              <div className="flex items-center justify-between gap-32 phones:hidden">
+                <div className="flex items-center gap-4 rounded-lg bg-primary-100 bg-opacity-70 p-16 text-black">
+                  <Newspaper size={16} />
+                  <p>{listImage?.[showIndex]?.kategori}</p>
+                </div>
+                <div className="flex items-center gap-16 bg-primary-100 bg-opacity-70 p-16 text-black">
+                  <div className="flex items-center gap-x-8">
+                    <ThumbsUp size={16} />
+                    <p>{listImage?.[showIndex]?.hits}</p>
+                  </div>
+                  <div className="flex items-center gap-x-8">
+                    <Calendar size={16} />
+                    <p>
+                      {dayjs(listImage?.[showIndex]?.tanggal)
+                        .locale('id')
+                        .format('DD MMMM YYYY')}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
