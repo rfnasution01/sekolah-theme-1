@@ -13,7 +13,7 @@ export function Breadcrumb() {
 
   return (
     <div className="px-64 phones:px-32">
-      <div className="flex items-center gap-12 bg-primary-100 p-12 text-primary-700">
+      <div className="flex items-center gap-12 overflow-x-hidden bg-primary-100 p-12 text-primary-700">
         {path?.map((item, idx) => (
           <div className="flex items-center gap-12" key={idx}>
             <Link

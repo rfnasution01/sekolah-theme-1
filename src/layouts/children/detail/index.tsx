@@ -91,7 +91,13 @@ export default function Detail() {
               className="article-content"
             />
             <DetailTag data={detail} />
-            <DetailShare />
+            <DetailShare
+              slug={detail?.seo}
+              page={detail?.judul}
+              kelompok={firstPathname}
+              isi={detail?.isi}
+              photo={detail?.photo?.[0]?.gambar}
+            />
             <DetailRelated id={id} />
           </div>
         </div>
