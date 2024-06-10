@@ -112,36 +112,42 @@ export default function RootLayout() {
         </div>
       )}
       <div
-        className={`fixed bottom-0 right-32 top-0 z-30  flex flex-col items-center justify-center gap-32`}
+        className={`fixed bottom-0 right-32 z-30 flex h-5/6 flex-col items-center justify-center gap-32 `}
       >
-        <Link
-          to={`https://www.facebook.com/${identitas?.fb}`}
-          target="_blank"
-          className="opacity-20 hover:cursor-pointer hover:opacity-90"
-        >
-          <img src="/icon/facebook-link.svg" alt="facebook" />
-        </Link>
-        <Link
-          to={`https://www.twitter.com/${identitas?.tw}`}
-          target="_blank"
-          className="opacity-20 hover:cursor-pointer hover:opacity-90"
-        >
-          <img src="/icon/twitter-link.svg" alt="twitter" loading="lazy" />
-        </Link>
-        <Link
-          to={`https://www.instagram.com/${identitas?.ig}`}
-          target="_blank"
-          className="opacity-20 hover:cursor-pointer hover:opacity-90"
-        >
-          <img src="/icon/instagram-link.svg" alt="instagram" loading="lazy" />
-        </Link>
-        <Link
-          to={`https://api.whatsapp.com/send?phone=${identitas?.wa}`}
-          target="_blank"
-          className="opacity-20 hover:cursor-pointer hover:opacity-90"
-        >
-          <img src="/icon/wa-link.svg" alt="whatsapp" loading="lazy" />
-        </Link>
+        <div className="flex flex-col items-center justify-center gap-32">
+          <Link
+            to={`https://www.facebook.com/${identitas?.fb}`}
+            target="_blank"
+            className="opacity-20 hover:cursor-pointer hover:opacity-90"
+          >
+            <img src="/icon/facebook-link.svg" alt="facebook" />
+          </Link>
+          <Link
+            to={`https://www.twitter.com/${identitas?.tw}`}
+            target="_blank"
+            className="opacity-20 hover:cursor-pointer hover:opacity-90"
+          >
+            <img src="/icon/twitter-link.svg" alt="twitter" loading="lazy" />
+          </Link>
+          <Link
+            to={`https://www.instagram.com/${identitas?.ig}`}
+            target="_blank"
+            className="opacity-20 hover:cursor-pointer hover:opacity-90"
+          >
+            <img
+              src="/icon/instagram-link.svg"
+              alt="instagram"
+              loading="lazy"
+            />
+          </Link>
+          <Link
+            to={`https://api.whatsapp.com/send?phone=${identitas?.wa}`}
+            target="_blank"
+            className="opacity-20 hover:cursor-pointer hover:opacity-90"
+          >
+            <img src="/icon/wa-link.svg" alt="whatsapp" loading="lazy" />
+          </Link>
+        </div>
       </div>
     </div>
   )
