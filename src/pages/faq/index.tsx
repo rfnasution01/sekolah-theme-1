@@ -24,10 +24,11 @@ export default function Faq() {
   useEffect(() => {
     if (faqKategoriData?.data) {
       setFaqKategori(faqKategoriData?.data)
+      setTab(faqKategoriData?.data?.[0]?.id)
     }
   }, [faqKategoriData?.data])
 
-  const [tab, setTab] = useState<string>('f28c86ca-a96b-46e9-a355-4b94f7ef0baa')
+  const [tab, setTab] = useState<string>('')
 
   // --- Faq Page ---
   const [faqDetail, setFaqDetail] = useState<FaqDetailType[]>()

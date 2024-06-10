@@ -5,7 +5,7 @@ export const FaqEndpoints = api.injectEndpoints({
   endpoints: (builder) => ({
     getFaqKategori: builder.query<Res<FaqType[]>, void>({
       query: () => ({
-        url: `website/faq/kategori`,
+        url: `website/faq_kategori`,
         method: 'GET',
       }),
     }),

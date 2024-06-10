@@ -1,6 +1,6 @@
 export type FaqType = {
   kategori: string
-  faq: FaqDetailType[]
+  id: string
 }
 
 export type FaqDetailType = {

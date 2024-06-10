@@ -23,7 +23,7 @@ export function FaqTab({
             key={idx}
             className={clsx('border-l-4 p-8 hover:cursor-pointer', {
               'border-primary-100 bg-primary-100 bg-opacity-10':
-                convertToSlug(item?.kategori) === tab ||
+                convertToSlug(item?.id) === tab ||
                 (tab === undefined && idx === 0),
               'border-transparent': convertToSlug(item?.kategori) !== tab,
             })}
