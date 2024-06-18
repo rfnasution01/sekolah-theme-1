@@ -2,6 +2,7 @@ import { bgPrimary200, bgPrimary800 } from '@/libs/helpers/format-color'
 import { SliderType } from '@/libs/types/beranda-type'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export function Slider1({
   listImage,
@@ -38,7 +39,11 @@ export function Slider1({
           style={{}}
           loading="lazy"
         />
-        <div className="absolute top-0 flex h-full w-[100%]">
+        <Link
+          to={listImage?.[showIndex]?.url}
+          target="_blank"
+          className="absolute top-0 flex h-full w-[100%]"
+        >
           {isShadow && (
             <div className="h-full w-[10%] bg-black bg-opacity-60 phones:w-[15%]" />
           )}
@@ -94,7 +99,7 @@ export function Slider1({
           {isShadow && (
             <div className="h-full w-[10%] bg-black bg-opacity-60 phones:w-[15%]" />
           )}
-        </div>
+        </Link>
       </div>
       {listImage?.length > 1 && (
         <div className="flex items-center justify-center gap-x-16">

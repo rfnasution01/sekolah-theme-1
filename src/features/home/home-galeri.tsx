@@ -1,8 +1,12 @@
 import { CardNextPrev } from '@/components/card/CardNextPrev'
 import { SingleSkeleton } from '@/components/skeleton'
+import { convertToSlug } from '@/libs/helpers/format-text'
 import { GaleriType } from '@/libs/types/galeri-type'
+import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import { useGetGaleriQuery } from '@/store/slices/galeriAPI'
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 export function HomeGaleri() {
   const [showIndex, setShowIndex] = useState<number>(0)
@@ -23,6 +27,8 @@ export function HomeGaleri() {
       setGaleri(galeryData?.data)
     }
   }, [galeryData?.data])
+
+  const dispatch = useDispatch()
 
   return (
     <div className="scrollbar flex w-full flex-col gap-32 overflow-x-auto px-64 phones:px-32">
@@ -45,7 +51,17 @@ export function HomeGaleri() {
           ) : (
             <div className="grid w-full grid-cols-12 gap-32">
               {galeri?.slice(showIndex, showIndex + 4)?.map((item, idx) => (
-                <div
+                <Link
+                  to={`/galeri-detail/page/${convertToSlug(item?.judul)}`}
+                  onClick={() => {
+                    dispatch(
+                      setStateHalaman({
+                        page: convertToSlug(item?.judul),
+                        id: item?.id,
+                      }),
+                    )
+                    localStorage.setItem('beritaID', item?.id)
+                  }}
                   className="relative col-span-3 block transform-gpu duration-300 hover:-translate-y-16 hover:cursor-pointer phones:col-span-12 phones:w-9/12"
                   key={idx}
                 >
@@ -67,7 +83,7 @@ export function HomeGaleri() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}
@@ -84,7 +100,17 @@ export function HomeGaleri() {
           ) : (
             <div className="flex gap-32 overflow-x-auto phones:w-full">
               {galeri?.slice(showIndex, showIndex + 1)?.map((item, idx) => (
-                <div
+                <Link
+                  to={`/galeri-detail/page/${item?.url}`}
+                  onClick={() => {
+                    dispatch(
+                      setStateHalaman({
+                        page: convertToSlug(item?.judul),
+                        id: item?.id,
+                      }),
+                    )
+                    localStorage.setItem('beritaID', item?.id)
+                  }}
                   className="relative transform-gpu duration-300 hover:-translate-y-16 hover:cursor-pointer phones:w-full"
                   key={idx}
                 >
@@ -106,7 +132,7 @@ export function HomeGaleri() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}

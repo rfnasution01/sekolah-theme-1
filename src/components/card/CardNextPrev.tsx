@@ -16,8 +16,7 @@ export function CardNextPrev({
   length: number
 }) {
   return (
-    <div className="scrollbar relative flex w-full gap-32 overflow-x-hidden">
-      {children}
+    <div className="scrollbar relative flex h-[60vh] w-full gap-32 overflow-x-hidden">
       {/* --- Navigation -- */}
       <div className="absolute bottom-0 top-0 flex w-full flex-grow items-center justify-between px-4">
         <button
@@ -31,17 +30,9 @@ export function CardNextPrev({
             }
           }}
         >
-          <img
-            src="/icon/IconLeft.svg"
-            alt="Icon Left"
-            className="block w-[6rem] phones:hidden"
-          />
-          <img
-            src="/icon/CircleLeft.svg"
-            alt="Icon Left"
-            className="hidden phones:block"
-          />
+          <img src="/icon/IconLeft.svg" alt="Icon Left" />
         </button>
+        {children}
         {/* --- Next --- */}
         <button
           type="button"
@@ -54,16 +45,7 @@ export function CardNextPrev({
             }
           }}
         >
-          <img
-            src="/icon/IconRight.svg"
-            alt="Icon Right"
-            className="block w-[6rem] phones:hidden"
-          />
-          <img
-            src="/icon/CircleRight.svg"
-            alt="Icon Right"
-            className="hidden phones:block"
-          />
+          <img src="/icon/IconRight.svg" alt="Icon Right" />
         </button>
       </div>
     </div>
