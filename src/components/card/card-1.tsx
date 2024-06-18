@@ -29,7 +29,7 @@ export function Card1({
       {loadingBeranda ? (
         <SingleSkeleton height="h-[40vh]" />
       ) : (
-        <div className="flex w-full flex-1 flex-col justify-between py-64">
+        <div className="flex w-full flex-1 flex-col justify-between gap-32 py-64">
           <div className="flex flex-col gap-16">
             <p className="font-roboto text-[5rem]">{data?.kategori}</p>
             <p>{data?.keterangan}</p>

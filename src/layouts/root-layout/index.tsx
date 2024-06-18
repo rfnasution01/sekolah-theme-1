@@ -19,6 +19,7 @@ import { useSelector } from 'react-redux'
 import { getThemeSlice } from '@/store/reducer/stateTheme'
 import { bgPrimary500 } from '@/libs/helpers/format-color'
 import { SingleSkeleton } from '@/components/skeleton'
+import { Helmet } from 'react-helmet'
 
 export default function RootLayout() {
   const stateColor = useSelector(getThemeSlice)?.color
@@ -194,6 +195,11 @@ export default function RootLayout() {
           )}
         </div>
       </div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{identitas?.nama_website}</title>
+        <link rel="canonical" href="https://demolaman1.avnet.id/" />
+      </Helmet>
     </div>
   )
 }
