@@ -1,8 +1,15 @@
 import { enumRoute } from '@/libs/enum/enum-route'
+import { textPrimary100 } from '@/libs/helpers/format-color'
 import { MenuType } from '@/libs/types/beranda-type'
 import { Link } from 'react-router-dom'
 
-export function NavigasiHeader({ menu }: { menu: MenuType[] }) {
+export function NavigasiHeader({
+  menu,
+  color,
+}: {
+  menu: MenuType[]
+  color: string
+}) {
   const sortedData = [...menu].sort((a, b) => {
     return parseInt(a.urutan) - parseInt(b.urutan)
   })
@@ -32,7 +39,7 @@ export function NavigasiHeader({ menu }: { menu: MenuType[] }) {
                               : item?.slug
           }
           target={item?.jenis_menu === enumRoute.URL ? '_blank' : '_self'}
-          className="text-nowrap font-light text-success-100 hover:cursor-pointer hover:text-success-700"
+          className={`text-nowrap font-light hover:cursor-pointer ${textPrimary100(color)}`}
           key={idx}
         >
           {item?.nama_menu}

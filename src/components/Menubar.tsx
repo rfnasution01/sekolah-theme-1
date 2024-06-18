@@ -51,7 +51,7 @@ const Menubar = React.forwardRef<
       ref={ref}
       className={cn(
         [
-          'h-10 flex items-center bg-background ',
+          'h-10 flex items-center bg-transparent',
           classFirst,
           classMiddle,
           classLast,

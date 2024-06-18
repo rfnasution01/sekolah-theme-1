@@ -27,17 +27,27 @@ export function FooterAlamat({ identitas }: { identitas: IdentitasType }) {
         <div className="flex items-center gap-8">
           <Link
             target="_blank"
+            className="duration-300 hover:-translate-y-12"
             to={`https://www.facebook.com/${identitas?.fb}`}
           >
             <img src="/icon/facebook.svg" alt="facebook" loading="lazy" />
           </Link>
-          <Link target="_blank" to={`mailto:${identitas?.email}`}>
+          <Link
+            target="_blank"
+            to={`mailto:${identitas?.email}`}
+            className="duration-300 hover:-translate-y-12"
+          >
             <img src="/icon/google.svg" alt="google" loading="lazy" />
           </Link>
-          <Link target="_blank" to={`https://www.youtube.com/${identitas?.yt}`}>
+          <Link
+            target="_blank"
+            to={`https://www.youtube.com/${identitas?.yt}`}
+            className="duration-300 hover:-translate-y-12"
+          >
             <img src="/icon/youtube.svg" alt="youtube" loading="lazy" />
           </Link>
           <Link
+            className="duration-300 hover:-translate-y-12"
             target="_blank"
             to={`https://www.instagram.com/${identitas?.ig}`}
           >

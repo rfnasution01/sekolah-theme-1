@@ -15,6 +15,10 @@ import {
 import { RootFooter } from './footer'
 import { Link, Outlet } from 'react-router-dom'
 import Loading from '@/components/Loading'
+import { MenubarColor } from './root-header/menubar-color'
+import { useSelector } from 'react-redux'
+import { getThemeSlice } from '@/store/reducer/stateTheme'
+import { bgPrimary500 } from '@/libs/helpers/format-color'
 
 export default function RootLayout() {
   const [isShow, setIsShow] = useState<boolean>(false)
@@ -81,25 +85,38 @@ export default function RootLayout() {
     loadingMenuTop ||
     loadingMenuUtama
 
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+
   return (
     <div className="flex h-screen flex-col bg-background text-[2rem] phones:text-[2.4rem]">
       {loadingIdentitas ? (
         <Loading />
       ) : (
         <>
-          <div className="bg-primary-500 p-24 text-primary-100">
+          <div className={`${bgPrimary500(color)} p-24`}>
             <RootHeader
               setIsShow={setIsShow}
               isShow={isShow}
               beritaTerbaru={beritaTerbaru}
               menuTop={sortedDataTop}
+              color={color}
             />
           </div>
           <div className="phones:hidden">
             <RootNavigasi
               menuUtama={sortedDataUtama}
-              loadingIdentitas={loadingIdentitas}
               identitas={identitas}
+              color={color}
             />
           </div>
           {isShow ? (
@@ -113,13 +130,14 @@ export default function RootLayout() {
           ) : (
             <div className="scrollbar h-full overflow-y-auto">
               <Outlet />
-              <RootFooter identitas={identitas} />
+              <RootFooter identitas={identitas} color={color} />
             </div>
           )}
           <div
             className={`fixed bottom-0 right-32 z-30 flex h-5/6 flex-col items-center justify-center gap-32 `}
           >
             <div className="flex flex-col items-center justify-center gap-32">
+              <MenubarColor color={color} />
               <Link
                 to={`https://www.facebook.com/${identitas?.fb}`}
                 target="_blank"

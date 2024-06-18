@@ -4,6 +4,7 @@ import { api } from './api'
 import stateSearch from './reducer/stateSearch.ts'
 import stateHalaman from './reducer/stateIdHalaman.tsx'
 import stateKategori from './reducer/stateIdKategori.tsx'
+import stateTheme from './reducer/stateTheme.tsx'
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     stateSearch: stateSearch,
     stateHalaman: stateHalaman,
     stateKategori: stateKategori,
+    stateTheme: stateTheme,
   },
   devTools: true,
   middleware: (getDefaultMiddleware) =>

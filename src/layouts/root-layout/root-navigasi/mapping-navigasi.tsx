@@ -1,14 +1,24 @@
 import Tooltips from '@/components/Tooltip'
 import { enumRoute } from '@/libs/enum/enum-route'
+import {
+  borderPrimary400,
+  hoverPrimary400,
+  textPrimary100,
+} from '@/libs/helpers/format-color'
 import { usePathname } from '@/libs/hooks/usePathname'
 import { MenuType } from '@/libs/types/beranda-type'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
-import clsx from 'clsx'
 import { ChevronDown } from 'lucide-react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export function MappingNavigasi({ menuUtama }: { menuUtama: MenuType[] }) {
+export function MappingNavigasi({
+  menuUtama,
+  color,
+}: {
+  menuUtama: MenuType[]
+  color: string
+}) {
   const { firstPathname } = usePathname()
 
   const isActivePage = (item: string) => {
@@ -59,25 +69,16 @@ export function MappingNavigasi({ menuUtama }: { menuUtama: MenuType[] }) {
                                 : item?.slug
           }
           target={item?.jenis_menu === enumRoute.URL ? '_blank' : '_self'}
-          className={clsx(
-            'border-l border-r border-primary-400 px-16 py-24 text-[2rem] uppercase hover:cursor-pointer hover:bg-primary-400 phones:text-[2.4rem]',
-            {
-              'bg-primary-400': isActivePage(item?.slug),
-            },
-          )}
+          className={`
+            border-l border-r ${isActivePage(item?.slug) ? borderPrimary400(color) : hoverPrimary400(color)} px-16 py-24 text-[2rem] uppercase hover:cursor-pointer phones:text-[2.4rem]`}
           key={idx}
         >
           {item?.children?.length > 0 ? (
             <Tooltips
+              color={color}
               triggerComponent={
                 <div
-                  className={clsx(
-                    'flex items-center gap-4 font-semibold uppercase tracking-0.5',
-                    {
-                      'text-primary-100': !isActivePage(item?.slug),
-                      'text-white': isActivePage(item?.slug),
-                    },
-                  )}
+                  className={`flex items-center gap-4 uppercase ${textPrimary100(color)}`}
                 >
                   <p>{item?.nama_menu}</p>
                   <ChevronDown size={12} />
@@ -137,10 +138,7 @@ export function MappingNavigasi({ menuUtama }: { menuUtama: MenuType[] }) {
                           }
                         >
                           <div
-                            className={clsx(
-                              'text-nowrap text-primary-100 hover:cursor-pointer hover:text-primary-300',
-                              {},
-                            )}
+                            className={`${textPrimary100(color)} text-nowrap hover:cursor-pointer`}
                           >
                             {list?.nama_menu}
                           </div>

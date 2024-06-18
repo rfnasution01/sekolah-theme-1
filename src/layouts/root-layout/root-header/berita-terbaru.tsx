@@ -7,8 +7,10 @@ import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 
 export function BeritaTerbaru({
   runningText,
+  color,
 }: {
   runningText: BeritaTerbaruType[]
+  color: string
 }) {
   const handleBeritaClick = (id) => {
     localStorage.setItem('beritaID', id)
@@ -17,8 +19,8 @@ export function BeritaTerbaru({
 
   return (
     <div className="flex w-full items-center gap-32">
-      <BeritaUtama />
-      <RunningText>
+      <BeritaUtama color={color} />
+      <RunningText color={color}>
         <div className="flex gap-32 text-nowrap">
           {runningText?.map((item, idx) => (
             <div

@@ -3,22 +3,31 @@ import { FooterAlamat } from './footer-alamat'
 import { FooterCopyright } from './footer-copyright'
 import { FooterKontak } from './footer-kontak'
 import { FooterPopuler } from './footer-populer'
+import { bgPrimary700, textPrimary100 } from '@/libs/helpers/format-color'
 
-export function RootFooter({ identitas }: { identitas: IdentitasType }) {
+export function RootFooter({
+  identitas,
+  color,
+}: {
+  identitas: IdentitasType
+  color: string
+}) {
   return (
-    <div className="flex flex-col text-primary-100">
+    <div className={`flex flex-col ${textPrimary100(color)}`}>
       {/* --- Info --- */}
-      <div className="flex w-full gap-32 bg-primary-footer px-64 py-32 text-primary-100 phones:flex-col phones:items-start phones:gap-64 phones:px-32">
+      <div
+        className={`${bgPrimary700(color)} flex w-full gap-32 px-64 py-32 phones:flex-col phones:items-start phones:gap-64 phones:px-32`}
+      >
         {/* --- Alamat --- */}
         <FooterAlamat identitas={identitas} />
 
         {/* --- Populer --- */}
         <FooterPopuler />
         {/* --- Kontak Kami --- */}
-        <FooterKontak />
+        <FooterKontak color={color} />
       </div>
       {/* --- Copyright --- */}
-      <FooterCopyright identitas={identitas} />
+      <FooterCopyright identitas={identitas} color={color} />
     </div>
   )
 }

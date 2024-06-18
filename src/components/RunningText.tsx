@@ -1,6 +1,13 @@
+import { textPrimary100 } from '@/libs/helpers/format-color'
 import { ReactNode, useState } from 'react'
 
-export const RunningText = ({ children }: { children: ReactNode }) => {
+export const RunningText = ({
+  children,
+  color,
+}: {
+  children: ReactNode
+  color: string
+}) => {
   const [isHovered, setIsHovered] = useState(false)
 
   const handleMouseEnter = () => {
@@ -20,7 +27,7 @@ export const RunningText = ({ children }: { children: ReactNode }) => {
           animationPlayState: isHovered ? 'paused' : 'running',
           animationDuration: '50s',
         }}
-        className="animate-marquee whitespace-nowrap text-[2rem] font-bold  uppercase tracking-1.5 text-primary-100 hover:cursor-pointer phones:text-[2.4rem]"
+        className={`animate-marquee whitespace-nowrap text-[2rem] font-bold  uppercase tracking-1.5 ${textPrimary100(color)} hover:cursor-pointer phones:text-[2.4rem]`}
       >
         {children}
       </div>

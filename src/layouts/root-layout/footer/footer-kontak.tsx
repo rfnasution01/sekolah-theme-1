@@ -1,4 +1,6 @@
-export function FooterKontak() {
+import { bgPrimary400 } from '@/libs/helpers/format-color'
+
+export function FooterKontak({ color }: { color: string }) {
   return (
     <div className="flex w-1/3 flex-col gap-48 phones:w-full">
       <p className="font-bold">Kontak Kami</p>
@@ -9,7 +11,7 @@ export function FooterKontak() {
       <div className="flex">
         <button
           type="button"
-          className="rounded-2xl bg-primary-500 p-12 text-primary-100 hover:bg-primary-400"
+          className={`${bgPrimary400(color)} rounded-2xl p-12`}
         >
           Kontak
         </button>
