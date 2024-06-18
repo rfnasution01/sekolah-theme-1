@@ -13,6 +13,7 @@ import { Pagination } from '@/components/Pagination'
 import { ListType } from '@/libs/types/list-type'
 import { usePathname } from '@/libs/hooks/usePathname'
 import { convertSlugToText } from '@/libs/helpers/format-text'
+import { bgPrimary700 } from '@/libs/helpers/format-color'
 
 interface BeritaListProps<T> {
   data: T[]
@@ -22,6 +23,7 @@ interface BeritaListProps<T> {
   loading: boolean
   pageNumber: number
   lastPage: number
+  color: string
 }
 
 export function List<T extends ListType>({
@@ -32,6 +34,7 @@ export function List<T extends ListType>({
   loading,
   pageNumber,
   lastPage,
+  color,
 }: BeritaListProps<T>) {
   const { firstPathname } = usePathname()
   const dispatch = useDispatch()
@@ -76,7 +79,7 @@ export function List<T extends ListType>({
               onChange={(e) => onSearch(e)}
             />
             <button
-              className="bg-primary px-12 text-white"
+              className={`${bgPrimary700(color)} px-12`}
               type="button"
               style={{
                 borderTopRightRadius: '1rem',

@@ -1,3 +1,4 @@
+import { bgPrimary500 } from '@/libs/helpers/format-color'
 import { convertSlugToText } from '@/libs/helpers/format-text'
 import { ProgramDetailType } from '@/libs/types/beranda-type'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
@@ -10,11 +11,13 @@ export function ProgramDetailTab({
   firstPathname,
   tab,
   setTab,
+  color,
 }: {
   menu: ProgramDetailType[]
   firstPathname: string
   tab: string
   setTab: Dispatch<SetStateAction<string>>
+  color: string
 }) {
   const dispatch = useDispatch()
 
@@ -23,7 +26,9 @@ export function ProgramDetailTab({
   }
 
   return (
-    <div className="flex flex-col gap-32 bg-primary-500 p-64 text-primary-100 phones:p-32">
+    <div
+      className={`${bgPrimary500(color)} flex flex-col gap-32 p-64 phones:p-32`}
+    >
       <p className="font-roboto text-[3rem]">
         {convertSlugToText(firstPathname)}
       </p>

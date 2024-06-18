@@ -3,6 +3,7 @@ import Loading from '@/components/Loading'
 import { ProgramDetail, ProgramDetailTab } from '@/features/program-detail'
 import { ProgramDetailType } from '@/libs/types/beranda-type'
 import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
+import { getThemeSlice } from '@/store/reducer/stateTheme'
 import {
   useGetProgramDetailQuery,
   useGetProgramQuery,
@@ -11,6 +12,18 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 export default function ProgramDetailsPage() {
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+
   const stateId = useSelector(getHalamanSlice)?.id
 
   useEffect(() => {
@@ -59,7 +72,7 @@ export default function ProgramDetailsPage() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb />
+      <Breadcrumb color={color} />
       {loadingProgramDetail ? (
         <Loading />
       ) : (
@@ -73,6 +86,7 @@ export default function ProgramDetailsPage() {
                 firstPathname="Program"
                 setTab={setId}
                 tab={id}
+                color={color}
               />
             )}
             <div className="scrollbar h-full flex-1 overflow-y-auto phones:flex-none">

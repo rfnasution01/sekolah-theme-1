@@ -17,8 +17,21 @@ import { ListType } from '@/libs/types/list-type'
 import { useGetKategoriQuery } from '@/store/slices/kategoriAPI'
 import { Meta } from '@/store/api'
 import { Breadcrumb } from '@/components/Breadcrumb'
+import { getThemeSlice } from '@/store/reducer/stateTheme'
+import { bgPrimary700 } from '@/libs/helpers/format-color'
 
 export default function Kategori() {
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
   const { firstPathname, secondPathname } = usePathname()
   const dispatch = useDispatch()
   const stateId = useSelector(getKategoriSlice)?.id
@@ -91,7 +104,7 @@ export default function Kategori() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb />
+      <Breadcrumb color={color} />
 
       {loadingKategori ? (
         <Loading />
@@ -114,7 +127,7 @@ export default function Kategori() {
                   onChange={(e) => onSearch(e)}
                 />
                 <button
-                  className="bg-primary px-12 text-white"
+                  className={`${bgPrimary700(color)} px-12`}
                   type="button"
                   style={{
                     borderTopRightRadius: '1rem',

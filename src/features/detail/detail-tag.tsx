@@ -1,6 +1,13 @@
+import { bgPrimary800 } from '@/libs/helpers/format-color'
 import { DetailType } from '@/libs/types/detail-type'
 
-export function DetailTag({ data }: { data: DetailType }) {
+export function DetailTag({
+  data,
+  color,
+}: {
+  data: DetailType
+  color: string
+}) {
   return (
     <div className="flex flex-col gap-12">
       <div className="flex">
@@ -13,7 +20,7 @@ export function DetailTag({ data }: { data: DetailType }) {
       <div className="flex flex-shrink items-center gap-24">
         {data?.tag?.map((item, idx) => (
           <div
-            className="rounded-lg bg-primary-800 px-16 py-8 text-primary-100 hover:cursor-pointer hover:bg-primary-500"
+            className={`"rounded-lg ${bgPrimary800(color)} px-16 py-8 hover:cursor-pointer`}
             key={idx}
           >
             {item?.nama}

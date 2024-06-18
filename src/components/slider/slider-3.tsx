@@ -1,3 +1,8 @@
+import {
+  bgPrimary200,
+  bgPrimary500,
+  bgPrimary800,
+} from '@/libs/helpers/format-color'
 import { PhotoType } from '@/libs/types/beranda-type'
 import { setStateKategori } from '@/store/reducer/stateIdKategori'
 import clsx from 'clsx'
@@ -14,6 +19,7 @@ export function Slider3({
   seo_kategori,
   kelompok,
   jumlahPhoto,
+  color,
 }: {
   listImage: PhotoType[]
   height?: string
@@ -22,6 +28,7 @@ export function Slider3({
   seo_kategori: string
   kelompok: string
   jumlahPhoto: number
+  color: string
 }) {
   const [showIndex, setShowIndex] = useState<number>(0)
 
@@ -140,7 +147,7 @@ export function Slider3({
                         }),
                       )
                     }}
-                    className="flex items-center gap-12 rounded-2xl bg-primary-500 p-16 text-[2rem] font-bold tracking-0.25 text-primary-100 hover:bg-primary-700"
+                    className={`flex items-center gap-12 rounded-2xl ${bgPrimary500(color)} p-16 text-[2rem] font-bold tracking-0.25`}
                   >
                     <Folder size={16} />
                     <p>{kategori}</p>
@@ -158,10 +165,7 @@ export function Slider3({
       <div className="flex items-center justify-center gap-x-16">
         {listImage?.map((_item, idx) => (
           <div
-            className={clsx('h-16 w-16 rounded-full', {
-              'bg-primary-800': idx === showIndex,
-              'bg-primary-200': idx !== showIndex,
-            })}
+            className={`rounded-full ${idx === showIndex ? `${bgPrimary800(color)} h-[2rem] w-[4rem]` : `${bgPrimary200(color)} h-[2rem] w-[2rem]`}`}
             key={idx}
           />
         ))}

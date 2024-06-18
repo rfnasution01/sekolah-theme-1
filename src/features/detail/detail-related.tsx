@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-export function DetailRelated({ id }: { id: string }) {
+export function DetailRelated({ id, color }: { id: string; color: string }) {
   const { firstPathname } = usePathname()
   // --- Berita Detail Page ---
   const [detailRelated, setDetailRelated] = useState<DetailRelatedType[]>()
@@ -57,6 +57,7 @@ export function DetailRelated({ id }: { id: string }) {
                 tanggal={item?.tanggal}
                 gambar={item?.photo}
                 kelompok={item?.kelompok}
+                color={color}
               />
             </Link>
           ))}

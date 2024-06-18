@@ -6,6 +6,7 @@ import { convertToSlug } from '@/libs/helpers/format-text'
 import { usePathname } from '@/libs/hooks/usePathname'
 import { HalamanDetailType, MenuType } from '@/libs/types/beranda-type'
 import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
+import { getThemeSlice } from '@/store/reducer/stateTheme'
 import {
   useGetHalamanDetailQuery,
   useGetMenuUtamaQuery,
@@ -14,6 +15,18 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 export default function TentangKamiPage() {
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+
   const stateId = useSelector(getHalamanSlice)?.id
 
   useEffect(() => {
@@ -80,7 +93,7 @@ export default function TentangKamiPage() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb />
+      <Breadcrumb color={color} />
       {loadingHalamanDetail ? (
         <Loading />
       ) : (
@@ -94,6 +107,7 @@ export default function TentangKamiPage() {
                 firstPathname={firstPathname}
                 setTab={setTab}
                 tab={tab}
+                color={color}
               />
             )}
             <div className="scrollbar h-full flex-1 overflow-y-auto">

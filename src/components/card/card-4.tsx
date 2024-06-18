@@ -4,7 +4,11 @@ import clsx from 'clsx'
 import { convertToSlug } from '@/libs/helpers/format-text'
 import { Slider4 } from '../slider/slider-4'
 import { useEffect, useState } from 'react'
-import { bgPrimary700 } from '@/libs/helpers/format-color'
+import {
+  bgPrimary200,
+  bgPrimary700,
+  bgPrimary800,
+} from '@/libs/helpers/format-color'
 
 export function Card4({
   data,
@@ -116,10 +120,7 @@ export function Card4({
           {data?.berita?.map((_item, idx) => (
             <div
               onClick={() => setShowIndex(idx)}
-              className={clsx('h-16 w-16 rounded-full', {
-                'bg-primary-800': idx === showIndex,
-                'bg-primary-200': idx !== showIndex,
-              })}
+              className={`${idx === showIndex ? `h-[2rem] w-[4rem] ${bgPrimary800(color)}` : `h-[2rem] w-[2rem] ${bgPrimary200(color)}`} h-16 w-16 rounded-full`}
               key={idx}
             />
           ))}

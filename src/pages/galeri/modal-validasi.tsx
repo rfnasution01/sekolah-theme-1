@@ -13,6 +13,7 @@ import {
 import { GaleriDetailType } from '@/libs/types/galeri-type'
 import clsx from 'clsx'
 import Loading from '@/components/Loading'
+import { bgPrimary200, bgPrimary800 } from '@/libs/helpers/format-color'
 
 export function ModalValidasi({
   isOpen,
@@ -20,12 +21,14 @@ export function ModalValidasi({
   data,
   loading,
   title,
+  color,
 }: {
   isOpen: boolean
   setIsOpen: Dispatch<SetStateAction<boolean>>
   data: GaleriDetailType
   loading: boolean
   title: string
+  color: string
 }) {
   const [showIndex, setShowIndex] = useState<number>(0)
 
@@ -83,10 +86,7 @@ export function ModalValidasi({
                 <div className="flex items-center justify-center gap-x-16">
                   {data?.lampiran?.map((_item, idx) => (
                     <div
-                      className={clsx('h-16 w-16 rounded-full', {
-                        'bg-primary-800': idx === showIndex,
-                        'bg-primary-200': idx !== showIndex,
-                      })}
+                      className={`h-16 w-16 rounded-full ${idx === showIndex ? `h-[1.6rem] w-[4rem] ${bgPrimary800(color)}` : `${bgPrimary200(color)} h-[1.6rem] w-[2rem]`}`}
                       key={idx}
                     />
                   ))}

@@ -1,4 +1,5 @@
 import { enumRoute } from '@/libs/enum/enum-route'
+import { bgPrimary100, bgPrimary700 } from '@/libs/helpers/format-color'
 import { MenuType } from '@/libs/types/beranda-type'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import clsx from 'clsx'
@@ -11,10 +12,12 @@ export function MobileNavigasi({
   menuTop,
   menuUtama,
   setIsShow,
+  color,
 }: {
   menuTop: MenuType[]
   menuUtama: MenuType[]
   setIsShow: Dispatch<SetStateAction<boolean>>
+  color: string
 }) {
   const dispatch = useDispatch()
 
@@ -23,7 +26,9 @@ export function MobileNavigasi({
   }
   return (
     <div className="scrollbar hidden h-full w-full overflow-y-auto phones:block">
-      <div className="scrollbar flex h-full flex-col gap-48 overflow-y-auto bg-primary-700 p-32 text-primary-100">
+      <div
+        className={`"scrollbar flex h-full flex-col gap-48 overflow-y-auto ${bgPrimary700(color)} p-32`}
+      >
         <div className="flex flex-col gap-16">
           {menuUtama.map((item, idx) => (
             <div key={idx}>
@@ -162,7 +167,7 @@ export function MobileNavigasi({
             </span>
             <input
               type="text"
-              className="w-full rounded-lg border border-gray-300 bg-primary-100 p-8 px-48 text-[2rem] focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 phones:w-full phones:px-48"
+              className={`w-full rounded-lg border border-gray-300 ${bgPrimary100(color)} p-8 px-48 text-[2rem] focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 phones:w-full phones:px-48`}
               placeholder="Tulis & Tekan Enter"
             />
           </div>

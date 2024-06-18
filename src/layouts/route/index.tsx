@@ -5,10 +5,24 @@ import { List } from '@/features/list'
 import { usePathname } from '@/libs/hooks/usePathname'
 import { ListType } from '@/libs/types/list-type'
 import { Meta } from '@/store/api'
+import { getThemeSlice } from '@/store/reducer/stateTheme'
 import { useGetListQuery } from '@/store/slices/listAPI'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 export default function RouteLayout() {
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+
   const { firstPathname } = usePathname()
 
   // --- List ---
@@ -39,7 +53,7 @@ export default function RouteLayout() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb />
+      <Breadcrumb color={color} />
       {loadingList ? (
         <Loading />
       ) : list?.length > 0 ? (
@@ -51,6 +65,7 @@ export default function RouteLayout() {
           loading={loadingList}
           pageNumber={pageNumber}
           lastPage={meta?.last_page}
+          color={color}
         />
       ) : (
         <NoData />

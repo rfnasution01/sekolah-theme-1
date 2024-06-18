@@ -8,11 +8,25 @@ import {
 } from '@/features/profil'
 import { IdentitasType } from '@/libs/types/beranda-type'
 import { ProfilType } from '@/libs/types/profil-type'
+import { getThemeSlice } from '@/store/reducer/stateTheme'
 import { useGetIdentitasQuery } from '@/store/slices/berandaAPI'
 import { useGetProfilQuery } from '@/store/slices/profilAPI'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 export default function ProfilPage() {
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+
   //   --- Profil ---
   const [profil, setProfil] = useState<ProfilType>()
   const { data, isFetching, isLoading } = useGetProfilQuery()
@@ -49,10 +63,14 @@ export default function ProfilPage() {
               gambar="/img/identitas.png"
             />
           </div>
-          <ProfilVisi profil={profil} />
+          <ProfilVisi profil={profil} color={color} />
           <ProfilTujuan profil={profil} sekolah={identitas?.nama_website} />
           <ProfilSasaran profil={profil} sekolah={identitas?.nama_website} />
-          <ProfilHasil profil={profil} sekolah={identitas?.nama_website} />
+          <ProfilHasil
+            profil={profil}
+            sekolah={identitas?.nama_website}
+            color={color}
+          />
         </div>
       )}
     </div>

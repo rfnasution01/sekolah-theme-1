@@ -1,10 +1,11 @@
+import { bgPrimary100 } from '@/libs/helpers/format-color'
 import { convertSlugToText } from '@/libs/helpers/format-text'
 import { usePathname } from '@/libs/hooks/usePathname'
 import clsx from 'clsx'
 import { ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-export function Breadcrumb() {
+export function Breadcrumb({ color }: { color: string }) {
   const { splittedPath } = usePathname()
 
   const pathLength4 = splittedPath.filter((_, index) => index !== 2)
@@ -13,7 +14,9 @@ export function Breadcrumb() {
 
   return (
     <div className="px-64 phones:px-32">
-      <div className="flex items-center gap-12 overflow-x-hidden bg-primary-100 p-12 text-primary-700">
+      <div
+        className={`flex items-center gap-12 overflow-x-hidden p-12 ${bgPrimary100(color)}`}
+      >
         {path?.map((item, idx) => (
           <div className="flex items-center gap-12" key={idx}>
             <Link

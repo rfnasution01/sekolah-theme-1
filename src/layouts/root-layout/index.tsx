@@ -125,6 +125,7 @@ export default function RootLayout() {
                 menuTop={sortedDataTop}
                 menuUtama={sortedDataUtama}
                 setIsShow={setIsShow}
+                color={color}
               />
             </div>
           ) : (

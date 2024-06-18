@@ -1,3 +1,4 @@
+import { bgPrimary500 } from '@/libs/helpers/format-color'
 import { convertToSlug } from '@/libs/helpers/format-text'
 import { FaqType } from '@/libs/types/faq-type'
 import clsx from 'clsx'
@@ -8,14 +9,18 @@ export function FaqTab({
   firstPathname,
   tab,
   setTab,
+  color,
 }: {
   menu: FaqType[]
   firstPathname: string
   tab: string
   setTab: Dispatch<SetStateAction<string>>
+  color: string
 }) {
   return (
-    <div className="flex w-1/5 flex-col gap-32 bg-primary-500 p-64 text-primary-100 phones:w-full phones:p-32">
+    <div
+      className={`flex w-1/5 flex-col gap-32 p-64 phones:w-full phones:p-32 ${bgPrimary500(color)}`}
+    >
       <p className="font-roboto text-[3rem] uppercase">{firstPathname}</p>
       <div className="flex flex-col gap-16">
         {menu?.map((item, idx) => (

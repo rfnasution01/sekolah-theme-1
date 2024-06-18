@@ -9,8 +9,22 @@ import {
 import { useEffect, useState } from 'react'
 import { ModalValidasi } from './modal-validasi'
 import { convertSlugToText } from '@/libs/helpers/format-text'
+import { useSelector } from 'react-redux'
+import { getThemeSlice } from '@/store/reducer/stateTheme'
 
 export default function GaleriPage() {
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+
   const [id, setId] = useState<string>('')
   const [title, setTitle] = useState<string>('')
   const [show, setShow] = useState<boolean>(false)
@@ -56,7 +70,7 @@ export default function GaleriPage() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb />
+      <Breadcrumb color={color} />
       {loadingDetail ? (
         <Loading />
       ) : (
@@ -73,6 +87,7 @@ export default function GaleriPage() {
         data={galeriDetail}
         loading={loadingGaleriDetail}
         title={convertSlugToText(title)}
+        color={color}
       />
     </div>
   )

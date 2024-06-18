@@ -13,8 +13,21 @@ import { DetailType } from '@/libs/types/detail-type'
 import { usePathname } from '@/libs/hooks/usePathname'
 import { useGetDetailQuery } from '@/store/slices/detailAPI'
 import { DetailRelated, DetailShare, DetailTag } from '@/features/detail'
+import { getThemeSlice } from '@/store/reducer/stateTheme'
 
 export default function Detail() {
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+
   const { firstPathname } = usePathname()
   const stateId = useSelector(getHalamanSlice)?.id
 
@@ -49,7 +62,7 @@ export default function Detail() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb />
+      <Breadcrumb color={color} />
 
       {loadingDetail ? (
         <Loading />
@@ -84,13 +97,14 @@ export default function Detail() {
                 seo_kategori={detail?.seo_kategori}
                 kelompok={firstPathname}
                 jumlahPhoto={detail?.jumlah_photo}
+                color={color}
               />
             </div>
             <div
               dangerouslySetInnerHTML={{ __html: detail?.isi }}
               className="article-content"
             />
-            <DetailTag data={detail} />
+            <DetailTag data={detail} color={color} />
             <DetailShare
               slug={detail?.seo}
               page={detail?.judul}
@@ -98,7 +112,7 @@ export default function Detail() {
               isi={detail?.isi}
               photo={detail?.photo?.[0]?.gambar}
             />
-            <DetailRelated id={id} />
+            <DetailRelated id={id} color={color} />
           </div>
         </div>
       )}

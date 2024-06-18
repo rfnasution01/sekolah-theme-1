@@ -1,14 +1,28 @@
 import './program.css'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import { useEffect, useState } from 'react'
 import { ProgramDetailType } from '@/libs/types/beranda-type'
 import { useGetProgramQuery } from '@/store/slices/berandaAPI'
 import Loading from '@/components/Loading'
 import { Breadcrumb } from '@/components/Breadcrumb'
+import { getThemeSlice } from '@/store/reducer/stateTheme'
+import { bgPrimary100 } from '@/libs/helpers/format-color'
 
 export default function Program() {
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+
   const dispatch = useDispatch()
 
   // --- Program Page ---
@@ -29,7 +43,7 @@ export default function Program() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb />
+      <Breadcrumb color={color} />
 
       {loadingProgram ? (
         <Loading />
@@ -52,7 +66,7 @@ export default function Program() {
                 >
                   <Link
                     to={`/program-details/page/${item?.seo}`}
-                    className="flex flex-col gap-24 rounded-2xl bg-primary-100 px-24 pb-32 pt-24 shadow hover:cursor-pointer hover:shadow-lg"
+                    className={`flex flex-col gap-24 rounded-2xl ${bgPrimary100(color)} px-24 pb-32 pt-24 shadow hover:cursor-pointer hover:shadow-lg`}
                   >
                     <div className="relative -top-96">
                       <img

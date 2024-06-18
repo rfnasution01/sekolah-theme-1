@@ -2,6 +2,7 @@ import { CalendarDays, Eye } from 'lucide-react'
 import { IconLabel } from '../IconLabel'
 import dayjs from 'dayjs'
 import { PhotoType } from '@/libs/types/beranda-type'
+import { bgPrimary700 } from '@/libs/helpers/format-color'
 
 export function Card3({
   judul,
@@ -9,12 +10,14 @@ export function Card3({
   tanggal,
   gambar,
   kelompok,
+  color,
 }: {
   judul: string
   hits: string
   tanggal: string
   gambar: PhotoType
   kelompok: string
+  color: string
 }) {
   return (
     <div className="flex transform gap-24 border-b border-[#00000033] py-12 transition-transform hover:translate-x-12 hover:cursor-pointer phones:flex-col">
@@ -46,7 +49,7 @@ export function Card3({
           <div className="w-1/3 phones:w-full">
             <button
               type="button"
-              className="flex w-full items-center justify-center rounded-lg bg-primary-700 py-8 text-[1.6rem] text-primary-100 hover:bg-primary-500 phones:text-[2rem]"
+              className={`"flex w-full items-center justify-center rounded-lg ${bgPrimary700(color)} py-8 text-[1.6rem] phones:text-[2rem]`}
             >
               Lihat {kelompok} Lainnya
             </button>

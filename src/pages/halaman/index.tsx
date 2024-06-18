@@ -3,11 +3,24 @@ import Loading from '@/components/Loading'
 import { HalamanDetail } from '@/features/halaman'
 import { HalamanDetailType } from '@/libs/types/beranda-type'
 import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
+import { getThemeSlice } from '@/store/reducer/stateTheme'
 import { useGetHalamanDetailQuery } from '@/store/slices/berandaAPI'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 export default function HalamanPage() {
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+
   const stateId = useSelector(getHalamanSlice)?.id
 
   useEffect(() => {
@@ -40,7 +53,7 @@ export default function HalamanPage() {
 
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
-      <Breadcrumb />
+      <Breadcrumb color={color} />
       {loadingHalamanDetail ? (
         <Loading />
       ) : (

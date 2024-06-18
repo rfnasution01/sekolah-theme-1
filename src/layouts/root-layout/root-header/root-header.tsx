@@ -28,7 +28,7 @@ export function RootHeader({
           <NavigasiHeader menu={menuTop} color={color} />
         </div>
         <div>
-          <SearchHeader />
+          <SearchHeader color={color} />
         </div>
       </div>
       <div className="hidden phones:block">

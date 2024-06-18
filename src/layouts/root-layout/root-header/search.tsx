@@ -1,6 +1,7 @@
+import { bgPrimary100 } from '@/libs/helpers/format-color'
 import { Search } from 'lucide-react'
 
-export function SearchHeader() {
+export function SearchHeader({ color }: { color: string }) {
   return (
     <div className="relative text-black phones:hidden">
       <span className="block phones:hidden">
@@ -17,7 +18,7 @@ export function SearchHeader() {
       </span>
       <input
         type="text"
-        className="w-full rounded-lg border border-gray-300 bg-primary-100 p-8 px-48 text-[2rem] focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 phones:w-full phones:px-48"
+        className={`w-full rounded-lg border border-gray-300 ${bgPrimary100(color)} p-8 px-48 text-[2rem] focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 phones:w-full phones:px-48`}
         placeholder="Tulis & Tekan Enter"
       />
     </div>
