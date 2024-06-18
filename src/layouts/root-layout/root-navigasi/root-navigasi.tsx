@@ -1,23 +1,34 @@
 import { IdentitasType, MenuType } from '@/libs/types/beranda-type'
 import { LogoNavigasi } from './logo'
 import { MappingNavigasi } from './mapping-navigasi'
-import { bgPrimary700 } from '@/libs/helpers/format-color'
+import { SingleSkeleton } from '@/components/skeleton'
 
 export function RootNavigasi({
   menuUtama,
   identitas,
   color,
+  loadingMenuUtama,
+  loadingIdentitas,
 }: {
   menuUtama: MenuType[]
   identitas: IdentitasType
   color: string
+  loadingMenuUtama: boolean
+  loadingIdentitas: boolean
 }) {
   return (
-    <div
-      className={`flex items-center justify-between gap-32 pl-64 ${bgPrimary700(color)}`}
-    >
-      <LogoNavigasi identitas={identitas} />
-      <MappingNavigasi menuUtama={menuUtama} color={color} />
+    <div className={`flex flex-col`}>
+      {loadingIdentitas ? (
+        <SingleSkeleton height="h-[20vh]" />
+      ) : (
+        <LogoNavigasi identitas={identitas} />
+      )}
+
+      {loadingMenuUtama ? (
+        <SingleSkeleton />
+      ) : (
+        <MappingNavigasi menuUtama={menuUtama} color={color} />
+      )}
     </div>
   )
 }

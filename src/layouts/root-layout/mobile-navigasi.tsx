@@ -1,9 +1,8 @@
 import { enumRoute } from '@/libs/enum/enum-route'
-import { bgPrimary100, bgPrimary700 } from '@/libs/helpers/format-color'
+import { bgPrimary700 } from '@/libs/helpers/format-color'
 import { MenuType } from '@/libs/types/beranda-type'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import clsx from 'clsx'
-import { Search } from 'lucide-react'
 import { Dispatch, SetStateAction } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -29,7 +28,7 @@ export function MobileNavigasi({
       <div
         className={`"scrollbar flex h-full flex-col gap-48 overflow-y-auto ${bgPrimary700(color)} p-32`}
       >
-        <div className="flex flex-col gap-16">
+        <div className="flex flex-col gap-0">
           {menuUtama.map((item, idx) => (
             <div key={idx}>
               <Link
@@ -158,19 +157,6 @@ export function MobileNavigasi({
               {item?.nama_menu}
             </Link>
           ))}
-          <div className="relative w-full text-black">
-            <span className="">
-              <Search
-                className="absolute left-12 top-1/2 -translate-y-1/2 transform"
-                size={16}
-              />
-            </span>
-            <input
-              type="text"
-              className={`w-full rounded-lg border border-gray-300 ${bgPrimary100(color)} p-8 px-48 text-[2rem] focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 phones:w-full phones:px-48`}
-              placeholder="Tulis & Tekan Enter"
-            />
-          </div>
         </div>
       </div>
     </div>

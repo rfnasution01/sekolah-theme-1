@@ -14,13 +14,27 @@ import {
 } from '@/store/slices/berandaAPI'
 import { RootFooter } from './footer'
 import { Link, Outlet } from 'react-router-dom'
-import Loading from '@/components/Loading'
 import { MenubarColor } from './root-header/menubar-color'
 import { useSelector } from 'react-redux'
 import { getThemeSlice } from '@/store/reducer/stateTheme'
 import { bgPrimary500 } from '@/libs/helpers/format-color'
+import { SingleSkeleton } from '@/components/skeleton'
 
 export default function RootLayout() {
+  const stateColor = useSelector(getThemeSlice)?.color
+
+  useEffect(() => {
+    if (stateColor) {
+      setColor(stateColor)
+    }
+  }, [stateColor])
+
+  const colorParams = localStorage.getItem('themeColor')
+
+  const baseColor = import.meta.env.VITE_BASE_THEME
+  const [color, setColor] = useState<string>(
+    colorParams ?? stateColor ?? baseColor,
+  )
   const [isShow, setIsShow] = useState<boolean>(false)
 
   // --- Menu Top ---
@@ -65,7 +79,6 @@ export default function RootLayout() {
     return parseInt(a.urutan) - parseInt(b.urutan)
   })
 
-  // --- Identitas ---
   const [identitas, setIdentitas] = useState<IdentitasType>()
   const {
     data: identitasData,
@@ -79,33 +92,14 @@ export default function RootLayout() {
     }
   }, [identitasData?.data])
 
-  const loadingIdentitas =
-    isLoadingIdentitas ||
-    isFetchingIdentitas ||
-    loadingMenuTop ||
-    loadingMenuUtama
-
-  const stateColor = useSelector(getThemeSlice)?.color
-
-  useEffect(() => {
-    if (stateColor) {
-      setColor(stateColor)
-    }
-  }, [stateColor])
-
-  const colorParams = localStorage.getItem('themeColor')
-
-  const baseColor = import.meta.env.VITE_BASE_THEME
-  const [color, setColor] = useState<string>(
-    colorParams ?? stateColor ?? baseColor,
-  )
+  const loadingIdentitas = isLoadingIdentitas || isFetchingIdentitas
 
   return (
-    <div className="flex h-screen flex-col bg-background text-[2rem] phones:text-[2.4rem]">
-      {loadingIdentitas ? (
-        <Loading />
-      ) : (
-        <>
+    <div className="flex h-screen flex-col bg-background px-128 text-[2rem] phones:px-0 phones:text-[2.4rem]">
+      <div className="flex h-full flex-col overflow-y-auto bg-white">
+        {loadingMenuTop ? (
+          <SingleSkeleton />
+        ) : (
           <div className={`${bgPrimary500(color)} p-24`}>
             <RootHeader
               setIsShow={setIsShow}
@@ -115,73 +109,91 @@ export default function RootLayout() {
               color={color}
             />
           </div>
-          <div className="phones:hidden">
-            <RootNavigasi
+        )}
+        {isShow ? (
+          <div className="flex-1">
+            <MobileNavigasi
+              menuTop={sortedDataTop}
               menuUtama={sortedDataUtama}
-              identitas={identitas}
+              setIsShow={setIsShow}
               color={color}
             />
           </div>
-          {isShow ? (
-            <div className="flex-1">
-              <MobileNavigasi
-                menuTop={sortedDataTop}
+        ) : (
+          <div className="scrollbar h-full overflow-y-auto">
+            <div className="phones:hidden">
+              <RootNavigasi
                 menuUtama={sortedDataUtama}
-                setIsShow={setIsShow}
+                identitas={identitas}
                 color={color}
+                loadingIdentitas={loadingIdentitas}
+                loadingMenuUtama={loadingMenuUtama}
               />
             </div>
-          ) : (
-            <div className="scrollbar h-full overflow-y-auto">
-              <Outlet />
-              <RootFooter identitas={identitas} color={color} />
-            </div>
-          )}
-          <div
-            className={`fixed bottom-0 right-32 z-30 flex h-5/6 flex-col items-center justify-center gap-32 `}
-          >
-            <div className="flex flex-col items-center justify-center gap-32">
-              <MenubarColor color={color} />
-              <Link
-                to={`https://www.facebook.com/${identitas?.fb}`}
-                target="_blank"
-                className="opacity-20 hover:cursor-pointer hover:opacity-90"
-              >
-                <img src="/icon/facebook-link.svg" alt="facebook" />
-              </Link>
-              <Link
-                to={`https://www.twitter.com/${identitas?.tw}`}
-                target="_blank"
-                className="opacity-20 hover:cursor-pointer hover:opacity-90"
-              >
-                <img
-                  src="/icon/twitter-link.svg"
-                  alt="twitter"
-                  loading="lazy"
-                />
-              </Link>
-              <Link
-                to={`https://www.instagram.com/${identitas?.ig}`}
-                target="_blank"
-                className="opacity-20 hover:cursor-pointer hover:opacity-90"
-              >
-                <img
-                  src="/icon/instagram-link.svg"
-                  alt="instagram"
-                  loading="lazy"
-                />
-              </Link>
-              <Link
-                to={`https://api.whatsapp.com/send?phone=${identitas?.wa}`}
-                target="_blank"
-                className="opacity-20 hover:cursor-pointer hover:opacity-90"
-              >
-                <img src="/icon/wa-link.svg" alt="whatsapp" loading="lazy" />
-              </Link>
-            </div>
+            <Outlet />
+            <RootFooter
+              identitas={identitas}
+              color={color}
+              loadingFooter={loadingIdentitas}
+            />
           </div>
-        </>
-      )}
+        )}
+      </div>
+      <div
+        className={`fixed bottom-0 right-32 z-30 flex h-5/6 flex-col items-center justify-center gap-32 `}
+      >
+        <div className="flex flex-col items-center justify-center gap-32">
+          <MenubarColor color={color} />
+          {loadingIdentitas ? (
+            <SingleSkeleton />
+          ) : (
+            <Link
+              to={`https://www.facebook.com/${identitas?.fb}`}
+              target="_blank"
+              className="opacity-20 hover:cursor-pointer hover:opacity-90"
+            >
+              <img src="/icon/facebook-link.svg" alt="facebook" />
+            </Link>
+          )}
+          {loadingIdentitas ? (
+            <SingleSkeleton />
+          ) : (
+            <Link
+              to={`https://www.twitter.com/${identitas?.tw}`}
+              target="_blank"
+              className="opacity-20 hover:cursor-pointer hover:opacity-90"
+            >
+              <img src="/icon/twitter-link.svg" alt="twitter" loading="lazy" />
+            </Link>
+          )}
+          {loadingIdentitas ? (
+            <SingleSkeleton />
+          ) : (
+            <Link
+              to={`https://www.instagram.com/${identitas?.ig}`}
+              target="_blank"
+              className="opacity-20 hover:cursor-pointer hover:opacity-90"
+            >
+              <img
+                src="/icon/instagram-link.svg"
+                alt="instagram"
+                loading="lazy"
+              />
+            </Link>
+          )}
+          {loadingIdentitas ? (
+            <SingleSkeleton />
+          ) : (
+            <Link
+              to={`https://api.whatsapp.com/send?phone=${identitas?.wa}`}
+              target="_blank"
+              className="opacity-20 hover:cursor-pointer hover:opacity-90"
+            >
+              <img src="/icon/wa-link.svg" alt="whatsapp" loading="lazy" />
+            </Link>
+          )}
+        </div>
+      </div>
     </div>
   )
 }

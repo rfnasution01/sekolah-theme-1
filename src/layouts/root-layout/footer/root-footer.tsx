@@ -8,9 +8,11 @@ import { bgPrimary700, textPrimary100 } from '@/libs/helpers/format-color'
 export function RootFooter({
   identitas,
   color,
+  loadingFooter,
 }: {
   identitas: IdentitasType
   color: string
+  loadingFooter: boolean
 }) {
   return (
     <div className={`flex flex-col ${textPrimary100(color)}`}>
@@ -19,7 +21,7 @@ export function RootFooter({
         className={`${bgPrimary700(color)} flex w-full gap-32 px-64 py-32 phones:flex-col phones:items-start phones:gap-64 phones:px-32`}
       >
         {/* --- Alamat --- */}
-        <FooterAlamat identitas={identitas} />
+        <FooterAlamat identitas={identitas} loadingFooter={loadingFooter} />
 
         {/* --- Populer --- */}
         <FooterPopuler />
@@ -27,7 +29,11 @@ export function RootFooter({
         <FooterKontak color={color} />
       </div>
       {/* --- Copyright --- */}
-      <FooterCopyright identitas={identitas} color={color} />
+      <FooterCopyright
+        identitas={identitas}
+        color={color}
+        loadingFooter={loadingFooter}
+      />
     </div>
   )
 }

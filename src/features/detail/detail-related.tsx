@@ -32,7 +32,7 @@ export function DetailRelated({ id, color }: { id: string; color: string }) {
   const dispatch = useDispatch()
 
   return (
-    <div className="flex w-3/5 flex-col gap-12 phones:w-full">
+    <div className="flex w-full flex-col gap-12 phones:w-full">
       <div className="flex border-b-4 border-danger-700 pb-8">
         <p className="border-l-4 border-danger-700 px-12 py-8 font-nunito text-[3rem] uppercase">
           berita lainnya
@@ -42,7 +42,7 @@ export function DetailRelated({ id, color }: { id: string; color: string }) {
       {loadingBeritaDetail ? (
         <Loading />
       ) : (
-        <div className="flex flex-col">
+        <div className="grid grid-cols-12 gap-32">
           {detailRelated?.map((item, idx) => (
             <Link
               to={`/${firstPathname}/page/${item?.seo}`}
@@ -50,6 +50,7 @@ export function DetailRelated({ id, color }: { id: string; color: string }) {
                 dispatch(setStateHalaman({ id: item?.id, page: item?.seo }))
               }}
               key={idx}
+              className="col-span-6 phones:col-span-12"
             >
               <Card3
                 judul={item?.judul}

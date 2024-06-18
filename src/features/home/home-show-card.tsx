@@ -6,21 +6,36 @@ export function HomeShowCard({
   data,
   kelompok,
   color,
+  loadingBeranda,
 }: {
   angka: number
   data: BerandaType
   kelompok: string
   color: string
+  loadingBeranda: boolean
 }) {
   const index = angka % 4
 
   switch (index) {
     case 1:
       return (
-        <Card1 data={data} angka={angka} kelompok={kelompok} color={color} />
+        <Card1
+          data={data}
+          angka={angka}
+          kelompok={kelompok}
+          color={color}
+          loadingBeranda={loadingBeranda}
+        />
       )
     case 2:
-      return <Card2 data={data} kelompok={kelompok} color={color} />
+      return (
+        <Card2
+          data={data}
+          kelompok={kelompok}
+          color={color}
+          loadingBeranda={loadingBeranda}
+        />
+      )
     case 3:
       return (
         <Card4
@@ -28,11 +43,18 @@ export function HomeShowCard({
           angka={angka + 1}
           kelompok={kelompok}
           color={color}
+          loadingBeranda={loadingBeranda}
         />
       )
     case 0:
       return (
-        <Card1 data={data} angka={angka} kelompok={kelompok} color={color} />
+        <Card1
+          data={data}
+          angka={angka}
+          kelompok={kelompok}
+          color={color}
+          loadingBeranda={loadingBeranda}
+        />
       )
     default:
       return 'Index tidak ditemukan'

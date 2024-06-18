@@ -81,7 +81,7 @@ export default {
 
       // ? ----- COLOR SYSTEM
       colors: {
-        background: '#fff',
+        background: '#f0f0f0',
         primary: {
           DEFAULT: '#28A6F4',
           background: '#0891E6',

@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
         element: <ProfilPage />,
       },
       {
-        path: 'galeri',
+        path: 'galeri-detail/page/:id',
         element: <GaleriPage />,
       },
       {

@@ -40,14 +40,14 @@ export function Slider1({
         />
         <div className="absolute top-0 flex h-full w-[100%]">
           {isShadow && (
-            <div className="h-full w-[10%] bg-black bg-opacity-60" />
+            <div className="h-full w-[10%] bg-black bg-opacity-60 phones:w-[15%]" />
           )}
           <div
-            className={`"relative flex h-full ${isShadow ? 'w-[80%]' : 'w-full'} flex-col justify-end border-white`}
+            className={`"relative flex h-full ${isShadow ? 'w-[80%] phones:w-[70%]' : 'w-full'} flex-col justify-end border-white`}
           >
             {/* --- Navigation -- */}
             <div
-              className={`absolute bottom-0 top-0 flex ${isShadow ? 'w-[80%]' : 'w-full'} flex-grow items-center justify-between px-4`}
+              className={`absolute bottom-0 top-0 flex ${isShadow ? 'w-[80%] phones:w-[70%]' : 'w-full'} flex-grow items-center justify-between px-4`}
             >
               <span
                 className={clsx('', {
@@ -104,7 +104,7 @@ export function Slider1({
           </div>
 
           {isShadow && (
-            <div className="h-full w-[10%] bg-black bg-opacity-60" />
+            <div className="h-full w-[10%] bg-black bg-opacity-60 phones:w-[15%]" />
           )}
         </div>
       </div>

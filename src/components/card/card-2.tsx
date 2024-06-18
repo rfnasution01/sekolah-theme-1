@@ -6,15 +6,18 @@ import { convertToSlug } from '@/libs/helpers/format-text'
 import { useDispatch } from 'react-redux'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import { bgPrimary700 } from '@/libs/helpers/format-color'
+import { SingleSkeleton } from '../skeleton'
 
 export function Card2({
   data,
   kelompok,
   color,
+  loadingBeranda,
 }: {
   data: BerandaType
   kelompok: string
   color: string
+  loadingBeranda: boolean
 }) {
   const dispatch = useDispatch()
 
@@ -49,17 +52,21 @@ export function Card2({
                 )
               }}
             >
-              <div className="flex flex-col gap-12 border bg-background px-12 pb-24 pt-12 shadow hover:cursor-pointer hover:shadow-lg">
-                <img
-                  src={item?.photo?.gambar}
-                  alt={item?.photo?.keterangan}
-                  className="h-[35vh] w-full"
-                  loading="lazy"
-                />
-                <div className="flex flex-col gap-4">
-                  <p className="text-center">{item?.judul}</p>
+              {loadingBeranda ? (
+                <SingleSkeleton height="h-[40vh]" />
+              ) : (
+                <div className="flex flex-col gap-12 border bg-white px-12 pb-24 pt-12 shadow hover:cursor-pointer hover:shadow-lg">
+                  <img
+                    src={item?.photo?.gambar}
+                    alt={item?.photo?.keterangan}
+                    className="h-[35vh] w-full"
+                    loading="lazy"
+                  />
+                  <div className="flex flex-col gap-4">
+                    <p className="text-center">{item?.judul}</p>
+                  </div>
                 </div>
-              </div>
+              )}
             </Link>
           ))
         ) : (

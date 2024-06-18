@@ -25,7 +25,7 @@ export const RunningText = ({
         onMouseLeave={handleMouseLeave}
         style={{
           animationPlayState: isHovered ? 'paused' : 'running',
-          animationDuration: '50s',
+          animationDuration: '100s',
         }}
         className={`animate-marquee whitespace-nowrap text-[2rem] font-bold  uppercase tracking-1.5 ${textPrimary100(color)} hover:cursor-pointer phones:text-[2.4rem]`}
       >

@@ -7,7 +7,7 @@ export function SingleSkeleton({
 }) {
   return (
     <div
-      className={`${height} ${width} animate-pulse rounded-full bg-slate-200 font-roboto text-[3rem] duration-100`}
+      className={`${height} ${width} animate-pulse rounded-md bg-slate-200 font-roboto text-[3rem] duration-100`}
     />
   )
 }

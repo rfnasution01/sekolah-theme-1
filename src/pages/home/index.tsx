@@ -1,6 +1,11 @@
-import Loading from '@/components/Loading'
+import { SingleSkeleton } from '@/components/skeleton'
 import { Slider1 } from '@/components/slider/slider-1'
-import { HomeCard, HomeLayanan, HomeTestimoni } from '@/features/home'
+import {
+  HomeCard,
+  HomeGaleri,
+  HomeLayanan,
+  HomeTestimoni,
+} from '@/features/home'
 import { BerandaType, SliderType } from '@/libs/types/beranda-type'
 import { LayananType } from '@/libs/types/layanan-type'
 import { TestimoniType } from '@/libs/types/testimoni-type'
@@ -97,25 +102,28 @@ export default function HomePage() {
     }
   }, [dataLayanan?.data])
 
-  const loading =
-    loadingSlider || loadingBeranda || loadingLayanan || loadingTestimoni
-
   return (
     <div className="mb-80 flex flex-col gap-32">
-      {loading ? (
-        <div className="h-[30vh]">
-          <Loading />
-        </div>
+      {/* --- Banner --- */}
+      {loadingSlider ? (
+        <SingleSkeleton height="h-[77vh]" />
       ) : (
-        <>
-          {/* --- Banner --- */}
-          <Slider1 listImage={slider} isShadow color={color} />
-          <HomeCard beranda={beranda} color={color} />
-
-          <HomeLayanan layanan={layanan} />
-          <HomeTestimoni testimoni={testimoni} />
-        </>
+        <Slider1 listImage={slider} isShadow color={color} />
       )}
+      <HomeCard
+        beranda={beranda}
+        color={color}
+        loadingBeranda={loadingBeranda}
+      />
+
+      <HomeLayanan layanan={layanan} loadingLayanan={loadingLayanan} />
+      {loadingTestimoni ? (
+        <SingleSkeleton height="h-[40vh]" />
+      ) : (
+        <HomeTestimoni testimoni={testimoni} />
+      )}
+
+      <HomeGaleri />
     </div>
   )
 }

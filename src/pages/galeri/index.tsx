@@ -1,16 +1,11 @@
 import { Breadcrumb } from '@/components/Breadcrumb'
-import Loading from '@/components/Loading'
-import { MappingGaleri } from '@/features/galeri'
-import { GaleriDetailType, GaleriType } from '@/libs/types/galeri-type'
-import {
-  useGetGaleriDetailQuery,
-  useGetGaleriQuery,
-} from '@/store/slices/galeriAPI'
+import { GaleriDetailType } from '@/libs/types/galeri-type'
+import { useGetGaleriDetailQuery } from '@/store/slices/galeriAPI'
 import { useEffect, useState } from 'react'
-import { ModalValidasi } from './modal-validasi'
-import { convertSlugToText } from '@/libs/helpers/format-text'
 import { useSelector } from 'react-redux'
 import { getThemeSlice } from '@/store/reducer/stateTheme'
+import { getHalamanSlice } from '@/store/reducer/stateIdHalaman'
+import { SingleSkeleton } from '@/components/skeleton'
 
 export default function GaleriPage() {
   const stateColor = useSelector(getThemeSlice)?.color
@@ -28,27 +23,17 @@ export default function GaleriPage() {
     colorParams ?? stateColor ?? baseColor,
   )
 
-  const [id, setId] = useState<string>('')
-  const [title, setTitle] = useState<string>('')
-  const [show, setShow] = useState<boolean>(false)
-
-  const [galeri, setGaleri] = useState<GaleriType[]>()
-  const {
-    data: galeryData,
-    isLoading: galeryLoading,
-    isFetching: galeryFetching,
-  } = useGetGaleriQuery({
-    page_number: 1,
-    page_size: 100,
-  })
-
-  const loadingDetail = galeryFetching || galeryLoading
+  const stateId = useSelector(getHalamanSlice)?.id
 
   useEffect(() => {
-    if (galeryData?.data) {
-      setGaleri(galeryData?.data)
+    if (stateId) {
+      setId(stateId)
     }
-  }, [galeryData?.data, id])
+  }, [stateId])
+
+  const idParams = localStorage.getItem('beritaID')
+
+  const [id, setId] = useState<string>(idParams ?? stateId ?? '')
 
   // --- Galeri Page ---
   const [galeriDetail, setGaleriDetail] = useState<GaleriDetailType>()
@@ -74,24 +59,23 @@ export default function GaleriPage() {
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
       <Breadcrumb color={color} />
-      {loadingDetail ? (
-        <Loading />
+
+      {loadingGaleriDetail ? (
+        <SingleSkeleton height="h-[40vh]" />
       ) : (
-        <MappingGaleri
-          data={galeri}
-          setId={setId}
-          setShow={setShow}
-          setTitle={setTitle}
-        />
+        <div className="flex flex-col gap-32 px-64 phones:px-32">
+          {galeriDetail?.lampiran?.map((item, idx) => (
+            <div className="h-full w-full flex-1" key={idx}>
+              <img
+                src={item?.gambar}
+                alt={item?.judul}
+                className={`h-[65vh] w-full rounded-lg bg-opacity-10 object-cover filter phones:h-[30vh]`}
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
       )}
-      <ModalValidasi
-        isOpen={show}
-        setIsOpen={setShow}
-        data={galeriDetail}
-        loading={loadingGaleriDetail}
-        title={convertSlugToText(title)}
-        color={color}
-      />
     </div>
   )
 }

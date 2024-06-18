@@ -1,6 +1,7 @@
 import Tooltips from '@/components/Tooltip'
 import { enumRoute } from '@/libs/enum/enum-route'
 import {
+  bgPrimary700,
   borderPrimary400,
   hoverPrimary400,
   textPrimary100,
@@ -42,7 +43,9 @@ export function MappingNavigasi({
   }
 
   return (
-    <div className="flex items-center">
+    <div
+      className={`flex items-center gap-32 px-128 phones:p-32 ${bgPrimary700(color)}`}
+    >
       {sortedData.map((item, idx) => (
         <Link
           to={
@@ -70,7 +73,7 @@ export function MappingNavigasi({
           }
           target={item?.jenis_menu === enumRoute.URL ? '_blank' : '_self'}
           className={`
-            border-l border-r ${isActivePage(item?.slug) ? borderPrimary400(color) : hoverPrimary400(color)} px-16 py-24 text-[2rem] uppercase hover:cursor-pointer phones:text-[2.4rem]`}
+            ${isActivePage(item?.slug) ? borderPrimary400(color) : hoverPrimary400(color)} px-16 py-24 text-[2rem] uppercase hover:cursor-pointer phones:text-[2.4rem]`}
           key={idx}
         >
           {item?.children?.length > 0 ? (
