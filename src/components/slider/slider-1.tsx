@@ -46,61 +46,49 @@ export function Slider1({
             className={`"relative flex h-full ${isShadow ? 'w-[80%] phones:w-[70%]' : 'w-full'} flex-col justify-end border-white`}
           >
             {/* --- Navigation -- */}
-            <div
-              className={`absolute bottom-0 top-0 flex ${isShadow ? 'w-[80%] phones:w-[70%]' : 'w-full'} flex-grow items-center justify-between px-4`}
-            >
-              <span
-                className={clsx('', {
-                  'hover:cursor-pointer': showIndex > 0,
-                  'hover:cursor-not-allowed': !(showIndex > 0),
-                })}
-                onClick={() => {
-                  if (showIndex > 0) {
-                    setShowIndex(showIndex - 1)
-                  }
-                }}
+            {listImage?.length > 1 && (
+              <div
+                className={`absolute bottom-0 top-0 flex ${isShadow ? 'w-[80%] phones:w-[70%]' : 'w-full'} flex-grow items-center justify-between px-4`}
               >
-                <img
-                  src="/icon/IconLeft.svg"
-                  alt="Icon Left"
-                  className="block phones:hidden"
-                  loading="lazy"
-                />
-                <img
-                  src="/icon/CircleLeft.svg"
-                  alt="Icon Left"
-                  className="hidden phones:block"
-                  loading="lazy"
-                />
-              </span>
-              <span
-                className={clsx('', {
-                  'hover:cursor-pointer': showIndex < listImage?.length - 1,
-                  'hover:cursor-not-allowed': !(
-                    showIndex <
-                    listImage?.length - 1
-                  ),
-                })}
-                onClick={() => {
-                  if (showIndex < listImage?.length - 1) {
-                    setShowIndex(showIndex + 1)
-                  }
-                }}
-              >
-                <img
-                  src="/icon/IconRight.svg"
-                  alt="Icon Right"
-                  className="block phones:hidden"
-                  loading="lazy"
-                />
-                <img
-                  src="/icon/CircleRight.svg"
-                  alt="Icon Right"
-                  className="hidden phones:block"
-                  loading="lazy"
-                />
-              </span>
-            </div>
+                <span
+                  className={clsx('', {
+                    'hover:cursor-pointer': showIndex > 0,
+                    'hover:cursor-not-allowed': !(showIndex > 0),
+                  })}
+                  onClick={() => {
+                    if (showIndex > 0) {
+                      setShowIndex(showIndex - 1)
+                    }
+                  }}
+                >
+                  <img
+                    src="/icon/IconLeft.svg"
+                    alt="Icon Left"
+                    loading="lazy"
+                  />
+                </span>
+                <span
+                  className={clsx('', {
+                    'hover:cursor-pointer': showIndex < listImage?.length - 1,
+                    'hover:cursor-not-allowed': !(
+                      showIndex <
+                      listImage?.length - 1
+                    ),
+                  })}
+                  onClick={() => {
+                    if (showIndex < listImage?.length - 1) {
+                      setShowIndex(showIndex + 1)
+                    }
+                  }}
+                >
+                  <img
+                    src="/icon/IconRight.svg"
+                    alt="Icon Right"
+                    loading="lazy"
+                  />
+                </span>
+              </div>
+            )}
           </div>
 
           {isShadow && (
@@ -108,14 +96,16 @@ export function Slider1({
           )}
         </div>
       </div>
-      <div className="flex items-center justify-center gap-x-16">
-        {listImage?.map((_item, idx) => (
-          <div
-            className={`h-16 w-16 rounded-full ${idx === showIndex ? bgPrimary800(color) : bgPrimary200(color)}`}
-            key={idx}
-          />
-        ))}
-      </div>
+      {listImage?.length > 1 && (
+        <div className="flex items-center justify-center gap-x-16">
+          {listImage?.map((_item, idx) => (
+            <div
+              className={`h-16 w-16 rounded-full ${idx === showIndex ? bgPrimary800(color) : bgPrimary200(color)}`}
+              key={idx}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

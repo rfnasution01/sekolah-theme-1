@@ -92,17 +92,19 @@ export default function Detail() {
                 />
               </div>
             </div>
-            <div className="h-[50vh] w-full">
-              <Slider3
-                listImage={detail?.photo}
-                height="h-[50vh]"
-                kategori={detail?.kategori}
-                seo_kategori={detail?.seo_kategori}
-                kelompok={firstPathname}
-                jumlahPhoto={detail?.jumlah_photo}
-                color={color}
-              />
-            </div>
+            {detail?.photo?.length > 0 && (
+              <div className="h-[50vh] w-full">
+                <Slider3
+                  listImage={detail?.photo}
+                  height="h-[50vh]"
+                  kategori={detail?.kategori}
+                  seo_kategori={detail?.seo_kategori}
+                  kelompok={firstPathname}
+                  jumlahPhoto={detail?.jumlah_photo}
+                  color={color}
+                />
+              </div>
+            )}
             <div
               dangerouslySetInnerHTML={{ __html: detail?.isi }}
               className="article-content"

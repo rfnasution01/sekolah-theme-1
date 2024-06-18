@@ -1,6 +1,5 @@
 import { BerandaType } from '@/libs/types/beranda-type'
 import clsx from 'clsx'
-import { NoData } from '../NoData'
 import { Link } from 'react-router-dom'
 import { convertToSlug } from '@/libs/helpers/format-text'
 import { useDispatch } from 'react-redux'
@@ -36,7 +35,7 @@ export function Card2({
         <p className="text-center">{data?.keterangan}</p>
       </div>
       <div className="grid grid-cols-5 gap-12">
-        {data?.berita?.length > 0 ? (
+        {data?.berita?.length > 0 &&
           data?.berita?.map((item, idx) => (
             <Link
               to={`/${convertToSlug(item?.kelompok)}/page/${item?.seo}`}
@@ -68,12 +67,7 @@ export function Card2({
                 </div>
               )}
             </Link>
-          ))
-        ) : (
-          <div className="col-span-5">
-            <NoData />
-          </div>
-        )}
+          ))}
       </div>
       <div className="flex items-center justify-center">
         <Link

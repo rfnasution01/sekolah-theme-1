@@ -126,15 +126,17 @@ export function Card4({
               </div>
             )}
           </div>
-          <div className="flex items-center justify-center gap-x-16 hover:cursor-pointer">
-            {data?.berita?.map((_item, idx) => (
-              <div
-                onClick={() => setShowIndex(idx)}
-                className={`${idx === showIndex ? `h-[2rem] w-[4rem] ${bgPrimary800(color)}` : `h-[2rem] w-[2rem] ${bgPrimary200(color)}`} h-16 w-16 rounded-full`}
-                key={idx}
-              />
-            ))}
-          </div>
+          {data?.berita?.length > 1 && (
+            <div className="flex items-center justify-center gap-x-16 hover:cursor-pointer">
+              {data?.berita?.map((_item, idx) => (
+                <div
+                  onClick={() => setShowIndex(idx)}
+                  className={`${idx === showIndex ? `h-[2rem] w-[4rem] ${bgPrimary800(color)}` : `h-[2rem] w-[2rem] ${bgPrimary200(color)}`} h-16 w-16 rounded-full`}
+                  key={idx}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -70,68 +70,62 @@ export function Slider2({
                 }),
               )
             }}
-            className={`"relative flex h-full phones:hidden ${isShadow ? 'w-[80%]' : 'w-full'} flex-col justify-end border-white`}
+            className={`"relative flex h-full ${isShadow ? 'w-[80%]' : 'w-full'} flex-col justify-end border-white`}
           >
             {/* --- Navigation -- */}
-            <div
-              className={`absolute bottom-0 top-0 flex ${isShadow ? 'w-[80%]' : 'w-full'} flex-grow items-center justify-between px-4`}
-            >
-              <span
-                className={clsx('', {
-                  'hover:cursor-pointer': showIndex > 0,
-                  'hover:cursor-not-allowed': !(showIndex > 0),
-                })}
-                onClick={() => {
-                  if (showIndex > 0) {
-                    setShowIndex(showIndex - 1)
-                  }
-                }}
+            {listImage?.length > 1 && (
+              <div
+                className={`absolute bottom-0 top-0 flex ${isShadow ? 'w-[80%]' : 'w-full'} flex-grow items-center justify-between px-4`}
               >
-                <img
-                  src="/icon/IconLeft.svg"
-                  alt="Icon Left"
-                  className="block phones:hidden"
-                  loading="lazy"
-                />
-                <img
-                  src="/icon/CircleLeft.svg"
-                  alt="Icon Left"
-                  className="hidden phones:block"
-                  loading="lazy"
-                />
-              </span>
-              <span
-                className={clsx('', {
-                  'hover:cursor-pointer': showIndex < listImage?.length - 1,
-                  'hover:cursor-not-allowed': !(
-                    showIndex <
-                    listImage?.length - 1
-                  ),
-                })}
-                onClick={() => {
-                  if (showIndex < listImage?.length - 1) {
-                    setShowIndex(showIndex + 1)
-                  }
-                }}
-              >
-                <img
-                  src="/icon/IconRight.svg"
-                  alt="Icon Right"
-                  className="block phones:hidden"
-                  loading="lazy"
-                />
-                <img
-                  src="/icon/CircleRight.svg"
-                  alt="Icon Right"
-                  className="hidden phones:block"
-                  loading="lazy"
-                />
-              </span>
-            </div>
+                <button
+                  type="button"
+                  className={clsx('', {
+                    'hover:cursor-pointer': showIndex > 0,
+                    'hover:cursor-not-allowed': !(showIndex > 0),
+                  })}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    if (showIndex > 0) {
+                      setShowIndex(showIndex - 1)
+                    }
+                  }}
+                >
+                  <img
+                    src="/icon/IconLeft.svg"
+                    alt="Icon Left"
+                    loading="lazy"
+                  />
+                </button>
+                <button
+                  type="button"
+                  className={clsx('', {
+                    'hover:cursor-pointer': showIndex < listImage?.length - 1,
+                    'hover:cursor-not-allowed': !(
+                      showIndex <
+                      listImage?.length - 1
+                    ),
+                  })}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    if (showIndex < listImage?.length - 1) {
+                      setShowIndex(showIndex + 1)
+                    }
+                  }}
+                >
+                  <img
+                    src="/icon/IconRight.svg"
+                    alt="Icon Right"
+                    loading="lazy"
+                  />
+                </button>
+              </div>
+            )}
 
             <div className="flex flex-shrink flex-col gap-16 p-32">
               <p
-                className={`${bgPrimary100(color)} line-clamp-1 rounded-lg bg-opacity-70 p-16 text-[2rem] font-bold tracking-0.25`}
+                className={`${bgPrimary100(color)} line-clamp-1 rounded-lg bg-opacity-70 p-16 text-[2rem] font-bold tracking-0.25 phones:hidden`}
               >
                 {listImage?.[showIndex]?.judul}
               </p>
@@ -167,14 +161,16 @@ export function Slider2({
           )}
         </div>
       </div>
-      <div className="flex items-center justify-center gap-x-16">
-        {listImage?.map((_item, idx) => (
-          <div
-            className={`rounded-full ${idx === showIndex ? `${bgPrimary800(color)} h-[2rem] w-[4rem]` : `${bgPrimary200(color)} h-[2rem] w-[2rem]`}`}
-            key={idx}
-          />
-        ))}
-      </div>
+      {listImage?.length > 1 && (
+        <div className="flex items-center justify-center gap-x-16">
+          {listImage?.map((_item, idx) => (
+            <div
+              className={`rounded-full ${idx === showIndex ? `${bgPrimary800(color)} h-[2rem] w-[4rem]` : `${bgPrimary200(color)} h-[2rem] w-[2rem]`}`}
+              key={idx}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

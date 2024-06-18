@@ -88,7 +88,7 @@ export function MobileNavigasi({
                                 : list?.jenis_menu === enumRoute.ROUTE
                                   ? list?.slug
                                   : list?.jenis_menu === enumRoute.HALAMAN
-                                    ? `/halaman/page=${list?.slug}`
+                                    ? `/halaman/page/${list?.slug}`
                                     : list?.jenis_menu === enumRoute.PROGRAM
                                       ? `/program-details/page/${list?.slug}`
                                       : list?.jenis_menu === enumRoute.BERITA

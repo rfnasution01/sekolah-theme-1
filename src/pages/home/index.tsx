@@ -108,7 +108,9 @@ export default function HomePage() {
       {loadingSlider ? (
         <SingleSkeleton height="h-[77vh]" />
       ) : (
-        <Slider1 listImage={slider} isShadow color={color} />
+        slider?.length > 0 && (
+          <Slider1 listImage={slider} isShadow color={color} />
+        )
       )}
       <HomeCard
         beranda={beranda}

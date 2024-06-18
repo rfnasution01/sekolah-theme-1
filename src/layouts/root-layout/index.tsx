@@ -139,9 +139,9 @@ export default function RootLayout() {
         )}
       </div>
       <div
-        className={`fixed bottom-0 right-32 z-30 flex h-5/6 flex-col items-center justify-center gap-32 `}
+        className={`fixed bottom-0 right-32 top-0 z-30 flex flex-col items-center justify-center gap-32 phones:right-8 `}
       >
-        <div className="flex flex-col items-center justify-center gap-32">
+        <div className="flex flex-col items-center justify-center gap-32 ">
           <MenubarColor color={color} />
           {loadingIdentitas ? (
             <SingleSkeleton />

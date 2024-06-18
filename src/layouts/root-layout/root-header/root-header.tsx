@@ -37,11 +37,13 @@ export function RootHeader({
       <div className="hidden w-full phones:block">
         <div className="flex items-center gap-32">
           <span
+            className="flex items-center gap-12"
             onClick={() => {
               setIsShow(!isShow)
             }}
           >
             {!isShow ? <LayoutDashboard size={20} /> : <X size={20} />}
+            Menu
           </span>
           <div className="flex-1 ">
             <div className="relative text-black">
