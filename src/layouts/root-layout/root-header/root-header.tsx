@@ -5,6 +5,9 @@ import { NavigasiHeader } from './mapping-navigasi'
 import { BeritaTerbaru } from './berita-terbaru'
 import { LayoutDashboard, Search, X } from 'lucide-react'
 import { bgPrimary100 } from '@/libs/helpers/format-color'
+import { LayananType } from '@/libs/types/layanan-type'
+import { Link } from 'react-router-dom'
+import Tooltips from '@/components/Tooltip'
 
 export function RootHeader({
   setIsShow,
@@ -12,16 +15,47 @@ export function RootHeader({
   beritaTerbaru,
   menuTop,
   color,
+  layanan,
 }: {
   setIsShow: Dispatch<SetStateAction<boolean>>
   isShow: boolean
   beritaTerbaru: BeritaTerbaruType[]
   menuTop: MenuType[]
   color: string
+  layanan: LayananType[]
 }) {
   return (
     <div className="flex w-full items-center gap-32 phones:flex-col phones:items-start">
       <div className="flex w-full items-center gap-32">
+        <Tooltips
+          color={color}
+          triggerComponent={
+            <div className={`flex items-center gap-4 uppercase phones:hidden`}>
+              <LayoutDashboard size={16} />
+            </div>
+          }
+          tooltipContent={
+            <div
+              className="flex flex-col gap-y-16 border-l p-12"
+              style={{
+                borderImage:
+                  'linear-gradient(180deg, #FFFFFF 0%, #0D1A4B 100%)',
+                borderImageSlice: 1,
+              }}
+            >
+              <div className="mx-16 flex flex-col items-start gap-y-16 text-[2rem]">
+                {layanan?.map((list, no) => (
+                  <Link to={list?.url} target="_blank" key={no}>
+                    <div className={`text-nowrap hover:cursor-pointer`}>
+                      {list?.nama_layanan}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          }
+          position="bottom"
+        />
         <div className="flex w-3/5 items-center gap-32 phones:flex-1">
           <BeritaTerbaru runningText={beritaTerbaru} color={color} />
         </div>

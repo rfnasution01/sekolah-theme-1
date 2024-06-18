@@ -26,3 +26,4 @@ export const ProgramDetailPage = loadable(
 export const ProfilPage = loadable(() => import('@/pages/profil'))
 export const FaqPage = loadable(() => import('@/pages/faq'))
 export const GaleriPage = loadable(() => import('@/pages/galeri'))
+export const TestimonialPage = loadable(() => import('@/pages/testimonial'))

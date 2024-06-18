@@ -61,7 +61,7 @@ export function List<T extends ListType>({
   }
 
   return (
-    <div className="px-[30rem] phones:p-32">
+    <div className="px-64 phones:p-32">
       <div
         className={
           'flex flex-col gap-32 border bg-background p-64 shadow-lg phones:p-32'

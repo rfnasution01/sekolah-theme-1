@@ -13,6 +13,7 @@ import {
   RootLayout,
   RouteLayout,
   TentangKamiPage,
+  TestimonialPage,
 } from './loadables'
 
 const categories = ['berita', 'pengumuman', 'agenda', 'prestasi']
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
       {
         path: 'faq',
         element: <FaqPage />,
+      },
+      {
+        path: 'testimonial',
+        element: <TestimonialPage />,
       },
       {
         path: 'program-details/page/:id',

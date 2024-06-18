@@ -20,6 +20,8 @@ import { getThemeSlice } from '@/store/reducer/stateTheme'
 import { bgPrimary500 } from '@/libs/helpers/format-color'
 import { SingleSkeleton } from '@/components/skeleton'
 import { Helmet } from 'react-helmet'
+import { LayananType } from '@/libs/types/layanan-type'
+import { useGetLayananQuery } from '@/store/slices/layananAPI'
 
 export default function RootLayout() {
   const stateColor = useSelector(getThemeSlice)?.color
@@ -95,19 +97,32 @@ export default function RootLayout() {
 
   const loadingIdentitas = isLoadingIdentitas || isFetchingIdentitas
 
+  // --- Layanan ---
+  const [layanan, setLayanan] = useState<LayananType[]>([])
+  const { data: dataLayanan } = useGetLayananQuery()
+
+  useEffect(() => {
+    if (dataLayanan?.data) {
+      setLayanan(dataLayanan?.data)
+    }
+  }, [dataLayanan?.data])
+
   return (
     <div className="flex h-screen flex-col bg-background px-128 text-[2rem] phones:px-0 phones:text-[2.4rem]">
       <div className="flex h-full flex-col overflow-y-auto bg-white">
         {loadingMenuTop ? (
           <SingleSkeleton />
         ) : (
-          <div className={`${bgPrimary500(color)} p-24`}>
+          <div
+            className={`${bgPrimary500(color)} flex items-center gap-24 p-24`}
+          >
             <RootHeader
               setIsShow={setIsShow}
               isShow={isShow}
               beritaTerbaru={beritaTerbaru}
               menuTop={sortedDataTop}
               color={color}
+              layanan={layanan}
             />
           </div>
         )}

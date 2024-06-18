@@ -122,7 +122,9 @@ export default function HomePage() {
       {loadingTestimoni ? (
         <SingleSkeleton height="h-[40vh]" />
       ) : (
-        <HomeTestimoni testimoni={testimoni} />
+        testimoni?.length > 0 && (
+          <HomeTestimoni testimoni={testimoni} color={color} />
+        )
       )}
 
       <HomeGaleri />
