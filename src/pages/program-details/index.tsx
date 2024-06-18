@@ -79,7 +79,7 @@ export default function ProgramDetailsPage() {
       {loadingProgramDetail ? (
         <Loading />
       ) : (
-        <div className="scrollbar h-[75vh] w-full overflow-y-auto px-[30rem] phones:p-32">
+        <div className="scrollbar h-[75vh] w-full overflow-y-auto px-64 phones:p-32">
           <div className="flex h-full border bg-background shadow-lg phones:flex-none phones:flex-col">
             {loadingProgram ? (
               <Loading />

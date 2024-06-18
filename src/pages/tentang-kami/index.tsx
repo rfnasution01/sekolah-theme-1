@@ -100,7 +100,7 @@ export default function TentangKamiPage() {
       {loadingHalamanDetail ? (
         <Loading />
       ) : (
-        <div className="h-[75vh] w-full px-[30rem] phones:p-32">
+        <div className="h-[75vh] w-full px-64 phones:p-32">
           <div className="flex h-full border bg-background shadow-lg phones:flex-col">
             {loadingMenuUtama ? (
               <Loading />
