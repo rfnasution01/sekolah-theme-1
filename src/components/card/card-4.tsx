@@ -4,15 +4,18 @@ import clsx from 'clsx'
 import { convertToSlug } from '@/libs/helpers/format-text'
 import { Slider4 } from '../slider/slider-4'
 import { useEffect, useState } from 'react'
+import { bgPrimary700 } from '@/libs/helpers/format-color'
 
 export function Card4({
   data,
   angka,
   kelompok,
+  color,
 }: {
   data: BerandaType
   angka: number
   kelompok: string
+  color: string
 }) {
   const [showIndex, setShowIndex] = useState<number>(0)
 
@@ -43,7 +46,7 @@ export function Card4({
         <div>
           <Link
             to={`/${convertToSlug(data?.kelompok)}`}
-            className="rounded-lg bg-primary-700 px-32 py-12 text-primary-100 hover:bg-primary-900"
+            className={`rounded-lg px-32 py-12 ${bgPrimary700(color)}`}
           >
             Lihat {kelompok} Lainnya
           </Link>
@@ -67,6 +70,7 @@ export function Card4({
                       kelompok={convertToSlug(data?.kelompok)}
                       id={data?.berita?.[showIndex - 1]?.id}
                       seo={data?.berita?.[showIndex - 1]?.seo}
+                      color={color}
                     />
                   </div>
                 )}
@@ -83,6 +87,7 @@ export function Card4({
                   kelompok={convertToSlug(data?.kelompok)}
                   id={data?.berita?.[showIndex]?.id}
                   seo={data?.berita?.[showIndex]?.seo}
+                  color={color}
                 />
               </div>
               <div className="my-32 w-2/12 phones:w-1/6">
@@ -99,6 +104,7 @@ export function Card4({
                       kelompok={convertToSlug(data?.kelompok)}
                       id={data?.berita?.[showIndex + 1]?.id}
                       seo={data?.berita?.[showIndex + 1]?.seo}
+                      color={color}
                     />
                   </div>
                 )}

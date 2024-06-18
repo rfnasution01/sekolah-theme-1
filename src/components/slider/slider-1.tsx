@@ -1,3 +1,4 @@
+import { bgPrimary200, bgPrimary800 } from '@/libs/helpers/format-color'
 import { SliderType } from '@/libs/types/beranda-type'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
@@ -6,10 +7,12 @@ export function Slider1({
   listImage,
   height = 'h-[77vh]',
   isShadow,
+  color,
 }: {
   listImage: SliderType[]
   height?: string
   isShadow?: boolean
+  color: string
 }) {
   const [showIndex, setShowIndex] = useState<number>(0)
 
@@ -98,28 +101,6 @@ export function Slider1({
                 />
               </span>
             </div>
-
-            {/* <div className="flex flex-shrink flex-col gap-16 p-32">
-              <p className="rounded-lg bg-primary-100 bg-opacity-50 p-16 text-[2rem] font-bold tracking-0.25 text-black">
-                {listImage?.[showIndex]?.judul}
-              </p>
-              <div className="flex items-center justify-between gap-32 phones:hidden">
-                <div className="flex items-center gap-4 rounded-lg bg-primary-100 bg-opacity-50 p-16 text-black">
-                  <Newspaper size={16} />
-                  <p>Berita Sekolah, Agenda</p>
-                </div>
-                <div className="flex items-center gap-16 bg-primary-100 bg-opacity-50 p-16 text-black">
-                  <div className="flex items-center gap-x-8">
-                    <ThumbsUp size={16} />
-                    <p>0 suka</p>
-                  </div>
-                  <div className="flex items-center gap-x-8">
-                    <Calendar size={16} />
-                    <p>20 Maret 2023</p>
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
 
           {isShadow && (
@@ -130,10 +111,7 @@ export function Slider1({
       <div className="flex items-center justify-center gap-x-16">
         {listImage?.map((_item, idx) => (
           <div
-            className={clsx('h-16 w-16 rounded-full', {
-              'bg-primary-800': idx === showIndex,
-              'bg-primary-200': idx !== showIndex,
-            })}
+            className={`h-16 w-16 rounded-full ${idx === showIndex ? bgPrimary800(color) : bgPrimary200(color)}`}
             key={idx}
           />
         ))}

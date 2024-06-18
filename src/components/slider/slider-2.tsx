@@ -1,3 +1,8 @@
+import {
+  bgPrimary100,
+  bgPrimary200,
+  bgPrimary800,
+} from '@/libs/helpers/format-color'
 import { BeritaType } from '@/libs/types/beranda-type'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import clsx from 'clsx'
@@ -12,11 +17,13 @@ export function Slider2({
   height = 'h-[80vh]',
   isShadow,
   kelompok,
+  color,
 }: {
   listImage: BeritaType[]
   height?: string
   isShadow?: boolean
   kelompok: string
+  color: string
 }) {
   const [showIndex, setShowIndex] = useState<number>(0)
 
@@ -123,15 +130,21 @@ export function Slider2({
             </div>
 
             <div className="flex flex-shrink flex-col gap-16 p-32">
-              <p className="line-clamp-1 rounded-lg bg-primary-100 bg-opacity-70 p-16 text-[2rem] font-bold tracking-0.25 text-black">
+              <p
+                className={`${bgPrimary100(color)} line-clamp-1 rounded-lg bg-opacity-70 p-16 text-[2rem] font-bold tracking-0.25`}
+              >
                 {listImage?.[showIndex]?.judul}
               </p>
               <div className="flex items-center justify-between gap-32 phones:hidden">
-                <div className="flex items-center gap-4 rounded-lg bg-primary-100 bg-opacity-70 p-16 text-black">
+                <div
+                  className={`flex ${bgPrimary100(color)} items-center gap-4 rounded-lg bg-opacity-70 p-16`}
+                >
                   <Newspaper size={16} />
                   <p>{listImage?.[showIndex]?.kategori}</p>
                 </div>
-                <div className="flex items-center gap-16 bg-primary-100 bg-opacity-70 p-16 text-black">
+                <div
+                  className={`${bgPrimary100(color)} flex items-center gap-16 bg-opacity-70 p-16`}
+                >
                   <div className="flex items-center gap-x-8">
                     <ThumbsUp size={16} />
                     <p>{listImage?.[showIndex]?.hits}</p>
@@ -157,10 +170,7 @@ export function Slider2({
       <div className="flex items-center justify-center gap-x-16">
         {listImage?.map((_item, idx) => (
           <div
-            className={clsx('h-16 w-16 rounded-full', {
-              'bg-primary-800': idx === showIndex,
-              'bg-primary-200': idx !== showIndex,
-            })}
+            className={`rounded-full ${idx === showIndex ? `${bgPrimary800(color)} h-[2rem] w-[4rem]` : `${bgPrimary200(color)} h-[2rem] w-[2rem]`}`}
             key={idx}
           />
         ))}

@@ -5,13 +5,16 @@ import { Link } from 'react-router-dom'
 import { convertToSlug } from '@/libs/helpers/format-text'
 import { useDispatch } from 'react-redux'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
+import { bgPrimary700 } from '@/libs/helpers/format-color'
 
 export function Card2({
   data,
   kelompok,
+  color,
 }: {
   data: BerandaType
   kelompok: string
+  color: string
 }) {
   const dispatch = useDispatch()
 
@@ -68,7 +71,7 @@ export function Card2({
       <div className="flex items-center justify-center">
         <Link
           to={`/${convertToSlug(data?.kelompok)}`}
-          className="rounded-lg bg-primary-700 px-32 py-12 text-primary-100 hover:bg-primary-900"
+          className={`rounded-lg px-32 py-12 ${bgPrimary700(color)}`}
         >
           Lihat {kelompok} Lainnya
         </Link>

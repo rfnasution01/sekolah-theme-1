@@ -1,27 +1,12 @@
-import { useState, useEffect } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Loading from '@/components/Loading'
 import { NoData } from '@/components/NoData'
 import { TestimoniType } from '@/libs/types/testimoni-type'
-import { useGetTestimoniQuery } from '@/store/slices/testimoniAPI'
 import './detail.css'
 import Card from './home-testimoni-card'
 
-export function HomeTestimoni() {
-  const [testimoni, setTestimoni] = useState<TestimoniType[]>([])
-  const { data, isFetching, isLoading } = useGetTestimoniQuery({
-    page_number: 1,
-    page_size: 100,
-  })
-
-  useEffect(() => {
-    if (data?.data) {
-      setTestimoni(data?.data)
-    }
-  }, [data?.data])
-
+export function HomeTestimoni({ testimoni }: { testimoni: TestimoniType[] }) {
   const settings = {
     dots: true,
     fade: true,
@@ -49,9 +34,7 @@ export function HomeTestimoni() {
         </p>
         <hr className="flex-1 border border-primary-100" />
       </div>
-      {isLoading || isFetching ? (
-        <Loading />
-      ) : testimoni?.length > 0 ? (
+      {testimoni?.length > 0 ? (
         <Slider {...settings}>{testimoni?.map(Card)}</Slider>
       ) : (
         <NoData />

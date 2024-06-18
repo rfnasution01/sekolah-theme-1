@@ -13,6 +13,36 @@ export function textPrimary100(color) {
   }
 }
 
+export function bgPrimary100(color) {
+  switch (color) {
+    case 'SD':
+      return 'bg-sd-100 text-sd-700'
+    case 'SMP':
+      return 'bg-smp-100 text-smp-700'
+    case 'SMA':
+      return 'bg-sma-100 text-sma-700'
+    case 'ISLAMIC':
+      return 'bg-islamic-100 text-islamic-700'
+    default:
+      return 'bg-sd-100 text-sd-700'
+  }
+}
+
+export function bgPrimary200(color) {
+  switch (color) {
+    case 'SD':
+      return 'bg-sd-200 text-sd-700'
+    case 'SMP':
+      return 'bg-smp-200 text-smp-700'
+    case 'SMA':
+      return 'bg-sma-200 text-sma-700'
+    case 'ISLAMIC':
+      return 'bg-islamic-200 text-islamic-700'
+    default:
+      return 'bg-sd-200 text-sd-700'
+  }
+}
+
 export function bgPrimary500(color) {
   switch (color) {
     case 'SD':

@@ -1,3 +1,4 @@
+import { bgPrimary100 } from '@/libs/helpers/format-color'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import dayjs from 'dayjs'
 import { Calendar, Newspaper, ThumbsUp } from 'lucide-react'
@@ -15,6 +16,7 @@ export function Slider4({
   kelompok,
   id,
   seo,
+  color,
 }: {
   height?: string
   gambar: string
@@ -26,6 +28,7 @@ export function Slider4({
   kelompok: string
   id: string
   seo: string
+  color: string
 }) {
   const dispatch = useDispatch()
 
@@ -59,15 +62,21 @@ export function Slider4({
           className={`relative flex h-full w-full flex-col justify-end border-white phones:hidden`}
         >
           <div className="flex flex-shrink flex-col gap-16 p-32">
-            <p className="truncate rounded-lg bg-primary-100 bg-opacity-70 p-16 text-[2rem] font-bold tracking-0.25 text-black">
+            <p
+              className={`truncate rounded-lg bg-opacity-70 p-16 text-[2rem] font-bold tracking-0.25 ${bgPrimary100(color)}`}
+            >
               {judul}
             </p>
             <div className="flex items-center justify-between gap-32 phones:hidden">
-              <div className="flex items-center gap-4 rounded-lg bg-primary-100 bg-opacity-70 p-16 text-black">
+              <div
+                className={`flex items-center gap-4 rounded-lg bg-opacity-70 p-16 ${bgPrimary100(color)}`}
+              >
                 <Newspaper size={16} />
                 <p>{kategori}</p>
               </div>
-              <div className="flex items-center gap-16 bg-primary-100 bg-opacity-70 p-16 text-black">
+              <div
+                className={`flex items-center gap-16 bg-opacity-70 p-16 ${bgPrimary100(color)}`}
+              >
                 <div className="flex items-center gap-x-8">
                   <ThumbsUp size={16} />
                   <p>{hits}</p>
