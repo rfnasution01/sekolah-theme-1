@@ -122,15 +122,13 @@ export default function RootLayout() {
           </div>
         ) : (
           <div className="scrollbar h-full overflow-y-auto">
-            <div className="phones:hidden">
-              <RootNavigasi
-                menuUtama={sortedDataUtama}
-                identitas={identitas}
-                color={color}
-                loadingIdentitas={loadingIdentitas}
-                loadingMenuUtama={loadingMenuUtama}
-              />
-            </div>
+            <RootNavigasi
+              menuUtama={sortedDataUtama}
+              identitas={identitas}
+              color={color}
+              loadingIdentitas={loadingIdentitas}
+              loadingMenuUtama={loadingMenuUtama}
+            />
             <Outlet />
             <RootFooter
               identitas={identitas}

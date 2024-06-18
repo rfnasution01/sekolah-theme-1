@@ -7,19 +7,19 @@ export function LogoNavigasi({ identitas }: { identitas: IdentitasType }) {
       <img
         src="/img/indonesia.png"
         alt={identitas?.nama_website}
-        className={`h-[20vh] w-full rounded-lg object-cover opacity-15 filter phones:h-[30vh]`}
+        className={`h-[20vh] w-full rounded-lg object-cover opacity-15 filter`}
         loading="lazy"
       />
       <div className="absolute top-0 flex h-full w-[100%]">
         <Link
           to={`/`}
-          className={`relative flex h-full w-full flex-col items-center justify-center border-white phones:hidden`}
+          className={`relative flex h-full w-full flex-col items-center justify-center border-white`}
         >
-          <div className="flex items-center gap-32 p-32">
+          <div className="flex  items-center gap-32 p-32">
             <img
               src="/img/SMA.png"
               alt={identitas?.nama_website}
-              className={`h-[12vh] rounded-lg object-cover filter phones:h-[30vh]`}
+              className={`h-[12vh] rounded-lg object-cover filter phones:h-[9vh]`}
               loading="lazy"
             />
             <div className="flex flex-col gap-12">

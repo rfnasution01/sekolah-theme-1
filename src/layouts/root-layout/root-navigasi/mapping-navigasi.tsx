@@ -44,7 +44,7 @@ export function MappingNavigasi({
 
   return (
     <div
-      className={`flex items-center gap-32 px-128 phones:p-32 ${bgPrimary700(color)}`}
+      className={`flex items-center gap-32 px-128 phones:hidden phones:p-32 ${bgPrimary700(color)}`}
     >
       {sortedData.map((item, idx) => (
         <Link
