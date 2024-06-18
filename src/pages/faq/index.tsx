@@ -22,7 +22,10 @@ export default function Faq() {
 
   const colorParams = localStorage.getItem('themeColor')
 
-  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+  const baseColor = import.meta.env.VITE_BASE_THEME
+  const [color, setColor] = useState<string>(
+    colorParams ?? stateColor ?? baseColor,
+  )
 
   // --- Faq Kategori ---
   const [faqKategori, setFaqKategori] = useState<FaqType[]>()

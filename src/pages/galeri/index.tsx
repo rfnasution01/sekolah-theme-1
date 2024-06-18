@@ -23,7 +23,10 @@ export default function GaleriPage() {
 
   const colorParams = localStorage.getItem('themeColor')
 
-  const [color, setColor] = useState<string>(colorParams ?? stateColor ?? '')
+  const baseColor = import.meta.env.VITE_BASE_THEME
+  const [color, setColor] = useState<string>(
+    colorParams ?? stateColor ?? baseColor,
+  )
 
   const [id, setId] = useState<string>('')
   const [title, setTitle] = useState<string>('')
