@@ -14,6 +14,7 @@ import {
 } from '@/store/slices/berandaAPI'
 import { RootFooter } from './footer'
 import { Link, Outlet } from 'react-router-dom'
+import Loading from '@/components/Loading'
 
 export default function RootLayout() {
   const [isShow, setIsShow] = useState<boolean>(false)
@@ -74,81 +75,91 @@ export default function RootLayout() {
     }
   }, [identitasData?.data])
 
-  const loadingIdentitas = isLoadingIdentitas || isFetchingIdentitas
+  const loadingIdentitas =
+    isLoadingIdentitas ||
+    isFetchingIdentitas ||
+    loadingMenuTop ||
+    loadingMenuUtama
 
   return (
     <div className="flex h-screen flex-col bg-background text-[2rem] phones:text-[2.4rem]">
-      <div className="bg-primary-500 p-24 text-primary-100">
-        <RootHeader
-          setIsShow={setIsShow}
-          isShow={isShow}
-          beritaTerbaru={beritaTerbaru}
-          menuTop={sortedDataTop}
-          loading={loadingMenuTop}
-        />
-      </div>
-      <div className="phones:hidden">
-        <RootNavigasi
-          menuUtama={sortedDataUtama}
-          loading={loadingMenuUtama}
-          loadingIdentitas={loadingIdentitas}
-          identitas={identitas}
-        />
-      </div>
-      {isShow ? (
-        <div className="flex-1">
-          <MobileNavigasi
-            menuTop={sortedDataTop}
-            menuUtama={sortedDataUtama}
-            loadingTop={loadingMenuTop}
-            loadingUtama={loadingMenuUtama}
-            setIsShow={setIsShow}
-          />
-        </div>
+      {loadingIdentitas ? (
+        <Loading />
       ) : (
-        <div className="scrollbar h-full overflow-y-auto">
-          <Outlet />
-          <RootFooter identitas={identitas} loading={loadingIdentitas} />
-        </div>
-      )}
-      <div
-        className={`fixed bottom-0 right-32 z-30 flex h-5/6 flex-col items-center justify-center gap-32 `}
-      >
-        <div className="flex flex-col items-center justify-center gap-32">
-          <Link
-            to={`https://www.facebook.com/${identitas?.fb}`}
-            target="_blank"
-            className="opacity-20 hover:cursor-pointer hover:opacity-90"
-          >
-            <img src="/icon/facebook-link.svg" alt="facebook" />
-          </Link>
-          <Link
-            to={`https://www.twitter.com/${identitas?.tw}`}
-            target="_blank"
-            className="opacity-20 hover:cursor-pointer hover:opacity-90"
-          >
-            <img src="/icon/twitter-link.svg" alt="twitter" loading="lazy" />
-          </Link>
-          <Link
-            to={`https://www.instagram.com/${identitas?.ig}`}
-            target="_blank"
-            className="opacity-20 hover:cursor-pointer hover:opacity-90"
-          >
-            <img
-              src="/icon/instagram-link.svg"
-              alt="instagram"
-              loading="lazy"
+        <>
+          <div className="bg-primary-500 p-24 text-primary-100">
+            <RootHeader
+              setIsShow={setIsShow}
+              isShow={isShow}
+              beritaTerbaru={beritaTerbaru}
+              menuTop={sortedDataTop}
             />
-          </Link>
-          <Link
-            to={`https://api.whatsapp.com/send?phone=${identitas?.wa}`}
-            target="_blank"
-            className="opacity-20 hover:cursor-pointer hover:opacity-90"
+          </div>
+          <div className="phones:hidden">
+            <RootNavigasi
+              menuUtama={sortedDataUtama}
+              loadingIdentitas={loadingIdentitas}
+              identitas={identitas}
+            />
+          </div>
+          {isShow ? (
+            <div className="flex-1">
+              <MobileNavigasi
+                menuTop={sortedDataTop}
+                menuUtama={sortedDataUtama}
+                setIsShow={setIsShow}
+              />
+            </div>
+          ) : (
+            <div className="scrollbar h-full overflow-y-auto">
+              <Outlet />
+              <RootFooter identitas={identitas} />
+            </div>
+          )}
+          <div
+            className={`fixed bottom-0 right-32 z-30 flex h-5/6 flex-col items-center justify-center gap-32 `}
           >
-            <img src="/icon/wa-link.svg" alt="whatsapp" loading="lazy" />
-          </Link>
-        </div>
-      </div>
+            <div className="flex flex-col items-center justify-center gap-32">
+              <Link
+                to={`https://www.facebook.com/${identitas?.fb}`}
+                target="_blank"
+                className="opacity-20 hover:cursor-pointer hover:opacity-90"
+              >
+                <img src="/icon/facebook-link.svg" alt="facebook" />
+              </Link>
+              <Link
+                to={`https://www.twitter.com/${identitas?.tw}`}
+                target="_blank"
+                className="opacity-20 hover:cursor-pointer hover:opacity-90"
+              >
+                <img
+                  src="/icon/twitter-link.svg"
+                  alt="twitter"
+                  loading="lazy"
+                />
+              </Link>
+              <Link
+                to={`https://www.instagram.com/${identitas?.ig}`}
+                target="_blank"
+                className="opacity-20 hover:cursor-pointer hover:opacity-90"
+              >
+                <img
+                  src="/icon/instagram-link.svg"
+                  alt="instagram"
+                  loading="lazy"
+                />
+              </Link>
+              <Link
+                to={`https://api.whatsapp.com/send?phone=${identitas?.wa}`}
+                target="_blank"
+                className="opacity-20 hover:cursor-pointer hover:opacity-90"
+              >
+                <img src="/icon/wa-link.svg" alt="whatsapp" loading="lazy" />
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }

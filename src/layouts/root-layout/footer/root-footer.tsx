@@ -3,21 +3,14 @@ import { FooterAlamat } from './footer-alamat'
 import { FooterCopyright } from './footer-copyright'
 import { FooterKontak } from './footer-kontak'
 import { FooterPopuler } from './footer-populer'
-import Loading from '@/components/Loading'
 
-export function RootFooter({
-  identitas,
-  loading,
-}: {
-  identitas: IdentitasType
-  loading: boolean
-}) {
+export function RootFooter({ identitas }: { identitas: IdentitasType }) {
   return (
     <div className="flex flex-col text-primary-100">
       {/* --- Info --- */}
       <div className="flex w-full gap-32 bg-primary-footer px-64 py-32 text-primary-100 phones:flex-col phones:items-start phones:gap-64 phones:px-32">
         {/* --- Alamat --- */}
-        {loading ? <Loading /> : <FooterAlamat identitas={identitas} />}
+        <FooterAlamat identitas={identitas} />
 
         {/* --- Populer --- */}
         <FooterPopuler />
@@ -25,7 +18,7 @@ export function RootFooter({
         <FooterKontak />
       </div>
       {/* --- Copyright --- */}
-      <FooterCopyright identitas={identitas} loading={loading} />
+      <FooterCopyright identitas={identitas} />
     </div>
   )
 }
