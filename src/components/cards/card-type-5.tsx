@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import { PhotoType } from '@/libs/types/beranda-type'
 import { bgPrimary700 } from '@/libs/helpers/format-color'
 
-export function Card3({
+export function CardType5({
   judul,
   hits,
   tanggal,

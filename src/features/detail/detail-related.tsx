@@ -1,5 +1,5 @@
 import Loading from '@/components/Loading'
-import { Card3 } from '@/components/card/card-3'
+import { CardType5 } from '@/components/cards'
 import { usePathname } from '@/libs/hooks/usePathname'
 import { DetailRelatedType } from '@/libs/types/detail-type'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
@@ -52,7 +52,7 @@ export function DetailRelated({ id, color }: { id: string; color: string }) {
               key={idx}
               className="col-span-6 phones:col-span-12"
             >
-              <Card3
+              <CardType5
                 judul={item?.judul}
                 hits={item?.hits}
                 tanggal={item?.tanggal}
