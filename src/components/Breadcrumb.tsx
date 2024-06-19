@@ -25,7 +25,7 @@ export function Breadcrumb({ color }: { color: string }) {
                   ? '#'
                   : item === ''
                     ? '/'
-                    : item === 'halaman'
+                    : item === 'halaman' || item === 'galeri-detail'
                       ? '#'
                       : item === 'program-details'
                         ? '/program'
@@ -35,15 +35,21 @@ export function Breadcrumb({ color }: { color: string }) {
                 'hover:cursor-not-allowed': idx >= path?.length - 1,
               })}
             >
-              {item === ''
-                ? 'Dashboard'
-                : item === 'hasil-ppdb'
-                  ? 'Hasil PPDB'
-                  : item === 'program-details'
-                    ? 'Program'
-                    : convertSlugToText(item)}
+              <p
+                className={`${path?.length - 2 >= idx ? '' : 'phones:hidden'}`}
+              >
+                {item === ''
+                  ? 'Dashboard'
+                  : item === 'hasil-ppdb'
+                    ? 'Hasil PPDB'
+                    : item === 'program-details'
+                      ? 'Program'
+                      : convertSlugToText(item)}
+              </p>
             </Link>
-            <p className="text-nowrap">
+            <p
+              className={`text-nowrap ${path?.length - 2 >= idx ? '' : 'phones:hidden'}`}
+            >
               <ChevronRight size={16} />
             </p>
           </div>
