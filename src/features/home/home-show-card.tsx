@@ -1,4 +1,4 @@
-import { Card1, Card2, Card4 } from '@/components/card'
+import { Card1, Card2, Card4, Card5 } from '@/components/card'
 import { BerandaType } from '@/libs/types/beranda-type'
 
 export function HomeShowCard({
@@ -48,7 +48,7 @@ export function HomeShowCard({
       )
     case 0:
       return (
-        <Card1
+        <Card5
           data={data}
           angka={angka}
           kelompok={kelompok}

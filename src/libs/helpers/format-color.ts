@@ -13,6 +13,21 @@ export function textPrimary100(color) {
   }
 }
 
+export function textPrimary700(color) {
+  switch (color) {
+    case 'SD':
+      return 'text-sd-700 hover:text-sd-900'
+    case 'SMP':
+      return 'text-smp-700 hover:text-smp-900'
+    case 'SMA':
+      return 'text-sma-700 hover:text-sma-900'
+    case 'ISLAMIC':
+      return 'text-islamic-700 hover:text-islamic-900'
+    default:
+      return 'text-sd-700 hover:text-sd-900'
+  }
+}
+
 export function bgPrimary100(color) {
   switch (color) {
     case 'SD':
@@ -25,6 +40,21 @@ export function bgPrimary100(color) {
       return 'bg-islamic-100 text-islamic-700'
     default:
       return 'bg-sd-100 text-sd-700'
+  }
+}
+
+export function bgWhite(color) {
+  switch (color) {
+    case 'SD':
+      return 'text-sd-700 hover:bg-sd-700 hover:text-sd-100'
+    case 'SMP':
+      return 'text-smp-700 hover:bg-smp-700 hover:text-smp-100'
+    case 'SMA':
+      return 'text-sma-700 hover:bg-sma-700 hover:text-sma-100'
+    case 'ISLAMIC':
+      return 'text-islamic-700 hover:bg-islamic-700 hover:text-islamic-100'
+    default:
+      return 'text-sd-700 hover:bg-sd-700 hover:text-sd-100'
   }
 }
 
