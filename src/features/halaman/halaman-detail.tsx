@@ -13,7 +13,7 @@ export function HalamanDetail({
     <div className={clsx('', { 'px-[30rem] phones:p-32': !isDetail })}>
       <div
         className={
-          'flex flex-col gap-32 border bg-background p-64 shadow-lg phones:p-32'
+          'flex flex-col gap-32 border bg-background p-64 shadow-lg phones:border-transparent phones:bg-white phones:p-0 phones:shadow-none'
         }
       >
         <p className="font-roboto text-[5rem]">{data?.judul}</p>

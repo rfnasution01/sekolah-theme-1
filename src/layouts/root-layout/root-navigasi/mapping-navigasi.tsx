@@ -73,7 +73,7 @@ export function MappingNavigasi({
           }
           target={item?.jenis_menu === enumRoute.URL ? '_blank' : '_self'}
           className={`
-            ${isActivePage(item?.slug) ? borderPrimary400(color) : hoverPrimary400(color)} text-[2rem] uppercase hover:cursor-pointer phones:text-[2.4rem]`}
+            ${isActivePage(item?.slug) ? borderPrimary400(color) : hoverPrimary400(color)} ${item?.children?.length > 0 ? '' : 'px-16 py-24 '} text-[2rem] uppercase hover:cursor-pointer phones:text-[2.4rem]`}
           key={idx}
         >
           {item?.children?.length > 0 ? (

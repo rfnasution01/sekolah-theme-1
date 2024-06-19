@@ -73,7 +73,7 @@ export default function Detail() {
         <div className="px-[30rem] phones:p-32">
           <div
             className={
-              'flex flex-col gap-32 border bg-background p-64 shadow-lg phones:p-32'
+              'flex flex-col gap-32 border bg-background p-64 shadow-lg phones:border-transparent phones:bg-white phones:p-0 phones:shadow-none'
             }
           >
             <div className="flex flex-col gap-16">

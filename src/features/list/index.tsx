@@ -64,7 +64,7 @@ export function List<T extends ListType>({
     <div className="px-64 phones:p-32">
       <div
         className={
-          'flex flex-col gap-32 border bg-background p-64 shadow-lg phones:p-32'
+          'flex flex-col gap-32 border bg-background p-64 shadow-lg phones:border-transparent phones:bg-white phones:shadow-none'
         }
       >
         <div className="flex items-center justify-between gap-32">
