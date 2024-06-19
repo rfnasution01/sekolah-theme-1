@@ -17,11 +17,12 @@ import { Link, Outlet } from 'react-router-dom'
 import { MenubarColor } from './root-header/menubar-color'
 import { useSelector } from 'react-redux'
 import { getThemeSlice } from '@/store/reducer/stateTheme'
-import { bgPrimary500 } from '@/libs/helpers/format-color'
+import { bgPrimary500, bgPrimary700 } from '@/libs/helpers/format-color'
 import { SingleSkeleton } from '@/components/skeleton'
 import { Helmet } from 'react-helmet'
 import { LayananType } from '@/libs/types/layanan-type'
 import { useGetLayananQuery } from '@/store/slices/layananAPI'
+import { ChevronUp } from 'lucide-react'
 
 export default function RootLayout() {
   const stateColor = useSelector(getThemeSlice)?.color
@@ -137,13 +138,15 @@ export default function RootLayout() {
           </div>
         ) : (
           <div className="scrollbar h-full overflow-y-auto">
-            <RootNavigasi
-              menuUtama={sortedDataUtama}
-              identitas={identitas}
-              color={color}
-              loadingIdentitas={loadingIdentitas}
-              loadingMenuUtama={loadingMenuUtama}
-            />
+            <div id="header">
+              <RootNavigasi
+                menuUtama={sortedDataUtama}
+                identitas={identitas}
+                color={color}
+                loadingIdentitas={loadingIdentitas}
+                loadingMenuUtama={loadingMenuUtama}
+              />
+            </div>
             <Outlet />
             <RootFooter
               identitas={identitas}
@@ -207,6 +210,17 @@ export default function RootLayout() {
             </Link>
           )}
         </div>
+      </div>
+      <div
+        className={`fixed bottom-32 right-32 z-30 flex flex-col items-center justify-center gap-32 phones:bottom-8 phones:right-8 `}
+      >
+        <a
+          href="#header"
+          className={`px-24 py-12 ${bgPrimary700(color)} flex items-center gap-12 rounded-lg bg-opacity-50 hover:bg-opacity-90`}
+        >
+          <ChevronUp size={16} />
+          Scroll Ke Atas
+        </a>
       </div>
       <Helmet>
         <meta charSet="utf-8" />
