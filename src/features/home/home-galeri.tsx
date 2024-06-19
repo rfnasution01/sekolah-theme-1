@@ -121,67 +121,39 @@ export function HomeGaleri() {
             <div className="hidden phones:block">
               {galeri?.length > 0 ? (
                 <div className="flex items-center gap-32">
-                  <button
-                    type="button"
-                    className="opacity-55 hover:cursor-pointer hover:opacity-90 disabled:cursor-not-allowed"
-                    onClick={() => {
-                      if (showIndex > 0) {
-                        setShowIndex(showIndex - 1)
-                      } else {
-                        setShowIndex(galeri?.length - 1)
-                      }
-                    }}
-                  >
-                    <img src="/icon/IconLeft.svg" alt="Icon Left" />
-                  </button>
                   {/* Mapping Data */}
-                  <div className="grid flex-1 grid-cols-12 gap-32">
-                    {galeri
-                      ?.slice(showIndex, showIndex + 1)
-                      ?.map((item, idx) => (
-                        <Link
-                          to={`/galeri-detail/page/${convertToSlug(item?.judul)}`}
-                          onClick={() => {
-                            localStorage.setItem('beritaID', item?.id)
-                            dispatch(
-                              setStateHalaman({
-                                page: item?.judul,
-                                id: item?.id,
-                              }),
-                            )
-                          }}
-                          key={idx}
-                          className="col-span-4 h-full phones:col-span-12"
-                        >
-                          <div className="flex h-full flex-col gap-16 rounded-2xl border bg-white p-32 shadow hover:cursor-pointer">
-                            <img
-                              src={item?.gambar ?? '/img/tutwuri.png'}
-                              alt={item?.judul}
-                              loading="lazy"
-                              className="h-[40rem] w-full rounded-2xl phones:h-[30rem]"
-                            />
-                            <div className="flex flex-col items-center justify-center gap-8">
-                              <p className="text-[3rem] font-bold">
-                                {item?.judul}
-                              </p>
-                            </div>
+                  <div className="flex h-full w-full items-center gap-32 overflow-x-auto">
+                    {galeri?.map((item, idx) => (
+                      <Link
+                        to={`/galeri-detail/page/${convertToSlug(item?.judul)}`}
+                        onClick={() => {
+                          localStorage.setItem('beritaID', item?.id)
+                          dispatch(
+                            setStateHalaman({
+                              page: item?.judul,
+                              id: item?.id,
+                            }),
+                          )
+                        }}
+                        key={idx}
+                        className="h-full w-4/5 flex-shrink-0 flex-grow"
+                      >
+                        <div className="flex h-full flex-col gap-16 rounded-2xl border bg-white p-32 shadow hover:cursor-pointer">
+                          <img
+                            src={item?.gambar ?? '/img/tutwuri.png'}
+                            alt={item?.judul}
+                            loading="lazy"
+                            className="h-[40rem] w-full rounded-2xl phones:h-[30rem]"
+                          />
+                          <div className="flex flex-col items-center justify-center gap-8">
+                            <p className="text-[3rem] font-bold">
+                              {item?.judul}
+                            </p>
                           </div>
-                        </Link>
-                      ))}
+                        </div>
+                      </Link>
+                    ))}
                   </div>
-                  <button
-                    type="button"
-                    className="opacity-55 hover:cursor-pointer hover:opacity-90 disabled:cursor-not-allowed"
-                    onClick={() => {
-                      if (showIndex < galeri?.length - 1) {
-                        setShowIndex(showIndex + 1)
-                      } else {
-                        setShowIndex(0)
-                      }
-                    }}
-                  >
-                    <img src="/icon/IconRight.svg" alt="Icon Right" />
-                  </button>
                 </div>
               ) : (
                 <NoData />

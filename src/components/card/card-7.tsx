@@ -58,7 +58,7 @@ export function Card7({
             <div className="w-3/5">
               {data?.berita?.length > 0 && (
                 <div className="grid grid-cols-3">
-                  {data?.berita?.map((_item, idx) => (
+                  {data?.berita?.slice(0, 3)?.map((_item, idx) => (
                     <div className="col-span-1 h-full" key={idx}>
                       <Card8
                         kelompok={kelompok}

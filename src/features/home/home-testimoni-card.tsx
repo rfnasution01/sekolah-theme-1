@@ -1,7 +1,7 @@
 import { TestimoniType } from '@/libs/types/testimoni-type'
 import { Star } from 'lucide-react'
 
-function Card(props: TestimoniType) {
+function Card({ props }: { props: TestimoniType }) {
   return (
     <div className="flex items-center justify-center text-center">
       <div className="flex flex-col items-center justify-center">

@@ -6,6 +6,7 @@ import './detail.css'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { bgPrimary700 } from '@/libs/helpers/format-color'
+import Card from './home-testimoni-card'
 
 export function HomeTestimoni({
   testimoni,
@@ -86,55 +87,14 @@ export function HomeTestimoni({
       <div className="hidden phones:block">
         {testimoni?.length > 0 ? (
           <div className="flex items-center gap-32">
-            <button
-              type="button"
-              className="opacity-55 hover:cursor-pointer hover:opacity-90 disabled:cursor-not-allowed"
-              onClick={() => {
-                if (showIndex > 0) {
-                  setShowIndex(showIndex - 1)
-                } else {
-                  setShowIndex(testimoni?.length - 1)
-                }
-              }}
-            >
-              <img src="/icon/IconLeft.svg" alt="Icon Left" />
-            </button>
             {/* Mapping Data */}
-            <div className="grid flex-1 grid-cols-12 gap-32">
-              {testimoni?.slice(showIndex, showIndex + 1)?.map((item, idx) => (
-                <div key={idx} className="col-span-4 h-full phones:col-span-12">
-                  <div className="flex h-full flex-col gap-16 rounded-2xl border bg-white p-32 shadow hover:cursor-pointer">
-                    <img
-                      src={item?.photo ?? '/img/tutwuri.png'}
-                      alt={item?.nama}
-                      loading="lazy"
-                      className="h-[40rem] w-full rounded-2xl phones:h-[30rem]"
-                    />
-                    <div className="flex flex-col items-center justify-center gap-8">
-                      <p className="text-[3rem] font-bold">{item?.nama}</p>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: item?.keterangan_singkat,
-                        }}
-                      />
-                    </div>
-                  </div>
+            <div className="flex h-full w-full items-center overflow-x-auto">
+              {testimoni?.map((item, idx) => (
+                <div key={idx} className="w-11/12 flex-shrink-0 flex-grow">
+                  <Card props={item} />
                 </div>
               ))}
             </div>
-            <button
-              type="button"
-              className="opacity-55 hover:cursor-pointer hover:opacity-90 disabled:cursor-not-allowed"
-              onClick={() => {
-                if (showIndex < testimoni?.length - 1) {
-                  setShowIndex(showIndex + 1)
-                } else {
-                  setShowIndex(0)
-                }
-              }}
-            >
-              <img src="/icon/IconRight.svg" alt="Icon Right" />
-            </button>
           </div>
         ) : (
           <NoData />

@@ -27,7 +27,7 @@ export function HomeLayanan({
             <Link
               to={item?.url}
               target="_blank"
-              className="flex h-[40vh]  w-1/5 flex-col items-center justify-center gap-16 rounded-2xl border bg-background p-32 text-center shadow hover:shadow-xl phones:w-3/5"
+              className="flex h-[40vh] w-1/5  flex-shrink-0 flex-col items-center justify-center gap-16 rounded-2xl border bg-background p-32 text-center shadow hover:shadow-xl phones:w-3/5"
               key={idx}
             >
               <div className="h-[16rem] w-[16rem] transition-transform hover:-translate-y-24 hover:cursor-pointer">
