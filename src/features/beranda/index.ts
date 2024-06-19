@@ -1,1 +1,5 @@
 export * from './beranda-banner'
+export * from './beranda-card'
+export * from './beranda-layanan'
+export * from './beranda-testimoni'
+export * from './beranda-galeri'
