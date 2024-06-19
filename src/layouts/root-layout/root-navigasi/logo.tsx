@@ -24,7 +24,7 @@ export function LogoNavigasi({ identitas }: { identitas: IdentitasType }) {
             />
             <div className="flex flex-col gap-12">
               <p className="text-[4rem]">{identitas?.nama_website}</p>
-              <p className="text-[2rem]">{identitas?.alamat}</p>
+              <p className="text-[2rem] phones:hidden">{identitas?.alamat}</p>
             </div>
           </div>
         </Link>

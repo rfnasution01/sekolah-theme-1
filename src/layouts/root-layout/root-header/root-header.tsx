@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { SearchHeader } from './search'
 import { BeritaTerbaruType, MenuType } from '@/libs/types/beranda-type'
 import { NavigasiHeader } from './mapping-navigasi'
@@ -24,13 +24,15 @@ export function RootHeader({
   color: string
   layanan: LayananType[]
 }) {
+  const [isSearch, setIsSearch] = useState<boolean>(false)
+
   return (
     <div className="flex w-full items-center gap-32 phones:flex-col phones:items-start">
-      <div className="flex w-full items-center gap-32">
+      <div className="flex w-full items-center gap-32 phones:hidden">
         <Tooltips
           color={color}
           triggerComponent={
-            <div className={`flex items-center gap-4 uppercase phones:hidden`}>
+            <div className={`flex items-center gap-4 uppercase`}>
               <LayoutDashboard size={16} />
             </div>
           }
@@ -56,10 +58,10 @@ export function RootHeader({
           }
           position="bottom"
         />
-        <div className="flex w-3/5 items-center gap-32 phones:flex-1">
+        <div className="flex w-3/5 items-center gap-32">
           <BeritaTerbaru runningText={beritaTerbaru} color={color} />
         </div>
-        <div className="flex w-2/5 items-center gap-32 phones:hidden">
+        <div className="flex w-2/5 items-center gap-32">
           <div className="flex-1">
             <NavigasiHeader menu={menuTop} color={color} />
           </div>
@@ -69,17 +71,26 @@ export function RootHeader({
         </div>
       </div>
       <div className="hidden w-full phones:block">
-        <div className="flex items-center gap-32">
-          <span
-            className="flex items-center gap-12"
-            onClick={() => {
-              setIsShow(!isShow)
-            }}
-          >
-            {!isShow ? <LayoutDashboard size={20} /> : <X size={20} />}
-            Menu
-          </span>
-          <div className="flex-1 ">
+        <div className="flex flex-col gap-24">
+          <div className="flex items-center justify-between gap-32">
+            <span
+              className="flex items-center gap-12"
+              onClick={() => {
+                setIsShow(!isShow)
+              }}
+            >
+              {!isShow ? <LayoutDashboard size={20} /> : <X size={20} />}
+              Menu
+            </span>
+            <div
+              onClick={() => {
+                setIsSearch(!isSearch)
+              }}
+            >
+              <Search size={16} />
+            </div>
+          </div>
+          {isSearch && (
             <div className="relative text-black">
               <span className="hidden phones:block">
                 <Search
@@ -93,7 +104,7 @@ export function RootHeader({
                 placeholder="Tulis & Tekan Enter"
               />
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
