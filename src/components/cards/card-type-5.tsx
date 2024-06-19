@@ -25,7 +25,7 @@ export function CardType5({
 }) {
   return (
     <div className="flex transform gap-24 border-b border-[#00000033] py-12 transition-transform hover:translate-x-12 hover:cursor-pointer phones:flex-col phones:gap-32">
-      <div className="flex h-[9rem] w-1/4 phones:hidden phones:h-[15rem] phones:w-full">
+      <div className="flex h-[9rem] w-1/4  phones:hidden phones:h-[15rem] phones:w-full">
         <img
           src={gambar?.gambar}
           alt={gambar?.keterangan}
@@ -33,8 +33,8 @@ export function CardType5({
           loading="lazy"
         />
       </div>
-      <div className="block phones:hidden">
-        <div className="flex w-3/4 flex-col justify-between phones:w-full phones:gap-12">
+      <div className="block w-3/4 phones:hidden ">
+        <div className="flex flex-col justify-between phones:w-full phones:gap-12">
           <div className="flex items-start gap-32">
             <p className="line-clamp-2 w-2/3 uppercase phones:w-full">
               {judul}
