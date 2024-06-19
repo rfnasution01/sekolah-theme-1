@@ -7,7 +7,7 @@ export function LogoNavigasi({ identitas }: { identitas: IdentitasType }) {
       <img
         src="/img/toba.png"
         alt={identitas?.nama_website}
-        className={`h-[20vh] w-full rounded-lg object-cover opacity-45 filter`}
+        className={`h-[20vh] w-full rounded-lg object-cover opacity-45 filter phones:h-[12vh]`}
         loading="lazy"
       />
       <div className="absolute top-0 flex h-full w-[100%]">
