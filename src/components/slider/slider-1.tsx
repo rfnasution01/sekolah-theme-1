@@ -55,12 +55,15 @@ export function Slider1({
               <div
                 className={`absolute bottom-0 top-0 flex ${isShadow ? 'w-[80%] phones:w-[70%]' : 'w-full'} flex-grow items-center justify-between px-4`}
               >
-                <span
+                <button
+                  type="button"
                   className={clsx('', {
                     'hover:cursor-pointer': showIndex > 0,
                     'hover:cursor-not-allowed': !(showIndex > 0),
                   })}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation
                     if (showIndex > 0) {
                       setShowIndex(showIndex - 1)
                     }
@@ -71,8 +74,9 @@ export function Slider1({
                     alt="Icon Left"
                     loading="lazy"
                   />
-                </span>
-                <span
+                </button>
+                <button
+                  type="button"
                   className={clsx('', {
                     'hover:cursor-pointer': showIndex < listImage?.length - 1,
                     'hover:cursor-not-allowed': !(
@@ -80,7 +84,9 @@ export function Slider1({
                       listImage?.length - 1
                     ),
                   })}
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
                     if (showIndex < listImage?.length - 1) {
                       setShowIndex(showIndex + 1)
                     }
@@ -91,7 +97,7 @@ export function Slider1({
                     alt="Icon Right"
                     loading="lazy"
                   />
-                </span>
+                </button>
               </div>
             )}
           </div>
