@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux'
 import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 import { bgPrimary700 } from '@/libs/helpers/format-color'
 import { SingleSkeleton } from '../skeleton'
+import { useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 export function Card2({
   data,
@@ -23,6 +25,22 @@ export function Card2({
   const handleBeritaClick = (id) => {
     localStorage.setItem('beritaID', id)
   }
+
+  const [isLoaded, setIsLoaded] = useState(false)
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  })
+
+  useEffect(() => {
+    if (inView) {
+      // Simulate data fetching
+      setTimeout(() => {
+        setIsLoaded(true)
+      }, 1000) // Adjust the delay as needed
+    }
+  }, [inView])
+
   return (
     <div
       className={clsx(
@@ -34,8 +52,9 @@ export function Card2({
         <p className="font-roboto text-[5rem]">{data?.kategori}</p>
         <p className="text-center">{data?.keterangan}</p>
       </div>
-      <div className="grid grid-cols-5 gap-12">
-        {data?.berita?.length > 0 &&
+      <div ref={ref} className="grid grid-cols-5 gap-12 phones:w-full">
+        {isLoaded ? (
+          data?.berita?.length > 0 &&
           data?.berita?.map((item, idx) => (
             <Link
               to={`/${convertToSlug(item?.kelompok)}/page/${item?.seo}`}
@@ -67,7 +86,32 @@ export function Card2({
                 </div>
               )}
             </Link>
-          ))}
+          ))
+        ) : (
+          <div className="col-span-5 flex items-center gap-32 phones:col-span-5 phones:w-full">
+            <SingleSkeleton height="h-[30vh]" width="w-1/5 phones:w-full" />
+            <SingleSkeleton
+              height="h-[30vh]"
+              width="w-1/5"
+              classname="phones:hidden"
+            />
+            <SingleSkeleton
+              height="h-[30vh]"
+              width="w-1/5"
+              classname="phones:hidden"
+            />
+            <SingleSkeleton
+              height="h-[30vh]"
+              width="w-1/5"
+              classname="phones:hidden"
+            />
+            <SingleSkeleton
+              height="h-[30vh]"
+              width="w-1/5"
+              classname="phones:hidden"
+            />
+          </div>
+        )}
       </div>
       <div className="flex items-center justify-center">
         <Link
