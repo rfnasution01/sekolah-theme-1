@@ -43,7 +43,7 @@ export function BerandaBanner({ color }: { color: string }) {
   const [showIndex, setShowIndex] = useState<number>(0)
 
   return (
-    <div className="flex h-full min-h-[30vh]">
+    <div className="mb-32 flex h-full min-h-[30vh]">
       {loadingSlider ? (
         <SingleSkeleton height="h-[30vh]" />
       ) : (
