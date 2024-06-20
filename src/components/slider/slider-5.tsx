@@ -7,25 +7,25 @@ export function Slider5({
   height = 'h-[80vh]',
   gambar,
   keterangan,
-  seo,
   isShadow,
   slider,
   showIndex,
   setShowIndex,
   isShowNext,
+  url,
 }: {
   height?: string
   gambar: string
   keterangan: string
-  seo: string
   isShadow?: boolean
   slider: SliderType[]
   showIndex?: number
   setShowIndex: Dispatch<SetStateAction<number>>
   isShowNext?: boolean
+  url?: string
 }) {
   return (
-    <Link to={`/${seo}`} className={`relative block`}>
+    <Link to={`${url === null ? '/' : url}`} className={`relative block`}>
       <img
         src={gambar}
         alt={keterangan}

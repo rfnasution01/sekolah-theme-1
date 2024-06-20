@@ -75,14 +75,14 @@ export function BerandaBanner({ color }: { color: string }) {
                             ]?.judul
                           }
                           height="h-[77vh]"
-                          seo={
+                          url={
                             slider?.[
                               showIndex > 0
                                 ? showIndex - 1
                                 : showIndex === 0
                                   ? 1
                                   : 0
-                            ]?.judul
+                            ]?.url
                           }
                           isShadow
                           slider={slider}
@@ -97,7 +97,7 @@ export function BerandaBanner({ color }: { color: string }) {
                       gambar={slider?.[showIndex]?.gambar}
                       keterangan={slider?.[showIndex]?.judul}
                       height="h-[77vh]"
-                      seo={slider?.[showIndex]?.judul}
+                      url={slider?.[showIndex]?.url}
                       slider={slider}
                       showIndex={showIndex}
                       setShowIndex={setShowIndex}
@@ -127,7 +127,7 @@ export function BerandaBanner({ color }: { color: string }) {
                             ]?.judul
                           }
                           height="h-[77vh]"
-                          seo={
+                          url={
                             slider?.[
                               showIndex < slider?.length - 1
                                 ? showIndex + 1
