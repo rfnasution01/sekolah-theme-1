@@ -66,14 +66,21 @@ export default function ProfilPage() {
               gambar="/img/identitas.png"
             />
           </div>
-          <ProfilVisi profil={profil} color={color} />
-          <ProfilTujuan profil={profil} sekolah={identitas?.nama_website} />
-          <ProfilSasaran profil={profil} sekolah={identitas?.nama_website} />
-          <ProfilHasil
-            profil={profil}
-            sekolah={identitas?.nama_website}
-            color={color}
-          />
+          {profil?.profil?.length > 0 && (
+            <>
+              <ProfilVisi profil={profil} color={color} />
+              <ProfilTujuan profil={profil} sekolah={identitas?.nama_website} />
+              <ProfilSasaran
+                profil={profil}
+                sekolah={identitas?.nama_website}
+              />
+              <ProfilHasil
+                profil={profil}
+                sekolah={identitas?.nama_website}
+                color={color}
+              />
+            </>
+          )}
         </div>
       )}
     </div>

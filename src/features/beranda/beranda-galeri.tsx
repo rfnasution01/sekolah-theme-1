@@ -117,7 +117,7 @@ export function BerandaGaleri() {
                                   src={item?.gambar ?? '/img/tutwuri.png'}
                                   alt={item?.judul}
                                   loading="lazy"
-                                  className="h-[40rem] w-full rounded-2xl phones:h-[20rem]"
+                                  className="h-[40rem] w-full rounded-2xl object-cover phones:h-[20rem]"
                                 />
                                 <div className="flex flex-col items-center justify-center gap-8">
                                   <p className="text-[2.4rem] font-bold">

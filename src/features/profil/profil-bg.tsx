@@ -32,37 +32,52 @@ export function ProfilBg({
                 />
               </div>
               <div className="flex w-full flex-col gap-12 text-[2.4rem] text-primary-100 phones:text-[2.8rem]">
-                <TextComponent
-                  label="Nama Sekolah"
-                  value={profil?.nama ?? '-'}
-                />
-                <TextComponent
-                  label="Tahun Operasional Sekolah"
-                  value={profil?.tahun_operasional ?? '-'}
-                />
-                <TextComponent
-                  label="Akreditasi BAN"
-                  value={profil?.akreditasi ?? '-'}
-                />
-                <TextComponent
-                  label="Penyelenggaraan Sekolah"
-                  value={profil?.penyelenggaraan ?? '-'}
-                />
-                <TextComponent label="NIS" value="" />
-                <TextComponent label="NSS" value="" />
-                <TextComponent
-                  label="Alamat Sekolah"
-                  value={profil?.alamat ?? '-'}
-                />
-                <TextComponent
-                  label="Telepon/Fax"
-                  value={profil?.telepon ?? '-'}
-                />
-                <TextComponent label="Kab/Kota" value={profil?.kota ?? '-'} />
-                <TextComponent
-                  label="Provinsi"
-                  value={profil?.provinsi ?? '-'}
-                />
+                {profil?.nama && (
+                  <TextComponent
+                    label="Nama Sekolah"
+                    value={profil?.nama ?? '-'}
+                  />
+                )}
+                {profil?.tahun_operasional && (
+                  <TextComponent
+                    label="Tahun Operasional Sekolah"
+                    value={profil?.tahun_operasional ?? '-'}
+                  />
+                )}
+                {profil?.akreditasi && (
+                  <TextComponent
+                    label="Akreditasi BAN"
+                    value={profil?.akreditasi ?? '-'}
+                  />
+                )}
+                {profil?.penyelenggaraan && (
+                  <TextComponent
+                    label="Penyelenggaraan Sekolah"
+                    value={profil?.penyelenggaraan ?? '-'}
+                  />
+                )}
+
+                {profil?.alamat && (
+                  <TextComponent
+                    label="Alamat Sekolah"
+                    value={profil?.alamat ?? '-'}
+                  />
+                )}
+                {profil?.telepon && (
+                  <TextComponent
+                    label="Telepon/Fax"
+                    value={profil?.telepon ?? '-'}
+                  />
+                )}
+                {profil?.kota && (
+                  <TextComponent label="Kab/Kota" value={profil?.kota ?? '-'} />
+                )}
+                {profil?.provinsi && (
+                  <TextComponent
+                    label="Provinsi"
+                    value={profil?.provinsi ?? '-'}
+                  />
+                )}
               </div>
             </div>
           </div>
