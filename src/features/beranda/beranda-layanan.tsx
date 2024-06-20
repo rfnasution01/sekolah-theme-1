@@ -1,12 +1,13 @@
 import { NoData } from '@/components/NoData'
 import { SingleSkeleton } from '@/components/skeleton'
+import { bgPrimary100 } from '@/libs/helpers/format-color'
 import { LayananType } from '@/libs/types/layanan-type'
 import { useGetLayananQuery } from '@/store/slices/layananAPI'
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
 
-export function BerandaLayanan() {
+export function BerandaLayanan({ color }: { color: string }) {
   const [isLoaded, setIsLoaded] = useState(false)
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -59,7 +60,7 @@ export function BerandaLayanan() {
               <Link
                 to={item?.url}
                 target="_blank"
-                className="flex h-[40vh] w-1/5  flex-shrink-0 flex-col items-center justify-center gap-16 rounded-2xl border bg-background p-32 text-center shadow hover:shadow-xl phones:w-3/5"
+                className={`flex h-[40vh] w-1/6  flex-shrink-0 flex-col items-center justify-center gap-16 rounded-2xl border ${bgPrimary100(color)} p-32 text-center shadow hover:shadow-xl phones:w-3/5`}
                 key={idx}
               >
                 <div className="h-[16rem] w-[16rem] transition-transform hover:-translate-y-24 hover:cursor-pointer">

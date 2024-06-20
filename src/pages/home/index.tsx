@@ -29,7 +29,7 @@ export default function HomePage() {
     <div className="mb-80 flex flex-col gap-32">
       <BerandaBanner color={color} />
       <BerandaCard color={color} />
-      <BerandaLayanan />
+      <BerandaLayanan color={color} />
       <BerandaTestimoni color={color} />
       <BerandaGaleri />
     </div>
