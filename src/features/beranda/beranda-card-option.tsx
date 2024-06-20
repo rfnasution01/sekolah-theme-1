@@ -29,14 +29,7 @@ export function BerandaCardOption({
         />
       )
     case 0:
-      return (
-        <CardType1
-          data={data}
-          angka={angka}
-          kelompok={kelompok}
-          color={color}
-        />
-      )
+      return <CardType1 data={data} kelompok={kelompok} color={color} />
     default:
       return 'Index tidak ditemukan'
   }

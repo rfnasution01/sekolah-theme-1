@@ -15,7 +15,6 @@ export function CardType1({
   color,
 }: {
   data: BerandaType
-  angka: number
   kelompok: string
   color: string
 }) {
