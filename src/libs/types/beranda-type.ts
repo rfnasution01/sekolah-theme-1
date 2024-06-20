@@ -152,6 +152,17 @@ export type KategoriType = {
   penulis: string
 }
 
+export type BeritaPopuler = {
+  id: string
+  judul: string
+  seo: string
+  tanggal: string
+  gambar: {
+    keterangan: string
+    gambar: string
+  }
+}
+
 export type PengumumanType = {
   id: string
   seo: string

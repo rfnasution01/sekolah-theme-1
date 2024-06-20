@@ -1,6 +1,7 @@
 import {
   BerandaType,
   BeritaDetailType,
+  BeritaPopuler,
   BeritaType,
   HalamanDetailType,
   IdentitasType,
@@ -111,6 +112,15 @@ export const BerandaEndpoints = api.injectEndpoints({
         },
       }),
     }),
+    getBeritaPopuler: builder.query<Res<BeritaPopuler[]>, { jumlah: number }>({
+      query: ({ jumlah }) => ({
+        url: `website/berita_populer`,
+        method: 'GET',
+        params: {
+          jumlah: jumlah,
+        },
+      }),
+    }),
     getPengumuman: builder.query<Res<PengumumanType[]>, Params>({
       query: ({ page_size, page_number, search }) => ({
         url: `website/pengumuman`,
@@ -209,6 +219,7 @@ export const {
   useGetBeritaDetailQuery,
   useGetBeritaDetailRelatedQuery,
   useGetBeritaKategoriQuery,
+  useGetBeritaPopulerQuery,
   useGetPengumumanDetailQuery,
   useGetPengumumanKategoriQuery,
   useGetPengumumanQuery,
