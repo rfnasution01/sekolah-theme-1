@@ -2,12 +2,13 @@ import { NoData } from '@/components/NoData'
 import './detail.css'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { bgPrimary700 } from '@/libs/helpers/format-color'
+import { bgPrimary100, bgPrimary700 } from '@/libs/helpers/format-color'
 import { useInView } from 'react-intersection-observer'
 import { SingleSkeleton } from '@/components/skeleton'
 import { TestimoniType } from '@/libs/types/testimoni-type'
 import { useGetTestimoniQuery } from '@/store/slices/testimoniAPI'
 import { BerandaCardTestimoni } from './beranda-card-testimoni'
+import { ChevronRight } from 'lucide-react'
 
 export function BerandaTestimoni({ color }: { color: string }) {
   const [showIndex, setShowIndex] = useState<number>(0)
@@ -75,22 +76,30 @@ export function BerandaTestimoni({ color }: { color: string }) {
                               key={idx}
                               className="col-span-4 h-full phones:col-span-12"
                             >
-                              <div className="flex h-full flex-col gap-16 rounded-2xl border bg-white p-32 shadow hover:cursor-pointer">
-                                <img
-                                  src={item?.photo ?? '/img/tutwuri.png'}
-                                  alt={item?.nama}
-                                  loading="lazy"
-                                  className="h-[40rem] w-full rounded-2xl"
-                                />
-                                <div className="flex flex-col items-center justify-center gap-8">
+                              <div className="flex h-full flex-col items-center justify-center gap-32 rounded-2xl border bg-white p-32 shadow hover:cursor-pointer">
+                                <div className="flex items-center justify-center">
+                                  <img
+                                    src={item?.photo ?? '/img/tutwuri.png'}
+                                    alt={item?.nama}
+                                    loading="lazy"
+                                    className="h-[20rem] w-[20rem] rounded-full"
+                                  />
+                                </div>
+                                <div className="flex flex-col items-center justify-center gap-16">
                                   <p className="text-[3rem] font-bold">
                                     {item?.nama}
                                   </p>
                                   <div
                                     dangerouslySetInnerHTML={{
-                                      __html: item?.keterangan_singkat,
+                                      __html: item?.isi,
                                     }}
+                                    className="line-clamp-4 text-center"
                                   />
+                                </div>
+                                <div
+                                  className={`p-12 ${bgPrimary100(color)} rounded-full`}
+                                >
+                                  <ChevronRight size={24} />
                                 </div>
                               </div>
                             </div>

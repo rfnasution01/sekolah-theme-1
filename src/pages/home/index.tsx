@@ -30,8 +30,8 @@ export default function HomePage() {
       <BerandaBanner color={color} />
       <BerandaCard color={color} />
       <BerandaLayanan color={color} />
-      <BerandaTestimoni color={color} />
       <BerandaGaleri />
+      <BerandaTestimoni color={color} />
     </div>
   )
 }

@@ -11,7 +11,6 @@ export function CardType5({
   hits,
   tanggal,
   gambar,
-  kelompok,
   color,
   isi,
 }: {
@@ -19,7 +18,6 @@ export function CardType5({
   hits: string
   tanggal: string
   gambar: PhotoType
-  kelompok: string
   color: string
   isi?: string
 }) {
@@ -58,7 +56,7 @@ export function CardType5({
                 type="button"
                 className={`"flex w-full items-center justify-center rounded-lg ${bgPrimary700(color)} py-8 text-[1.6rem] phones:text-[2rem]`}
               >
-                Lihat {kelompok} Lainnya
+                Read More
               </button>
             </div>
           </div>
