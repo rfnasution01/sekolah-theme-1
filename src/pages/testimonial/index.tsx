@@ -1,5 +1,5 @@
 import './detail.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import Loading from '@/components/Loading'
 import { convertSlugToText } from '@/libs/helpers/format-text'
@@ -8,6 +8,8 @@ import { Breadcrumb } from '@/components/Breadcrumb'
 import { getThemeSlice } from '@/store/reducer/stateTheme'
 import { TestimoniType } from '@/libs/types/testimoni-type'
 import { useGetTestimoniQuery } from '@/store/slices/testimoniAPI'
+import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
+import { Link } from 'react-router-dom'
 
 export default function Testimonial() {
   const { firstPathname } = usePathname()
@@ -45,6 +47,8 @@ export default function Testimonial() {
     }
   }, [dataTestimoni?.data])
 
+  const dispatch = useDispatch()
+
   return (
     <div className="mb-80 mt-32 flex flex-col gap-32">
       <Breadcrumb color={color} />
@@ -69,7 +73,20 @@ export default function Testimonial() {
             ) : (
               <div className="grid grid-cols-12 gap-32">
                 {testimoni?.map((item, idx) => (
-                  <div className="col-span-4 phones:col-span-12" key={idx}>
+                  <Link
+                    to={`/testimonial/page/${item?.id}`}
+                    className="col-span-4 phones:col-span-12"
+                    key={idx}
+                    onClick={() => {
+                      localStorage.setItem('beritaID', item?.id)
+                      dispatch(
+                        setStateHalaman({
+                          page: item?.nama,
+                          id: item?.id,
+                        }),
+                      )
+                    }}
+                  >
                     <div className="flex h-full flex-col gap-24 rounded-2xl bg-white px-24 pb-32 pt-24 shadow hover:cursor-pointer hover:shadow-lg">
                       <div className="h-[25vh] w-full">
                         <img
@@ -89,7 +106,7 @@ export default function Testimonial() {
                         />
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}

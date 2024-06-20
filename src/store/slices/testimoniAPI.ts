@@ -14,7 +14,17 @@ export const TestimoniEndpoints = api.injectEndpoints({
         },
       }),
     }),
+    getTestimoniId: builder.query<Res<TestimoniType>, { id: string }>({
+      query: ({ id }) => ({
+        url: `website/testimonial/detail`,
+        method: 'GET',
+        params: {
+          id: id,
+        },
+      }),
+    }),
   }),
 })
 
-export const { useGetTestimoniQuery } = TestimoniEndpoints
+export const { useGetTestimoniQuery, useGetTestimoniIdQuery } =
+  TestimoniEndpoints

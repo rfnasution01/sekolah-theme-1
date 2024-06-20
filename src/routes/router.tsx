@@ -13,6 +13,7 @@ import {
   RootLayout,
   RouteLayout,
   TentangKamiPage,
+  TestimonialDetailPage,
   TestimonialPage,
 } from './loadables'
 
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path: 'program-details/page/:id',
         element: <ProgramDetailPage />,
+      },
+      {
+        path: 'testimonial/page/:id',
+        element: <TestimonialDetailPage />,
       },
       ...categories.flatMap((category) => [
         { path: category, element: <RouteLayout /> },

@@ -9,6 +9,8 @@ import { TestimoniType } from '@/libs/types/testimoni-type'
 import { useGetTestimoniQuery } from '@/store/slices/testimoniAPI'
 import { BerandaCardTestimoni } from './beranda-card-testimoni'
 import { ChevronRight } from 'lucide-react'
+import { useDispatch } from 'react-redux'
+import { setStateHalaman } from '@/store/reducer/stateIdHalaman'
 
 export function BerandaTestimoni({ color }: { color: string }) {
   const [showIndex, setShowIndex] = useState<number>(0)
@@ -47,6 +49,8 @@ export function BerandaTestimoni({ color }: { color: string }) {
     }
   }, [dataTestimoni?.data])
 
+  const dispatch = useDispatch()
+
   return (
     <div className="flex w-full flex-col gap-32 px-64 phones:px-32">
       {/* --- Title --- */}
@@ -72,9 +76,19 @@ export function BerandaTestimoni({ color }: { color: string }) {
                         {testimoni
                           ?.slice(showIndex, showIndex + 3)
                           ?.map((item, idx) => (
-                            <div
+                            <Link
+                              to={`/testimonial/page/${item?.id}`}
                               key={idx}
                               className="col-span-4 h-full phones:col-span-12"
+                              onClick={() => {
+                                localStorage.setItem('beritaID', item?.id)
+                                dispatch(
+                                  setStateHalaman({
+                                    page: item?.nama,
+                                    id: item?.id,
+                                  }),
+                                )
+                              }}
                             >
                               <div className="flex h-full flex-col items-center justify-center gap-32 rounded-2xl border bg-white p-32 shadow hover:cursor-pointer">
                                 <div className="flex items-center justify-center">
@@ -102,7 +116,7 @@ export function BerandaTestimoni({ color }: { color: string }) {
                                   <ChevronRight size={24} />
                                 </div>
                               </div>
-                            </div>
+                            </Link>
                           ))}
                       </div>
                     </div>
@@ -145,12 +159,22 @@ export function BerandaTestimoni({ color }: { color: string }) {
                     {/* Mapping Data */}
                     <div className="flex h-full w-full items-center overflow-x-auto">
                       {testimoni?.map((item, idx) => (
-                        <div
+                        <Link
+                          to={`/testimonial/page/${item?.id}`}
                           key={idx}
                           className="w-11/12 flex-shrink-0 flex-grow"
+                          onClick={() => {
+                            localStorage.setItem('beritaID', item?.id)
+                            dispatch(
+                              setStateHalaman({
+                                page: item?.nama,
+                                id: item?.id,
+                              }),
+                            )
+                          }}
                         >
                           <BerandaCardTestimoni props={item} />
-                        </div>
+                        </Link>
                       ))}
                     </div>
                   </div>
